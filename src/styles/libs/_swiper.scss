@@ -1,0 +1,22 @@
+@import "../../node_modules/swiper/swiper.scss";
+
+.swiper-slide {
+  height: auto !important;
+}
+
+
+
+.slider-custom-pag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+		&__prev {
+            
+		}
+		&__pag {
+		}
+		&__next {
+		}
+}
+

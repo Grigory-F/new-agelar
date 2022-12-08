@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "Circe";
+  font-weight: 300;
+  src: local("Circe-Light"), url("../fonts/Circe-Light.woff2") format("woff2"),
+    url("../fonts/Circe-Light.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Circe";
+  font-weight: 400;
+  src: local("Circe-Regular"),
+    url("../fonts/Circe-Regular.woff2") format("woff2"),
+    url("../fonts/Circe-Regular.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Circe";
+  font-weight: 700;
+  src: local("Circe-Bold"), url("../fonts/Circe-Bold.woff2") format("woff2"),
+    url("../fonts/Circe-Bold.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Circe";
+  font-weight: 800;
+  src: local("Circe-ExtraBold"),
+    url("../fonts/Circe-ExtraBold.woff2") format("woff2"),
+    url("../fonts/Circe-ExtraBold.woff") format("woff");
+  font-display: swap;
+}
