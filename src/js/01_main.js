@@ -11,6 +11,16 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl);
 });
 
+
+document.querySelector('.burger-button').addEventListener('click', taggleButton)
+let sidebar = document.querySelector('.sidebar')
+function taggleButton() {
+  this.classList.toggle("change");
+  sidebar.classList.toggle('show')
+}
+new SimpleBar(document.getElementById('menu'))
+new SimpleBar(document.getElementById('sidebar-scroll'))
+
 const PartnersSlider = new Swiper(".partners-slider", {
   navigation: {
     nextEl: ".slider-partners-next",
@@ -79,6 +89,26 @@ const StuffSlider = new Swiper(".slider-stuff", {
 
     992: {
       slidesPerView: 4,
+      spaceBetween: 30,
+    },
+  },
+});
+
+/* tarrifs-slider */
+
+
+const TarrifsSlider = new Swiper(".tarrifs-slider", {
+  slidesPerView: "auto",
+  breakpoints: {
+    320: {
+
+      spaceBetween: 15,
+    },
+    575: {
+    },
+
+    992: {
+
       spaceBetween: 30,
     },
   },
@@ -237,7 +267,16 @@ const ReviewsVideoSlider = new Swiper(".reviews-video-slider", {
     },
   },
 });
-
+document.querySelectorAll(".tariff-btn > span").forEach((elem, index) => {
+  elem.addEventListener('click', () => {
+    console.log(elem.textContent.trim());
+    if (elem.textContent.trim() == "Что входит") {
+      elem.textContent = 'Свернуть'
+    } else {
+      elem.textContent = "Что входит"
+    }
+  })
+})
 document.querySelectorAll(".box-case").forEach((elem, index) => {
   const height = elem.clientHeight;
   const width = elem.clientWidth;

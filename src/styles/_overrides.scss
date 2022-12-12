@@ -47,6 +47,13 @@ p {
   }
 }
 
+@media (min-width: 1600px) {
+  .col-bl-five {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+}
+
 .tooltip {
   padding: 20px 30px;
 

@@ -24,12 +24,12 @@ $link-color-hover: #a20000;
 
 $system-component: rgba(225, 225, 225, 0.75);
 $block-component: #f6f7f9;
-$block: #F5F5F5;
+$block: #f5f5f5;
 
 $setting: rgba(40, 53, 71, 0.3);
 $interface-icons: #2f3c4e;
 $muted: $text-muted;
-$second-text: #7E8082;
+$second-text: #7e8082;
 
 $colors: (
   "blue": $blue,
@@ -104,8 +104,6 @@ $min-height-sizes: (
   "400": 400px,
 );
 
-
-
 $gutters: (
   0: 0,
   1: $spacer * 0.25,
@@ -151,7 +149,7 @@ $font-sizes: (
   7: $small-custom-font,
   8: $medium-small-custom-font,
   9: $extra-small-custom-font,
-  'special-size': $special-size,
+  "special-size": $special-size,
 );
 
 $headings-margin-bottom: 1.875rem;
@@ -188,7 +186,7 @@ $spread-gap: 5;
   $unitType,
   $auto-flag: false,
   $none-flag: false,
-  $zero-flag: false,
+  $zero-flag: false
 ) {
   $size-map-cutom: ();
   @if $auto-flag {
@@ -229,18 +227,10 @@ $spread-gap: 5;
   @return $size-map-cutom;
 }
 
-
-
-
-
 /* =======================MARGINS======================= */
 /* generate-sizes(50, 5, 5, "px", true), */
 $spacer: 1rem; /* 16px */
 $spacers: generate-sizes(100, 5, 5, "px", true, true, true);
-
-
-
-
 
 $utilities: (
   "rounded": (
@@ -248,7 +238,13 @@ $utilities: (
     class: rounded,
     responsive: true,
 
-    values: map-merge(('circle': 50%), generate-sizes(50, 5, 5, "px", true)),
+    values:
+      map-merge(
+        (
+          "circle": 50%,
+        ),
+        generate-sizes(50, 5, 5, "px", true)
+      ),
   ),
   "font-size": (
     property: font-size,
@@ -285,6 +281,7 @@ $utilities: (
     property: color,
     class: text,
     state: hover,
+    responsive: true,
     values:
       map-merge(
         map-merge($theme-colors, $colors),
@@ -307,6 +304,7 @@ $utilities: (
   "background-color": (
     property: background-color,
     class: bg,
+    responsive: true,
     state: hover,
     values:
       map-merge(
