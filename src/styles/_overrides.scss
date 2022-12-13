@@ -12,6 +12,10 @@ p {
   margin-bottom: 10px;
 }
 
+h1 {
+  font-weight: 800;
+}
+
 @media (min-width: 575px) {
   .col-sm-five {
     flex: 0 0 auto;

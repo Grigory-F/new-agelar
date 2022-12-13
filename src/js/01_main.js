@@ -1,3 +1,54 @@
+let scrollButton = document.querySelector(".upbtn");
+let mainWrap = document.querySelector(".main");
+/* window.addEventListener("scroll", () => {
+  console.log(window.scrollY);
+}); */
+
+let tarrifsContentMoreButton = document.querySelectorAll(
+  ".tarrifs-content__more-button"
+);
+let tarrifsTableHidden = document.querySelectorAll(".tarrifs-table--hidden");
+
+tarrifsContentMoreButton.forEach((tarrifsContentMoreButtonThis, index) => {
+  tarrifsContentMoreButtonThis.addEventListener("click", () => {
+    tarrifsTableHidden.forEach((elem, index) => {
+      elem.classList.remove("tarrifs-table--hidden");
+      /* tarrifsContentMoreButtonThis[index].classList.add("d-none"); */
+    });
+    delButtons();
+  });
+});
+
+function delButtons(params) {
+  tarrifsContentMoreButton.forEach((elem, index) => {
+    elem.classList.add("d-none");
+  });
+}
+
+mainWrap.addEventListener("scroll", function (e) {
+  if (mainWrap.scrollTop >= 500) {
+    scrollButton.classList.add("upbtn--active");
+  } else {
+    scrollButton.classList.remove("upbtn--active");
+  }
+});
+
+scrollButton.addEventListener("click", () => {
+  mainWrap.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+/* $(window).scroll(function () {
+  if ($(this).scrollTop() > 500) {
+      $('#upbtn').fadeIn();
+  } else {
+      $('#upbtn').fadeOut();
+  }
+});
+$('#upbtn').click(function(){
+  //window.scrollTo(0, 0);
+  $("html, body").animate({ scrollTop: 0 }, "slow");
+}); */
+
 document.querySelectorAll(".btn-expand").forEach((elem, index) => {
   elem.addEventListener("click", (e) => {
     e.target.classList.toggle("btn-expand--active");
@@ -10,16 +61,31 @@ var tooltipTriggerList = [].slice.call(
 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl);
 });
-
-
-document.querySelector('.burger-button').addEventListener('click', taggleButton)
-let sidebar = document.querySelector('.sidebar')
+let overflowNew = document.querySelector(".over-new");
+let burgerButton = document.querySelector(".burger-button");
+let sidebarClose = document.querySelector(".sidebar-close");
+burgerButton.addEventListener("click", taggleButton);
+let sidebar = document.querySelector(".sidebar");
 function taggleButton() {
   this.classList.toggle("change");
-  sidebar.classList.toggle('show')
+  sidebar.classList.toggle("show");
+  overflowNew.classList.add("active");
 }
-new SimpleBar(document.getElementById('menu'))
-new SimpleBar(document.getElementById('sidebar-scroll'))
+
+overflowNew.addEventListener("click", () => {
+  burgerButton.classList.remove("change");
+  sidebar.classList.remove("show");
+  overflowNew.classList.remove("active");
+});
+
+sidebarClose.addEventListener("click", () => {
+  burgerButton.classList.remove("change");
+  sidebar.classList.remove("show");
+  overflowNew.classList.remove("active");
+});
+
+new SimpleBar(document.getElementById("menu"));
+new SimpleBar(document.getElementById("sidebar-scroll"));
 
 const PartnersSlider = new Swiper(".partners-slider", {
   navigation: {
@@ -66,53 +132,90 @@ const CertificatesSlider = new Swiper(".certificates-slider", {
 });
 
 const StuffSlider = new Swiper(".slider-stuff", {
-  /* pagination: {
-    el: ".swiper-slider-pag",
-    clickable: true,
-    renderBullet: function (index, className) {
-      return `<a href="#" class="${className}">${index + 1}</a>`;
-    },
-  }, */
-
+  slidesPerView: "auto",
   navigation: {
     nextEl: ".slider-stuff-next",
     prevEl: ".slider-stuff-prev",
   },
   breakpoints: {
     320: {
-      slidesPerView: 1.2,
-      spaceBetween: 15,
-    },
-    575: {
-      slidesPerView: 2.2,
+      spaceBetween: 0,
     },
 
     992: {
-      slidesPerView: 4,
-      spaceBetween: 30,
+      spaceBetween: 15,
+    },
+  },
+});
+
+const SliderTech = new Swiper(".slider-tech", {
+  slidesPerView: "auto",
+  breakpoints: {
+    320: {
+      spaceBetween: 0,
+    },
+
+    992: {
+      spaceBetween: 15,
     },
   },
 });
 
 /* tarrifs-slider */
 
-
 const TarrifsSlider = new Swiper(".tarrifs-slider", {
   slidesPerView: "auto",
+
   breakpoints: {
     320: {
-
       spaceBetween: 15,
     },
-    575: {
-    },
+    575: {},
 
     992: {
-
       spaceBetween: 30,
     },
   },
 });
+
+const QuizSlider = new Swiper(".quiz-slider", {
+  slidesPerView: 1,
+  autoHeight: true,
+  allowTouchMove: false,
+  pagination: {
+    el: ".quiz-pag",
+    clickable: true,
+    renderBullet: function (index, className) {
+      return `<div class="quiz-pag__box ${className}">
+      <span>${index + 1}</span>
+    </div><div class="quiz-pag__line"></div>`;
+    },
+  },
+  breakpoints: {
+    320: {
+      spaceBetween: 15,
+    },
+    575: {},
+
+    992: {
+      spaceBetween: 30,
+    },
+  },
+});
+
+/* let quizPag = document.querySelector('.') */
+
+QuizSlider.on("slideChange", handlerSlider);
+function handlerSlider(slider) {
+  elPag = slider.pagination.$el[0];
+  widthSetPag = slider.pagination.$el[0].offsetWidth;
+  widthContainerPag = document.querySelector(".quiz__cont-pag").offsetWidth;
+  console.log(widthSetPag, widthContainerPag);
+  elPag.style.transform = `translateX(${
+    widthContainerPag / 2 - widthSetPag
+  }px)`;
+  console.log(widthSetPag / 5);
+}
 
 const ArticlesSlider = new Swiper(".articles-slider", {
   pagination: {
@@ -144,30 +247,21 @@ const ArticlesSlider = new Swiper(".articles-slider", {
 });
 
 const BudgeSliderMin = new Swiper(".budges-slider-min", {
-  spaceBetween: 20,
+  slidesPerView: "auto",
   breakpoints: {
     320: {
-      slidesPerView: 1.5,
-      spaceBetween: 15,
-    },
-    575: {
-      slidesPerView: 3.3,
+      spaceBetween: 0,
     },
 
     992: {
-      slidesPerView: 4,
-      spaceBetween: 30,
-    },
-    1200: {
-      slidesPerView: 5.5,
-      spaceBetween: 30,
+      spaceBetween: 15,
     },
   },
 });
 
 const BudgeSlider = new Swiper(".simple-budge-slider", {
   spaceBetween: 20,
-  slidesPerView: 4,
+  slidesPerView: "auto",
   breakpoints: {
     /* 320: {
         slidesPerView: 1.5,
@@ -267,16 +361,16 @@ const ReviewsVideoSlider = new Swiper(".reviews-video-slider", {
     },
   },
 });
-document.querySelectorAll(".tariff-btn > span").forEach((elem, index) => {
-  elem.addEventListener('click', () => {
-    console.log(elem.textContent.trim());
-    if (elem.textContent.trim() == "Что входит") {
-      elem.textContent = 'Свернуть'
+document.querySelectorAll(".tariff-btn").forEach((elem, index) => {
+  elem.addEventListener("click", () => {
+    textButton = elem.querySelector("span");
+    if (textButton.textContent == "Что входит") {
+      textButton.textContent = "Свернуть";
     } else {
-      elem.textContent = "Что входит"
+      textButton.textContent = "Что входит";
     }
-  })
-})
+  });
+});
 document.querySelectorAll(".box-case").forEach((elem, index) => {
   const height = elem.clientHeight;
   const width = elem.clientWidth;
