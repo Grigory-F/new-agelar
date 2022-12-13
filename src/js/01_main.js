@@ -161,6 +161,17 @@ const SliderTech = new Swiper(".slider-tech", {
   },
 });
 
+const SliderTop = new Swiper(".slider-top", {
+  slidesPerView: 1,
+  pagination: {
+    el: ".swiper-slider-top",
+    clickable: true,
+    renderBullet: function (index, className) {
+      return `<a href="#" class="${className}"></a>`;
+    },
+  },
+});
+
 /* tarrifs-slider */
 
 const TarrifsSlider = new Swiper(".tarrifs-slider", {

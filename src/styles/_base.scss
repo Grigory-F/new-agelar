@@ -15,6 +15,27 @@
   height: 100vh;
 }
 
+.slider-top {
+  /* & .swiper-slide {
+    width: 350px;
+  } */
+}
+.swiper-slider-top {
+  display: flex;
+  gap: 5px;
+}
+.swiper-slider-top .swiper-pagination-bullet {
+border-radius: 50%;
+width: 14px;
+height: 14px;
+background-color: $muted;
+display: block;
+}
+.swiper-slider-top .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: $primary;
+}
+
+
 .upbtn {
   position: fixed;
   width: 50px;
