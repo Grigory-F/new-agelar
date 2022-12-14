@@ -310,6 +310,9 @@ main {
   &__link-container.active &__text-icon,
   &__link-container.active &__link-arrow {
     color: white;
+    & img {
+      filter: invert(1);
+    }
   }
 }
 
