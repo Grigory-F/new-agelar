@@ -25,16 +25,15 @@
   gap: 5px;
 }
 .swiper-slider-top .swiper-pagination-bullet {
-border-radius: 50%;
-width: 14px;
-height: 14px;
-background-color: $muted;
-display: block;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  background-color: $muted;
+  display: block;
 }
 .swiper-slider-top .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background-color: $primary;
 }
-
 
 .upbtn {
   position: fixed;
@@ -109,6 +108,7 @@ main {
 }
 .button-toponims:hover .toponims {
   display: block;
+  z-index: 10;
 }
 
 .change .bar1 {
@@ -372,6 +372,11 @@ main {
     position: absolute;
     top: 0;
     left: 0;
+    & svg,
+    & img {
+      width: 65px;
+      min-width: 65px;
+    }
   }
 
   &__content {
@@ -646,7 +651,9 @@ main {
   display: flex;
   gap: 15px;
   align-items: center;
-
+  &:hover img, &:hover svg {
+    filter: invert(1);
+  }
   &__inner-icon {
     border-radius: 3px;
     display: flex;
@@ -694,6 +701,11 @@ main {
   &--big {
     padding: 15px 20px 15px 15px;
   }
+
+  &--middle svg,
+  &--middle img {
+    width: 30px;
+  }
   &--big:hover,
   &--min:hover,
   &--middle:hover {
@@ -705,7 +717,11 @@ main {
     background-color: $primary;
     transition: 0.3s ease;
   }
-
+  &--min:hover img,
+  &--middle:hover img,
+  &--big:hover img {
+    filter: invert(1);
+  }
   &__text-cont {
   }
 }
