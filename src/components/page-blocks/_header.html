@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header newh">
   <nav
     class="container-fluid h-100 d-flex justify-content-between align-items-center position-relative"
   >
@@ -12,13 +12,29 @@
         class="px-20 d-flex gap-10 h-100 align-items-center text-white bg-primary-hover"
       >
         @@include('./_sprite.html', {'id': 'map-pin', 'width': '20px', 'height':
-        '20px'})<span >О компании</span>
+        '20px'})<span>О компании</span>
       </div>
       <div data-simplebar style="height: 162px" class="toponims" id="menu">
-        <a href="#" class="px-10 d-block py-15 bg-secondary bg-primary-hover text-white">awdwad</a>
-        <a href="#" class="px-10 d-block py-15 bg-secondary bg-primary-hover text-white">awdawaw</a>
-        <a href="#" class="px-10 d-block py-15 bg-secondary bg-primary-hover text-white">awdawdaw</a>
-        <a href="#" class="px-10 d-block py-15 bg-secondary bg-primary-hover text-white">awdadaw</a>
+        <a
+          href="#"
+          class="px-10 d-block py-15 bg-secondary bg-primary-hover text-white"
+          >awdwad</a
+        >
+        <a
+          href="#"
+          class="px-10 d-block py-15 bg-secondary bg-primary-hover text-white"
+          >awdawaw</a
+        >
+        <a
+          href="#"
+          class="px-10 d-block py-15 bg-secondary bg-primary-hover text-white"
+          >awdawdaw</a
+        >
+        <a
+          href="#"
+          class="px-10 d-block py-15 bg-secondary bg-primary-hover text-white"
+          >awdadaw</a
+        >
       </div>
     </div>
     <a href="#" class="d-block d-xxl-none">
@@ -29,25 +45,31 @@
         href="#"
         class="px-20 h-100 d-flex align-items-center text-white bg-primary-hover"
         >О компании</a
+      ><a
+        href="#"
+        class="px-20 h-100 d-flex align-items-center text-white bg-primary-hover"
+        >Кейсы</a
       >
       <a
         href="#"
         class="px-20 h-100 d-flex align-items-center text-white bg-primary-hover"
-        >О компании</a
+        >Клиенты и отзывы</a
       >
       <a
         href="#"
         class="px-20 h-100 d-flex align-items-center text-white bg-primary-hover"
-        >О компании</a
+        >Акции</a
       >
       <a
         href="#"
         class="px-20 h-100 d-flex align-items-center text-white bg-primary-hover"
-        >О компании</a
+        >Контакты</a
       >
     </div>
     <div class="d-flex h-100 gap-0 gap-xxl-10">
       <div
+        data-bs-toggle="modal"
+        data-bs-target="#modal-map"
         class="px-10 px-xxl-20 d-flex d-xxl-none gap-10 h-100 align-items-center text-black text-xxl-white"
       >
         @@include('./_sprite.html', {'id': 'map-pin', 'width': '20px', 'height':
@@ -55,15 +77,23 @@
       </div>
       <a
         href="#"
+        data-bs-toggle="modal"
+        data-bs-target="#modal-call"
         class="px-10 px-xxl-20 h-100 gap-10 d-flex align-items-center text-black text-xxl-white bg-transparent bg-xxl-primary"
         >@@include('./_sprite.html', {'id': 'telepfone', 'width': '20px',
-        'height': '20px'})<span   class="d-none d-xxl-inline">О компании</span>
+        'height': '20px'})<span class="d-none d-xxl-inline text-uppercase"
+          >Перезвонить</span
+        >
       </a>
       <a
         href="#"
+        data-bs-toggle="modal"
+        data-bs-target="#modal-kp"
         class="px-10 px-xxl-20 h-100 gap-10 d-flex align-items-center text-black text-xxl-white bg-transparent bg-xxl-primary"
         >@@include('./_sprite.html', {'id': 'file-text', 'width': '20px',
-        'height': '20px'})<span class="d-none d-xxl-inline">О компании</span>
+        'height': '20px'})<span class="d-none d-xxl-inline text-uppercase"
+          >Получить кП</span
+        >
       </a>
     </div>
   </nav>

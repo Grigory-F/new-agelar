@@ -118,6 +118,7 @@
     bottom: 0;
     pointer-events: none;
     overflow: hidden;
+    background-color: #dee2e6;
   }
   
   [data-simplebar].simplebar-dragging .simplebar-content {
@@ -141,8 +142,8 @@
     position: absolute;
     content: '';
     background: #A20000;
-    left: 2px;
-    right: 2px;
+    left: 0px;
+    right: 0px;
     opacity: 1;
     transition: opacity 0.2s linear;
   }
@@ -155,7 +156,7 @@
   
   .simplebar-track.simplebar-vertical {
     top: 0;
-    width: 11px;
+    width: 5px;
   }
   
   .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
