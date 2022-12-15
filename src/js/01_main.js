@@ -51,7 +51,7 @@ $('#upbtn').click(function(){
 
 document.querySelectorAll(".btn-expand").forEach((elem, index) => {
   elem.addEventListener("click", (e) => {
-    e.target.classList.toggle("btn-expand--active");
+    elem.classList.toggle("btn-expand--active");
   });
 });
 
