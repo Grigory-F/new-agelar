@@ -575,22 +575,18 @@ main {
   background-color: white;
   width: 100px;
   height: 100px;
-  position: relative;
   &__container {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 25px;
+    left: 30px;
   }
 }
 
 @media (max-width: 768px) {
   .circle-number {
     &__container {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: 20px;
+      left: 25px;
     }
   }
 }
