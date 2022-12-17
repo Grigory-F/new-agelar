@@ -161,6 +161,22 @@ const SliderTech = new Swiper(".slider-tech", {
   },
 });
 
+const ServiceContentSlider = new Swiper(".service-content-slider", {
+  slidesPerView: 1,
+  navigation: {
+    nextEl: ".service-content-slider-next",
+    prevEl: ".service-content-slider-prev",
+  },
+  pagination: {
+    el: ".service-content-slider-pag",
+    dynamicBullets: true,
+    clickable: true,
+    renderBullet: function (index, className) {
+      return `<a href="#" class="${className}">${index + 1}</a>`;
+    },
+  },
+});
+
 const SliderTop = new Swiper(".slider-top", {
   slidesPerView: 1,
   pagination: {
