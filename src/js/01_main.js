@@ -433,3 +433,19 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
       "perspective(500px) scale(1.1) rotateX(0) rotateY(0)";
   });
 });
+
+//Определения размера ячеек блока "тарифы"
+(function(document){
+  let cellTarifs = document.querySelectorAll(".tarrifs-table > div");
+  let maxHeightCell = 0;
+  if(cellTarifs){
+    cellTarifs.forEach(function(item){
+      if(item.offsetHeight > maxHeightCell)
+        maxHeightCell = item.offsetHeight;
+    });
+
+    cellTarifs.forEach(function(item){
+      item.style.height = maxHeightCell + "px";
+    });
+  }
+})(document);
