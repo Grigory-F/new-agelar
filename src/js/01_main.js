@@ -171,6 +171,7 @@ const ServiceContentSlider = new Swiper(".service-content-slider", {
     el: ".service-content-slider-pag",
     dynamicBullets: true,
     clickable: true,
+    dynamicMainBullets: 5,
     renderBullet: function (index, className) {
       return `<a href="#" class="${className}">${index + 1}</a>`;
     },
@@ -448,4 +449,36 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
       item.style.height = maxHeightCell + "px";
     });
   }
+})(document);
+
+/**
+ * Функция для установки заголовка формы.
+ * Нужна для одинкаовых модальных форм с разными заголовками.
+ * На ссылку ставим data-open-form и data-form-title="Заголовок" и dataa-bs-target="#idModal"
+ * На место для заголовка в форме ставим data-form-place-title
+ */
+(function(document){
+  let btnsForOpenForm = document.querySelectorAll("[data-open-form]");
+  btnsForOpenForm.forEach(function(elem){
+    elem.addEventListener("click", function() {
+      let modal = document.querySelector(this.dataset.bsTarget);
+      if(modal){
+        let placeTitle = modal.querySelector("[data-form-place-title]");
+        if(placeTitle){
+          placeTitle.innerHTML = this.dataset.formTitle;
+        }
+
+        let form = modal.querySelector("form");
+        if(form){
+          if(placeTitle){
+            let input = document.createElement("input");
+            input.setAttribute("type", "hidden");
+            input.setAttribute("name", "nameForm");
+            input.value = this.dataset.formTitle;
+            form.appendChild(input);
+          }
+        }
+      }
+    });
+  });
 })(document);
