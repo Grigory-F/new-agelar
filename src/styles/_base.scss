@@ -647,7 +647,8 @@ main {
   display: flex;
   gap: 15px;
   align-items: center;
-  &:hover img, &:hover svg {
+  &:hover img,
+  &:hover svg {
     filter: invert(1);
   }
   &__inner-icon {
@@ -796,14 +797,13 @@ main {
       color: #7e8082;
       transition: 0.3s ease;
     }
-  }
-  &__quest--active {
-    & svg {
+    &.btn-expand--active svg {
       transform: rotate(90deg);
       color: $primary;
       transition: 0.3s ease;
     }
   }
+  
   &__answer {
     padding-bottom: 20px;
   }
