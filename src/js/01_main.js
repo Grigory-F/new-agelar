@@ -101,6 +101,18 @@ const PartnersSlider = new Swiper(".partners-slider", {
   slidesPerView: "auto",
 });
 
+lightGallery(document.querySelector(".certificates-slider"), {
+  selector: ".js_gal",
+  thumbnail: true,
+  animateThumb: true,
+  showThumbByDefault: true,
+});
+
+new AgelarPhoneValidator({
+  inputSelector: ".input-phone",
+  submitSelector: ".validator-submit",
+});
+
 const CertificatesSlider = new Swiper(".certificates-slider", {
   grabCursor: true,
   navigation: {

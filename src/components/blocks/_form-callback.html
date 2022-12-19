@@ -6,13 +6,13 @@
     </div>
 
     <div style="max-width: 992px; margin: 0 auto">
-      <div class="row gy-1">
+      <form method="post" action="" class="row gy-1 form">
         <div class="col-md-6">
           <input class="form-control input-error" type="text" placeholder="Имя*" />
           <span class="text-danger input-error-message fs-8">Заполните имя</span>
         </div>
         <div class="col-md-6">
-          <input class="form-control input-error" type="text" placeholder="Телефон*" />
+          <input class="form-control input-error input-phone" type="text" placeholder="Телефон*" />
           <span class="text-danger input-error-message fs-8">Заполните телефон</span>
         </div>
         <div class="col-12">
@@ -27,9 +27,9 @@
             вы соглашаетесь с политикой обработки персональных данных
           </p>
 
-          <div class="btn-lg btn-primary">Перезвоните мне</div>
+          <input type="submit" class="btn-lg btn-primary validator-submit" disabled="false " value="Перезвоните мне"/>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </section>

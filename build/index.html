@@ -430,13 +430,13 @@
     </div>
 
     <div style="max-width: 992px; margin: 0 auto">
-      <div class="row gy-1">
+      <form method="post" action="" class="row gy-1 form">
         <div class="col-md-6">
           <input class="form-control input-error" type="text" placeholder="Имя*" />
           <span class="text-danger input-error-message fs-8">Заполните имя</span>
         </div>
         <div class="col-md-6">
-          <input class="form-control input-error" type="text" placeholder="Телефон*" />
+          <input class="form-control input-error input-phone" type="text" placeholder="Телефон*" />
           <span class="text-danger input-error-message fs-8">Заполните телефон</span>
         </div>
         <div class="col-12">
@@ -451,9 +451,9 @@
             вы соглашаетесь с политикой обработки персональных данных
           </p>
 
-          <div class="btn-lg btn-primary">Перезвоните мне</div>
+          <input type="submit" class="btn-lg btn-primary validator-submit" disabled="false " value="Перезвоните мне"/>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </section>
@@ -2612,24 +2612,26 @@
 </section>
 
 			<section class="bg-block py-30">
-    <div class="container-fluid"><h3 class="text-center fw-bolder">
-            Договора для ознакомления
-        </h3>
-        <div class="row gy-2">
-            <div class="col-md-6 d-flex justify-content-md-end justify-content-center">
-                <div class="btn btn-secondary d-flex px-30 py-10 align-items-center justify-content-center gap-10 wp-100" style="max-width: 400px;">Скачать Стандартный договор <svg style="width: 32px; height: 32px;">
-  <use xlink:href="img/sprite.svg#downliad" />
-</svg>
-</div>
-            </div>
-            <div class="col-md-6 d-flex justify-content-md-start justify-content-center">
-                <div class="btn btn-primary px-30 py-10 d-flex align-items-center justify-content-center gap-10 wp-100" style="max-width: 400px;">Скачать Договор с гарантией <svg style="width: 32px; height: 32px;">
-  <use xlink:href="img/sprite.svg#downliad" />
-</svg>
-</div>
-            </div>
-        </div>
+  <div class="container-fluid text-center">
+    <div style="max-width: 600px; margin: 0 auto 20px auto">
+      <h3 class="text-center fw-bolder mb-10">Гарантии на SEO продвижение</h3>
+      <p class="fs-5">Если не достигнем результатов, вернем деньги</p>
     </div>
+
+    <div class="row gy-2">
+      <div class="d-flex justify-content-center">
+        <div
+          class="btn btn-primary px-30 py-10 d-flex align-items-center justify-content-center gap-10 wp-100"
+          style="max-width: 400px"
+        >
+          Скачать Договор с гарантией <svg style="width: 32px; height: 32px;">
+  <use xlink:href="img/sprite.svg#downliad" />
+</svg>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 			<section>
@@ -2733,7 +2735,7 @@
     <div class="certificates-slider swiper-slider h-100">
       <div class="swiper-wrapper">
         <div class="swiper-slide h-100">
-          <div>
+          <div class="js_gal" data-src="img/certificates.png">
             <img
               class="certificates-slider__image"
               src="img/certificates.png"
@@ -2742,7 +2744,17 @@
           </div>
         </div>
         <div class="swiper-slide h-100">
-          <div>
+          <div class="js_gal" data-src="img/certificates.png">
+            <img
+            
+              class="certificates-slider__image"
+              src="img/certificates.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="swiper-slide h-100">
+          <div class="js_gal" data-src="img/certificates.png">
             <img
               class="certificates-slider__image"
               src="img/certificates.png"
@@ -2751,16 +2763,7 @@
           </div>
         </div>
         <div class="swiper-slide h-100">
-          <div>
-            <img
-              class="certificates-slider__image"
-              src="img/certificates.png"
-              alt=""
-            />
-          </div>
-        </div>
-        <div class="swiper-slide h-100">
-          <div>
+          <div class="js_gal" data-src="img/certificates.png">
             <img
               class="certificates-slider__image"
               src="img/certificates.png"
