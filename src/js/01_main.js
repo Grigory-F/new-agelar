@@ -1,8 +1,5 @@
 let scrollButton = document.querySelector(".upbtn");
 let mainWrap = document.querySelector(".main");
-/* window.addEventListener("scroll", () => {
-  console.log(window.scrollY);
-}); */
 
 let tarrifsContentMoreButton = document.querySelectorAll(
   ".tarrifs-content__more-button"
@@ -78,6 +75,13 @@ overflowNew.addEventListener("click", () => {
   overflowNew.classList.remove("active");
 });
 
+let btnToggler = document.querySelector(".btn-toggler");
+btnToggler.addEventListener("click", () => {
+  document
+    .querySelector(".line-buttons")
+    .classList.toggle("line-buttons--show");
+});
+
 sidebarClose.addEventListener("click", () => {
   burgerButton.classList.remove("change");
   sidebar.classList.remove("show");
@@ -86,34 +90,19 @@ sidebarClose.addEventListener("click", () => {
 
 new SimpleBar(document.getElementById("menu"));
 new SimpleBar(document.getElementById("sidebar-scroll"));
+new SimpleBar(document.querySelector(".spec-cont"));
 
 const PartnersSlider = new Swiper(".partners-slider", {
+  grabCursor: true,
   navigation: {
     nextEl: ".slider-partners-next",
     prevEl: ".slider-partners-prev",
   },
   slidesPerView: "auto",
-  breakpoints: {
-    320: {
-      spaceBetween: 10,
-    },
-    575: {},
-
-    992: {
-      spaceBetween: 25,
-    },
-  },
 });
 
 const CertificatesSlider = new Swiper(".certificates-slider", {
-  /* pagination: {
-    el: ".swiper-slider-pag",
-    clickable: true,
-    renderBullet: function (index, className) {
-      return `<a href="#" class="${className}">${index + 1}</a>`;
-    },
-  }, */
-
+  grabCursor: true,
   navigation: {
     nextEl: ".slider-certificates-next",
     prevEl: ".slider-certificates-prev",
@@ -123,8 +112,6 @@ const CertificatesSlider = new Swiper(".certificates-slider", {
     320: {
       spaceBetween: 15,
     },
-    575: {},
-
     992: {
       spaceBetween: 30,
     },
@@ -133,6 +120,7 @@ const CertificatesSlider = new Swiper(".certificates-slider", {
 
 const StuffSlider = new Swiper(".slider-stuff", {
   slidesPerView: "auto",
+  grabCursor: true,
   navigation: {
     nextEl: ".slider-stuff-next",
     prevEl: ".slider-stuff-prev",
@@ -141,7 +129,6 @@ const StuffSlider = new Swiper(".slider-stuff", {
     320: {
       spaceBetween: 0,
     },
-
     992: {
       spaceBetween: 15,
     },
@@ -150,11 +137,11 @@ const StuffSlider = new Swiper(".slider-stuff", {
 
 const SliderTech = new Swiper(".slider-tech", {
   slidesPerView: "auto",
+  grabCursor: true,
   breakpoints: {
     320: {
       spaceBetween: 0,
     },
-
     992: {
       spaceBetween: 15,
     },
@@ -163,6 +150,7 @@ const SliderTech = new Swiper(".slider-tech", {
 
 const ServiceContentSlider = new Swiper(".service-content-slider", {
   slidesPerView: 1,
+  grabCursor: true,
   navigation: {
     nextEl: ".service-content-slider-next",
     prevEl: ".service-content-slider-prev",
@@ -180,6 +168,7 @@ const ServiceContentSlider = new Swiper(".service-content-slider", {
 
 const SliderTop = new Swiper(".slider-top", {
   slidesPerView: 1,
+  grabCursor: true,
   pagination: {
     el: ".swiper-slider-top",
     clickable: true,
@@ -193,7 +182,7 @@ const SliderTop = new Swiper(".slider-top", {
 
 const TarrifsSlider = new Swiper(".tarrifs-slider", {
   slidesPerView: "auto",
-
+  grabCursor: true,
   breakpoints: {
     320: {
       spaceBetween: 15,
@@ -210,6 +199,7 @@ const QuizSlider = new Swiper(".quiz-slider", {
   slidesPerView: 1,
   autoHeight: true,
   allowTouchMove: false,
+  grabCursor: true,
   pagination: {
     el: ".quiz-pag",
     clickable: true,
@@ -248,6 +238,7 @@ function handlerSlider(slider) {
 const ArticlesSlider = new Swiper(".articles-slider", {
   pagination: {
     el: ".swiper-slider-pag",
+    grabCursor: true,
     clickable: true,
     renderBullet: function (index, className) {
       return `<a href="#" class="${className}">${index + 1}</a>`;
@@ -276,6 +267,7 @@ const ArticlesSlider = new Swiper(".articles-slider", {
 
 const BudgeSliderMin = new Swiper(".budges-slider-min", {
   slidesPerView: "auto",
+  grabCursor: true,
   breakpoints: {
     320: {
       spaceBetween: 0,
@@ -290,6 +282,7 @@ const BudgeSliderMin = new Swiper(".budges-slider-min", {
 const BudgeSlider = new Swiper(".simple-budge-slider", {
   spaceBetween: 20,
   slidesPerView: "auto",
+  grabCursor: true,
   breakpoints: {
     /* 320: {
         slidesPerView: 1.5,
@@ -380,6 +373,7 @@ const reviewsTextSlider = new Swiper(".reviews-text-slider", {
 const ReviewsVideoSlider = new Swiper(".reviews-video-slider", {
   slidesPerView: "auto",
   grabCursor: true,
+
   breakpoints: {
     320: {
       spaceBetween: 15,
@@ -436,16 +430,15 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
 });
 
 //Определения размера ячеек блока "тарифы"
-(function(document){
+(function (document) {
   let cellTarifs = document.querySelectorAll(".tarrifs-table > div");
   let maxHeightCell = 0;
-  if(cellTarifs){
-    cellTarifs.forEach(function(item){
-      if(item.offsetHeight > maxHeightCell)
-        maxHeightCell = item.offsetHeight;
+  if (cellTarifs) {
+    cellTarifs.forEach(function (item) {
+      if (item.offsetHeight > maxHeightCell) maxHeightCell = item.offsetHeight;
     });
 
-    cellTarifs.forEach(function(item){
+    cellTarifs.forEach(function (item) {
       item.style.height = maxHeightCell + "px";
     });
   }

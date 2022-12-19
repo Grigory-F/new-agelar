@@ -318,7 +318,7 @@ main {
 
 .partners-slider {
   & .swiper-slide {
-    width: 265px;
+    width: 200px;
   }
 
   &__slide-cont {
@@ -647,7 +647,8 @@ main {
   display: flex;
   gap: 15px;
   align-items: center;
-  &:hover img, &:hover svg {
+  &:hover img,
+  &:hover svg {
     filter: invert(1);
   }
   &__inner-icon {
@@ -778,7 +779,8 @@ main {
 }
 
 .simple-budge-slider .swiper-slide {
-  width: 345px;
+  width: 100%;
+  flex-shrink: 100 !important;
 }
 .slider-stuff .swiper-slide {
   width: 315px;
@@ -796,14 +798,13 @@ main {
       color: #7e8082;
       transition: 0.3s ease;
     }
-  }
-  &__quest--active {
-    & svg {
+    &.btn-expand--active svg {
       transform: rotate(90deg);
       color: $primary;
       transition: 0.3s ease;
     }
   }
+
   &__answer {
     padding-bottom: 20px;
   }
@@ -1036,4 +1037,44 @@ main {
 .breadcrumbs ul li {
   display: inline;
   padding: 0 0 0 10px;
+}
+
+.line-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex: 1;
+  height: 40px;
+  width: 100%;
+  overflow: hidden;
+  &__button {
+    white-space: nowrap;
+  }
+  &__button--hover:hover {
+    background-color: $primary !important;
+    color: white !important;
+    
+  }
+  &--show {
+    height: 100%;
+  }
+}
+@media (max-width: 992px) {
+  .line-buttons {
+    flex-wrap: nowrap;
+    height: auto;
+    overflow-x: scroll;
+    padding-bottom: 20px;
+  }
+  .spec-cont {
+    overflow-x: scroll;
+  }
+}
+
+
+.input-error-message {
+  visibility: hidden;
+}
+.input-error ~ .input-error-message  {
+  visibility: visible;
 }
