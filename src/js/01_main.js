@@ -130,6 +130,13 @@ const CertificatesSlider = new Swiper(".certificates-slider", {
   },
 });
 
+const sliderStock = new Swiper(".slider-stock", {
+  grabCursor: true,
+  slidesPerView: "auto",
+  spaceBetween: 0,
+  
+});
+
 const StuffSlider = new Swiper(".slider-stuff", {
   slidesPerView: "auto",
   grabCursor: true,
