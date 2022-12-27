@@ -424,26 +424,27 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
     const xRotation = -20 * ((yVal - height / 2) / height);
 
     const string =
-      "perspective(500px) scale(1.1) rotateX(" +
+      "transform: perspective(500px) scale(1.1) rotateX(" +
       xRotation +
       "deg) rotateY(" +
       yRotation +
-      "deg)";
+      "deg); transition: .1s ease";
+      
 
-    elem.style.transform = string;
+    elem.style.cssText = string;
   });
   elem.addEventListener("mouseout", function () {
-    elem.style.transform = "perspective(500px) scale(1) rotateX(0) rotateY(0)";
+    elem.style.cssText = "transform: perspective(500px) scale(1) rotateX(0) rotateY(0); transition: .1s ease";
   });
 
   elem.addEventListener("mousedown", function () {
-    elem.style.transform =
-      "perspective(500px) scale(0.9) rotateX(0) rotateY(0)";
+    elem.style.cssText =
+      "transform :perspective(500px) scale(0.9) rotateX(0) rotateY(0); transition: .1s ease";
   });
 
   elem.addEventListener("mouseup", function () {
     elem.style.transform =
-      "perspective(500px) scale(1.1) rotateX(0) rotateY(0)";
+      "transform :perspective(500px) scale(1.1) rotateX(0) rotateY(0)";
   });
 });
 
