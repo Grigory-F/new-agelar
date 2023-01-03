@@ -1,6 +1,4 @@
-@import 'cases/top-case-bunner';
-
-
+@import "cases/top-case-bunner";
 
 .layout-main {
 }
@@ -10,8 +8,7 @@
 }
 .lap-bg-image {
   &::before {
-
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 100%;
@@ -503,17 +500,24 @@ main {
     opacity: 0;
   }
 }
-
-.tarrifs-titles__content .tarrifs-table:nth-child(even) div:nth-child(odd),
-.tarrifs-content__slide .tarrifs-table:nth-child(odd) div:nth-child(odd) {
+/* rgb(156,0,0) */
+.tarrifs-titles__content .tarrifs-table div:nth-child(odd),
+.tarrifs-content__slide .tarrifs-table div:nth-child(odd) {
   background-color: #f5f5f5;
   mix-blend-mode: multiply;
 }
-.tarrifs-titles__content .tarrifs-table:nth-child(odd) div:nth-child(even),
+/* .tarrifs-titles__content .tarrifs-table:nth-child(odd) div:nth-child(even),
 .tarrifs-content__slide .tarrifs-table:nth-child(even) div:nth-child(even) {
   background-color: #f5f5f5;
   mix-blend-mode: multiply;
-}
+} */
+
+/* .tarrifs-titles__content .tarrifs-table:last-child div:nth-child(even), */
+
+/* .tarrifs-content .tarrifs-content__slide:last-child .tarrifs-table  {
+  
+
+} */
 
 .tarrifs-table {
   /* & div:nth-child(odd) {
@@ -552,7 +556,7 @@ main {
 }
 .tarrifs-slider {
   & .swiper-slide {
-    width: 365px;
+    width: 350px;
   }
 }
 
@@ -562,6 +566,30 @@ main {
     height: 72px;
   }
 }
+
+
+.slider-cases-box .swiper-slide {
+  width: 350px;
+}
+
+
+.disabled-swiper-button {
+  display: none;
+}
+
+.tarrifs-prime .tarrifs-table:nth-child(odd) div:nth-child(odd),
+.tarrifs-prime .tarrifs-table:nth-child(even) div:nth-child(odd) {
+  mix-blend-mode: normal;
+  background-color: rgb(156, 0, 0);
+}
+.tarrifs-prime .tarrifs-table:nth-child(even) div:nth-child(even) {
+  mix-blend-mode: normal;
+  background-color: transparent;
+}
+.tarrifs-prime .tarrifs-table .tarrifs-table__dot {
+  background-color: white !important;
+}
+
 .box-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
@@ -1066,7 +1094,6 @@ main {
   &__button--hover:hover {
     background-color: $primary !important;
     color: white !important;
-    
   }
   &--show {
     height: 100%;
@@ -1084,18 +1111,13 @@ main {
   }
 }
 
-
 .input-error-message {
   visibility: hidden;
 }
-.input-error ~ .input-error-message  {
+.input-error ~ .input-error-message {
   visibility: visible;
 }
-
-
 
 .slider-stock .swiper-slide {
   width: 350px;
 }
-
-

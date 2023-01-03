@@ -92,6 +92,8 @@ new SimpleBar(document.getElementById("menu"));
 new SimpleBar(document.getElementById("sidebar-scroll"));
 new SimpleBar(document.querySelector(".spec-cont"));
 
+
+if (document.querySelector(".partners-slider")) {
 const PartnersSlider = new Swiper(".partners-slider", {
   grabCursor: true,
   navigation: {
@@ -100,7 +102,7 @@ const PartnersSlider = new Swiper(".partners-slider", {
   },
   slidesPerView: "auto",
 });
-
+}
 lightGallery(document.querySelector(".certificates-slider"), {
   selector: ".js_gal",
   thumbnail: true,
@@ -112,31 +114,33 @@ new AgelarPhoneValidator({
   inputSelector: ".input-phone",
   submitSelector: ".validator-submit",
 });
-
-const CertificatesSlider = new Swiper(".certificates-slider", {
-  grabCursor: true,
-  navigation: {
-    nextEl: ".slider-certificates-next",
-    prevEl: ".slider-certificates-prev",
-  },
-  slidesPerView: "auto",
-  breakpoints: {
-    320: {
-      spaceBetween: 15,
+if (document.querySelector(".certificates-slider")) {
+  const CertificatesSlider = new Swiper(".certificates-slider", {
+    grabCursor: true,
+    navigation: {
+      nextEl: ".slider-certificates-next",
+      prevEl: ".slider-certificates-prev",
     },
-    992: {
-      spaceBetween: 30,
+    slidesPerView: "auto",
+    breakpoints: {
+      320: {
+        spaceBetween: 15,
+      },
+      992: {
+        spaceBetween: 30,
+      },
     },
-  },
-});
-
+  });
+}
+if (document.querySelector(".slider-stock")) {
 const sliderStock = new Swiper(".slider-stock", {
   grabCursor: true,
   slidesPerView: "auto",
   spaceBetween: 0,
-  
 });
+}
 
+if (document.querySelector(".slider-stuff")) {
 const StuffSlider = new Swiper(".slider-stuff", {
   slidesPerView: "auto",
   grabCursor: true,
@@ -153,6 +157,8 @@ const StuffSlider = new Swiper(".slider-stuff", {
     },
   },
 });
+}
+if (document.querySelector(".slider-tech")) {
 
 const SliderTech = new Swiper(".slider-tech", {
   slidesPerView: "auto",
@@ -166,7 +172,9 @@ const SliderTech = new Swiper(".slider-tech", {
     },
   },
 });
+}
 
+if (document.querySelector(".service-content-slider")) {
 const ServiceContentSlider = new Swiper(".service-content-slider", {
   slidesPerView: 1,
   grabCursor: true,
@@ -183,7 +191,8 @@ const ServiceContentSlider = new Swiper(".service-content-slider", {
     },
   },
 });
-
+}
+if (document.querySelector(".slider-top")) {
 const SliderTop = new Swiper(".slider-top", {
   slidesPerView: 1,
   grabCursor: true,
@@ -195,53 +204,62 @@ const SliderTop = new Swiper(".slider-top", {
     },
   },
 });
-
+}
 /* tarrifs-slider */
-
+if (document.querySelector(".tarrifs-slider")) {
 const TarrifsSlider = new Swiper(".tarrifs-slider", {
   slidesPerView: "auto",
   grabCursor: true,
   breakpoints: {
     320: {
-      spaceBetween: 15,
-    },
-    575: {},
-
-    992: {
-      spaceBetween: 30,
+      spaceBetween: 5,
     },
   },
 });
+}
+if (document.querySelector(".slider-cases-box")) {
+  const TarrifsSlider = new Swiper(".slider-cases-box", {
+    slidesPerView: "auto",
+    grabCursor: true,
+    navigation: {
+      nextEl: ".slider-cases-next",
+      prevEl: ".slider-cases-prev",
+      disabledClass: "disabled-swiper-button",
+    },
+  });
+}
 
-const QuizSlider = new Swiper(".quiz-slider", {
-  slidesPerView: 1,
-  autoHeight: true,
-  allowTouchMove: false,
-  grabCursor: true,
-  pagination: {
-    el: ".quiz-pag",
-    clickable: true,
-    renderBullet: function (index, className) {
-      return `<div class="quiz-pag__box ${className}">
+if (document.querySelector(".quiz-slider")) {
+  const QuizSlider = new Swiper(".quiz-slider", {
+    slidesPerView: 1,
+    autoHeight: true,
+    allowTouchMove: false,
+    grabCursor: true,
+    pagination: {
+      el: ".quiz-pag",
+      clickable: true,
+      renderBullet: function (index, className) {
+        return `<div class="quiz-pag__box ${className}">
       <span>${index + 1}</span>
     </div><div class="quiz-pag__line"></div>`;
+      },
     },
-  },
-  breakpoints: {
-    320: {
-      spaceBetween: 15,
-    },
-    575: {},
+    breakpoints: {
+      320: {
+        spaceBetween: 15,
+      },
+      575: {},
 
-    992: {
-      spaceBetween: 30,
+      992: {
+        spaceBetween: 30,
+      },
     },
-  },
-});
+  });
+}
 
 /* let quizPag = document.querySelector('.') */
 
-QuizSlider.on("slideChange", handlerSlider);
+/* QuizSlider.on("slideChange", handlerSlider);
 function handlerSlider(slider) {
   elPag = slider.pagination.$el[0];
   widthSetPag = slider.pagination.$el[0].offsetWidth;
@@ -251,38 +269,41 @@ function handlerSlider(slider) {
     widthContainerPag / 2 - widthSetPag
   }px)`;
   console.log(widthSetPag / 5);
+} */
+if (document.querySelector(".articles-slider")) {
+  const ArticlesSlider = new Swiper(".articles-slider", {
+    pagination: {
+      el: ".swiper-slider-pag",
+      grabCursor: true,
+      clickable: true,
+      renderBullet: function (index, className) {
+        return `<a href="#" class="${className}">${index + 1}</a>`;
+      },
+    },
+
+    navigation: {
+      nextEl: ".swiper-button-prev",
+      prevEl: ".swiper-button-next",
+    },
+    breakpoints: {
+      320: {
+        slidesPerView: 1,
+        spaceBetween: 15,
+      },
+      575: {
+        slidesPerView: 2,
+      },
+
+      992: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+    },
+  });
 }
 
-const ArticlesSlider = new Swiper(".articles-slider", {
-  pagination: {
-    el: ".swiper-slider-pag",
-    grabCursor: true,
-    clickable: true,
-    renderBullet: function (index, className) {
-      return `<a href="#" class="${className}">${index + 1}</a>`;
-    },
-  },
 
-  navigation: {
-    nextEl: ".swiper-button-prev",
-    prevEl: ".swiper-button-next",
-  },
-  breakpoints: {
-    320: {
-      slidesPerView: 1,
-      spaceBetween: 15,
-    },
-    575: {
-      slidesPerView: 2,
-    },
-
-    992: {
-      slidesPerView: 3,
-      spaceBetween: 30,
-    },
-  },
-});
-
+if (document.querySelector(".budges-slider-min")) {
 const BudgeSliderMin = new Swiper(".budges-slider-min", {
   slidesPerView: "auto",
   grabCursor: true,
@@ -290,13 +311,15 @@ const BudgeSliderMin = new Swiper(".budges-slider-min", {
     320: {
       spaceBetween: 0,
     },
-
     992: {
       spaceBetween: 15,
     },
   },
-});
+});}
 
+
+
+if (document.querySelector(".simple-budge-slider")) {
 const BudgeSlider = new Swiper(".simple-budge-slider", {
   spaceBetween: 20,
   slidesPerView: "auto",
@@ -320,7 +343,7 @@ const BudgeSlider = new Swiper(".simple-budge-slider", {
       }, */
   },
 });
-
+}
 class ItcTabs {
   constructor(target, config) {
     const defaultConfig = {};
@@ -375,6 +398,8 @@ tabs.forEach((el, index) => {
   new ItcTabs(tabs[index]);
 });
 
+
+if (document.querySelector(".reviews-text-slider")) {
 const reviewsTextSlider = new Swiper(".reviews-text-slider", {
   slidesPerView: "auto",
   grabCursor: true,
@@ -387,7 +412,9 @@ const reviewsTextSlider = new Swiper(".reviews-text-slider", {
     },
   },
 });
+}
 
+if (document.querySelector(".reviews-video-slider")) {
 const ReviewsVideoSlider = new Swiper(".reviews-video-slider", {
   slidesPerView: "auto",
   grabCursor: true,
@@ -401,6 +428,7 @@ const ReviewsVideoSlider = new Swiper(".reviews-video-slider", {
     },
   },
 });
+}
 document.querySelectorAll(".tariff-btn").forEach((elem, index) => {
   elem.addEventListener("click", () => {
     textButton = elem.querySelector("span");
@@ -429,12 +457,12 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
       "deg) rotateY(" +
       yRotation +
       "deg); transition: .1s ease";
-      
 
     elem.style.cssText = string;
   });
   elem.addEventListener("mouseout", function () {
-    elem.style.cssText = "transform: perspective(500px) scale(1) rotateX(0) rotateY(0); transition: .1s ease";
+    elem.style.cssText =
+      "transform: perspective(500px) scale(1) rotateX(0) rotateY(0); transition: .1s ease";
   });
 
   elem.addEventListener("mousedown", function () {
