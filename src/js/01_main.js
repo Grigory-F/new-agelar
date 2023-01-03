@@ -75,12 +75,14 @@ overflowNew.addEventListener("click", () => {
   overflowNew.classList.remove("active");
 });
 
-let btnToggler = document.querySelector(".btn-toggler");
-btnToggler.addEventListener("click", () => {
-  document
-    .querySelector(".line-buttons")
-    .classList.toggle("line-buttons--show");
-});
+if (document.querySelector(".btn-toggler")) {
+  let btnToggler = document.querySelector(".btn-toggler");
+  btnToggler.addEventListener("click", () => {
+    document
+      .querySelector(".line-buttons")
+      .classList.toggle("line-buttons--show");
+  });
+}
 
 sidebarClose.addEventListener("click", () => {
   burgerButton.classList.remove("change");
@@ -90,18 +92,21 @@ sidebarClose.addEventListener("click", () => {
 
 new SimpleBar(document.getElementById("menu"));
 new SimpleBar(document.getElementById("sidebar-scroll"));
-new SimpleBar(document.querySelector(".spec-cont"));
+
+if (document.querySelector(".spec-cont")) {
+  new SimpleBar(document.querySelector(".spec-cont"));
+}
 
 
 if (document.querySelector(".partners-slider")) {
-const PartnersSlider = new Swiper(".partners-slider", {
-  grabCursor: true,
-  navigation: {
-    nextEl: ".slider-partners-next",
-    prevEl: ".slider-partners-prev",
-  },
-  slidesPerView: "auto",
-});
+  const PartnersSlider = new Swiper(".partners-slider", {
+    grabCursor: true,
+    navigation: {
+      nextEl: ".slider-partners-next",
+      prevEl: ".slider-partners-prev",
+    },
+    slidesPerView: "auto",
+  });
 }
 lightGallery(document.querySelector(".certificates-slider"), {
   selector: ".js_gal",
@@ -133,89 +138,88 @@ if (document.querySelector(".certificates-slider")) {
   });
 }
 if (document.querySelector(".slider-stock")) {
-const sliderStock = new Swiper(".slider-stock", {
-  grabCursor: true,
-  slidesPerView: "auto",
-  spaceBetween: 0,
-});
+  const sliderStock = new Swiper(".slider-stock", {
+    grabCursor: true,
+    slidesPerView: "auto",
+    spaceBetween: 0,
+  });
 }
 
 if (document.querySelector(".slider-stuff")) {
-const StuffSlider = new Swiper(".slider-stuff", {
-  slidesPerView: "auto",
-  grabCursor: true,
-  navigation: {
-    nextEl: ".slider-stuff-next",
-    prevEl: ".slider-stuff-prev",
-  },
-  breakpoints: {
-    320: {
-      spaceBetween: 0,
+  const StuffSlider = new Swiper(".slider-stuff", {
+    slidesPerView: "auto",
+    grabCursor: true,
+    navigation: {
+      nextEl: ".slider-stuff-next",
+      prevEl: ".slider-stuff-prev",
     },
-    992: {
-      spaceBetween: 15,
+    breakpoints: {
+      320: {
+        spaceBetween: 0,
+      },
+      992: {
+        spaceBetween: 15,
+      },
     },
-  },
-});
+  });
 }
 if (document.querySelector(".slider-tech")) {
-
-const SliderTech = new Swiper(".slider-tech", {
-  slidesPerView: "auto",
-  grabCursor: true,
-  breakpoints: {
-    320: {
-      spaceBetween: 0,
+  const SliderTech = new Swiper(".slider-tech", {
+    slidesPerView: "auto",
+    grabCursor: true,
+    breakpoints: {
+      320: {
+        spaceBetween: 0,
+      },
+      992: {
+        spaceBetween: 15,
+      },
     },
-    992: {
-      spaceBetween: 15,
-    },
-  },
-});
+  });
 }
 
 if (document.querySelector(".service-content-slider")) {
-const ServiceContentSlider = new Swiper(".service-content-slider", {
-  slidesPerView: 1,
-  grabCursor: true,
-  navigation: {
-    nextEl: ".service-content-slider-next",
-    prevEl: ".service-content-slider-prev",
-  },
-  pagination: {
-    el: ".service-content-slider-pag",
-    dynamicBullets: true,
-    clickable: true,
-    renderBullet: function (index, className) {
-      return `<a href="#" class="${className}">${index + 1}</a>`;
+  const ServiceContentSlider = new Swiper(".service-content-slider", {
+    slidesPerView: 1,
+    grabCursor: true,
+    navigation: {
+      nextEl: ".service-content-slider-next",
+      prevEl: ".service-content-slider-prev",
     },
-  },
-});
+    pagination: {
+      el: ".service-content-slider-pag",
+      dynamicBullets: true,
+      clickable: true,
+      renderBullet: function (index, className) {
+        return `<a href="#" class="${className}">${index + 1}</a>`;
+      },
+    },
+  });
 }
 if (document.querySelector(".slider-top")) {
-const SliderTop = new Swiper(".slider-top", {
-  slidesPerView: 1,
-  grabCursor: true,
-  pagination: {
-    el: ".swiper-slider-top",
-    clickable: true,
-    renderBullet: function (index, className) {
-      return `<a href="#" class="${className}"></a>`;
+  const SliderTop = new Swiper(".slider-top", {
+    slidesPerView: 1,
+    grabCursor: true,
+    pagination: {
+      el: ".swiper-slider-top",
+      clickable: true,
+      renderBullet: function (index, className) {
+        return `<a href="#" class="${className}"></a>`;
+      },
     },
-  },
-});
+  });
 }
 /* tarrifs-slider */
 if (document.querySelector(".tarrifs-slider")) {
-const TarrifsSlider = new Swiper(".tarrifs-slider", {
-  slidesPerView: "auto",
-  grabCursor: true,
-  breakpoints: {
-    320: {
-      spaceBetween: 5,
+  const TarrifsSlider = new Swiper(".tarrifs-slider", {
+    slidesPerView: "auto",
+    grabCursor: true,
+    breakpoints: {
+      320: {
+        spaceBetween: 5,
+      },
     },
-  },
-});
+  });
 }
 if (document.querySelector(".slider-cases-box")) {
   const TarrifsSlider = new Swiper(".slider-cases-box", {
@@ -302,30 +306,28 @@ if (document.querySelector(".articles-slider")) {
   });
 }
 
-
 if (document.querySelector(".budges-slider-min")) {
-const BudgeSliderMin = new Swiper(".budges-slider-min", {
-  slidesPerView: "auto",
-  grabCursor: true,
-  breakpoints: {
-    320: {
-      spaceBetween: 0,
+  const BudgeSliderMin = new Swiper(".budges-slider-min", {
+    slidesPerView: "auto",
+    grabCursor: true,
+    breakpoints: {
+      320: {
+        spaceBetween: 0,
+      },
+      992: {
+        spaceBetween: 15,
+      },
     },
-    992: {
-      spaceBetween: 15,
-    },
-  },
-});}
-
-
+  });
+}
 
 if (document.querySelector(".simple-budge-slider")) {
-const BudgeSlider = new Swiper(".simple-budge-slider", {
-  spaceBetween: 20,
-  slidesPerView: "auto",
-  grabCursor: true,
-  breakpoints: {
-    /* 320: {
+  const BudgeSlider = new Swiper(".simple-budge-slider", {
+    spaceBetween: 20,
+    slidesPerView: "auto",
+    grabCursor: true,
+    breakpoints: {
+      /* 320: {
         slidesPerView: 1.5,
         spaceBetween: 15,
       },
@@ -341,8 +343,8 @@ const BudgeSlider = new Swiper(".simple-budge-slider", {
         slidesPerView: 5.5,
         spaceBetween: 30,
       }, */
-  },
-});
+    },
+  });
 }
 class ItcTabs {
   constructor(target, config) {
@@ -398,36 +400,35 @@ tabs.forEach((el, index) => {
   new ItcTabs(tabs[index]);
 });
 
-
 if (document.querySelector(".reviews-text-slider")) {
-const reviewsTextSlider = new Swiper(".reviews-text-slider", {
-  slidesPerView: "auto",
-  grabCursor: true,
-  breakpoints: {
-    320: {
-      spaceBetween: 15,
+  const reviewsTextSlider = new Swiper(".reviews-text-slider", {
+    slidesPerView: "auto",
+    grabCursor: true,
+    breakpoints: {
+      320: {
+        spaceBetween: 15,
+      },
+      1200: {
+        spaceBetween: 30,
+      },
     },
-    1200: {
-      spaceBetween: 30,
-    },
-  },
-});
+  });
 }
 
 if (document.querySelector(".reviews-video-slider")) {
-const ReviewsVideoSlider = new Swiper(".reviews-video-slider", {
-  slidesPerView: "auto",
-  grabCursor: true,
+  const ReviewsVideoSlider = new Swiper(".reviews-video-slider", {
+    slidesPerView: "auto",
+    grabCursor: true,
 
-  breakpoints: {
-    320: {
-      spaceBetween: 15,
+    breakpoints: {
+      320: {
+        spaceBetween: 15,
+      },
+      1200: {
+        spaceBetween: 30,
+      },
     },
-    1200: {
-      spaceBetween: 30,
-    },
-  },
-});
+  });
 }
 document.querySelectorAll(".tariff-btn").forEach((elem, index) => {
   elem.addEventListener("click", () => {
@@ -490,3 +491,6 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
     });
   }
 })(document);
+
+
+

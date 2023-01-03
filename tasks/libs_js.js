@@ -5,6 +5,7 @@ const plugins = [
   "node_modules/simplebar/dist/simplebar.min.js",
   "./src/js-libs/ParsePhone.js",
   "./src/js-libs/LightGallery.js",
+  "node_modules/chart.js/dist/chart.umd.js"
 ];
 const { src, dest } = require("gulp");
 const uglify = require("gulp-uglify-es").default;
