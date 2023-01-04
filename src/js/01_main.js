@@ -76,21 +76,42 @@ overflowNew.addEventListener("click", () => {
 });
 
 let btnToggler = document.querySelector(".btn-toggler");
-btnToggler.addEventListener("click", () => {
-  document
-    .querySelector(".line-buttons")
-    .classList.toggle("line-buttons--show");
-});
+if(btnToggler){
+  btnToggler.addEventListener("click", () => {
+    document
+      .querySelector(".line-buttons")
+      .classList.toggle("line-buttons--show");
+  });
+}
 
-sidebarClose.addEventListener("click", () => {
-  burgerButton.classList.remove("change");
-  sidebar.classList.remove("show");
-  overflowNew.classList.remove("active");
-});
+if(sidebarClose){
+  sidebarClose.addEventListener("click", () => {
+    burgerButton.classList.remove("change");
+    sidebar.classList.remove("show");
+    overflowNew.classList.remove("active");
+  });
+}
 
-new SimpleBar(document.getElementById("menu"));
-new SimpleBar(document.getElementById("sidebar-scroll"));
-new SimpleBar(document.querySelector(".spec-cont"));
+(function(document){
+  let menu = document.getElementById("menu")
+  if(menu){
+    new SimpleBar(document.getElementById("menu"));
+  }
+})(document);
+
+(function(document){
+  let sliderScroll = document.getElementById("sidebar-scroll");
+  if(sliderScroll){
+    new SimpleBar(sliderScroll);
+  }
+})(document);
+
+(function(document){
+  let spec = document.querySelector(".spec-cont")
+  if(spec)
+    new SimpleBar(spec);
+})(document);
+
 
 const PartnersSlider = new Swiper(".partners-slider", {
   grabCursor: true,
@@ -101,12 +122,17 @@ const PartnersSlider = new Swiper(".partners-slider", {
   slidesPerView: "auto",
 });
 
-lightGallery(document.querySelector(".certificates-slider"), {
-  selector: ".js_gal",
-  thumbnail: true,
-  animateThumb: true,
-  showThumbByDefault: true,
-});
+(function(document){
+  let certificates = document.querySelector(".certificates-slider");
+  if(certificates){
+    lightGallery(document.querySelector(".certificates-slider"), {
+      selector: ".js_gal",
+      thumbnail: true,
+      animateThumb: true,
+      showThumbByDefault: true,
+    });
+  }
+})(document);
 
 new AgelarPhoneValidator({
   inputSelector: ".input-phone",
@@ -397,7 +423,7 @@ const ReviewsVideoSlider = new Swiper(".reviews-video-slider", {
 });
 document.querySelectorAll(".tariff-btn").forEach((elem, index) => {
   elem.addEventListener("click", () => {
-    textButton = elem.querySelector("span");
+    let textButton = elem.querySelector("span");
     if (textButton.textContent == "Что входит") {
       textButton.textContent = "Свернуть";
     } else {
@@ -443,17 +469,25 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
 
 //Определения размера ячеек блока "тарифы"
 (function (document) {
-  let cellTarifs = document.querySelectorAll(".tarrifs-table > div");
-  let maxHeightCell = 0;
-  if (cellTarifs) {
-    cellTarifs.forEach(function (item) {
-      if (item.offsetHeight > maxHeightCell) maxHeightCell = item.offsetHeight;
-    });
+  function setHeightCell(cellTarifs){
+    if(!cellTarifs)
+      return;
 
-    cellTarifs.forEach(function (item) {
-      item.style.height = maxHeightCell + "px";
-    });
+    let maxHeightCell = 0;
+    if (cellTarifs) {
+      cellTarifs.forEach(function (item) {
+        if (item.offsetHeight > maxHeightCell) maxHeightCell = item.offsetHeight;
+      });
+
+      cellTarifs.forEach(function (item) {
+        item.style.height = maxHeightCell + "px";
+      });
+    }
+
+    return maxHeightCell;
   }
+
+  setHeightCell(document.querySelectorAll(".tarrifs-container .tarrifs-table > div"));
 })(document);
 
 /**
@@ -486,4 +520,17 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
       }
     });
   });
+})(document);
+
+(function(document){
+  let reviewsGall = document.getElementById('n-reviews-gall');
+  if(reviewsGall){
+    lightGallery(reviewsGall, {
+      selector: '.js_gal_reviews',
+      thumbnail:true,
+      animateThumb: true,
+
+      showThumbByDefault: true,
+    });
+  }
 })(document);
