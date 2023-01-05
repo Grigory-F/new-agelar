@@ -627,6 +627,7 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
 
               if (showMoreBtn) {
                 showMoreBtn.setAttribute("data-id", id);
+                //Скрываем или отображаем кнопку "показать ещё"
                 if (!data.nextData) {
                   showMoreBtn.style.display = "none";
                 } else {
@@ -634,19 +635,13 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
                 }
               }
               generalPreloader.classList.remove("spin-overlap--active");
-              //Скрываем или отображаем кнопку "показать ещё"
-              if (!data.nextData) {
-                showMoreBtn.style.display = "none";
-              } else {
-                showMoreBtn.style.display = "";
-              }
+              loadImages();
             });
           }
         }
       );
     });
   });
-
   /*
       Загрузка кейсов
       resource - id ресурса
@@ -688,14 +683,34 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
               this.style.display = "none";
             }
           }
-          console.log("ararar");
+          
           return data;
         })
         .then((data) => {
-          console.log("awdawdwadwd");
-
           generalPreloader.classList.remove("spin-overlap--active");
+          loadImages();
         });
     });
   }
+  
+  //Загрузка изображений
+  async function loadImages(){
+    let images = document.querySelectorAll(".box-case__bg-image");
+    images.forEach(item => {
+        let image = document.createElement("img");
+        image.src = item.dataset.src;
+        image.setAttribute("class", item.getAttribute("class"));
+        image.addEventListener("load", function(){
+            item.parentNode.insertBefore(image, item);
+            let spin = item.parentNode.querySelector(".spin-overlap");
+            if(spin)
+                spin.remove();
+            item.remove();
+        });
+    });
+  }
+
+ 
+  loadImages();
+
 })(document);
