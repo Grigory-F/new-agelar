@@ -84,7 +84,7 @@ if (document.querySelector(".btn-toggler")) {
   });
 }
 
-if(sidebarClose){
+if (sidebarClose) {
   sidebarClose.addEventListener("click", () => {
     burgerButton.classList.remove("change");
     sidebar.classList.remove("show");
@@ -92,24 +92,23 @@ if(sidebarClose){
   });
 }
 
-(function(document){
-  let menu = document.getElementById("menu")
-  if(menu){
+(function (document) {
+  let menu = document.getElementById("menu");
+  if (menu) {
     new SimpleBar(document.getElementById("menu"));
   }
 })(document);
 
-(function(document){
+(function (document) {
   let sliderScroll = document.getElementById("sidebar-scroll");
-  if(sliderScroll){
+  if (sliderScroll) {
     new SimpleBar(sliderScroll);
   }
 })(document);
 
-(function(document){
-  let spec = document.querySelector(".spec-cont")
-  if(spec)
-    new SimpleBar(spec);
+(function (document) {
+  let spec = document.querySelector(".spec-cont");
+  if (spec) new SimpleBar(spec);
 })(document);
 
 new SimpleBar(document.getElementById("menu"));
@@ -118,7 +117,6 @@ new SimpleBar(document.getElementById("sidebar-scroll"));
 if (document.querySelector(".spec-cont")) {
   new SimpleBar(document.querySelector(".spec-cont"));
 }
-
 
 if (document.querySelector(".partners-slider")) {
   const PartnersSlider = new Swiper(".partners-slider", {
@@ -436,6 +434,20 @@ if (document.querySelector(".reviews-text-slider")) {
     },
   });
 }
+if (document.querySelector(".slider-case")) {
+  const reviewsTextSlider = new Swiper(".slider-case", {
+    slidesPerView: "auto",
+    grabCursor: true,
+    breakpoints: {
+      320: {
+        spaceBetween: 15,
+      },
+      1200: {
+        spaceBetween: 30,
+      },
+    },
+  });
+}
 
 if (document.querySelector(".reviews-video-slider")) {
   const ReviewsVideoSlider = new Swiper(".reviews-video-slider", {
@@ -501,14 +513,14 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
 
 //Определения размера ячеек блока "тарифы"
 (function (document) {
-  function setHeightCell(cellTarifs){
-    if(!cellTarifs)
-      return;
+  function setHeightCell(cellTarifs) {
+    if (!cellTarifs) return;
 
     let maxHeightCell = 0;
     if (cellTarifs) {
       cellTarifs.forEach(function (item) {
-        if (item.offsetHeight > maxHeightCell) maxHeightCell = item.offsetHeight;
+        if (item.offsetHeight > maxHeightCell)
+          maxHeightCell = item.offsetHeight;
       });
 
       cellTarifs.forEach(function (item) {
@@ -519,7 +531,9 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
     return maxHeightCell;
   }
 
-  setHeightCell(document.querySelectorAll(".tarrifs-container .tarrifs-table > div"));
+  setHeightCell(
+    document.querySelectorAll(".tarrifs-container .tarrifs-table > div")
+  );
 })(document);
 
 /**
@@ -528,20 +542,20 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
  * На ссылку ставим data-open-form и data-form-title="Заголовок" и dataa-bs-target="#idModal"
  * На место для заголовка в форме ставим data-form-place-title
  */
-(function(document){
+(function (document) {
   let btnsForOpenForm = document.querySelectorAll("[data-open-form]");
-  btnsForOpenForm.forEach(function(elem){
-    elem.addEventListener("click", function() {
+  btnsForOpenForm.forEach(function (elem) {
+    elem.addEventListener("click", function () {
       let modal = document.querySelector(this.dataset.bsTarget);
-      if(modal){
+      if (modal) {
         let placeTitle = modal.querySelector("[data-form-place-title]");
-        if(placeTitle){
+        if (placeTitle) {
           placeTitle.innerHTML = this.dataset.formTitle;
         }
 
         let form = modal.querySelector("form");
-        if(form){
-          if(placeTitle){
+        if (form) {
+          if (placeTitle) {
             let input = document.createElement("input");
             input.setAttribute("type", "hidden");
             input.setAttribute("name", "nameForm");
@@ -554,12 +568,12 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
   });
 })(document);
 
-(function(document){
-  let reviewsGall = document.getElementById('n-reviews-gall');
-  if(reviewsGall){
+(function (document) {
+  let reviewsGall = document.getElementById("n-reviews-gall");
+  if (reviewsGall) {
     lightGallery(reviewsGall, {
-      selector: '.js_gal_reviews',
-      thumbnail:true,
+      selector: ".js_gal_reviews",
+      thumbnail: true,
       animateThumb: true,
 
       showThumbByDefault: true,
@@ -568,51 +582,64 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
 })(document);
 
 //Код для подгрузки кейсов в категории кейсов
-(function(document){
+(function (document) {
+  function getCases(resource, shift = 0) {
+    return $.post("/assets/templates/agelar/getCases.php", {
+      id: resource,
+      shift: shift,
+    });
+  }
   //Проверка на существования своих тегов у категории
   let tags = document.querySelectorAll("[data-tags]");
-  tags.forEach(function(item){
-      item.addEventListener("click", function(e){
-          e.preventDefault();
-          let id = this.dataset.id;
-          
-          $.post('/assets/templates/agelar/isTagsCases.php', {
-              id: id
-          }, function(data){
-              if(Number(data))
-                  window.location.href = this.href;
-              else {
-                  getCases(id).then(function(data){
-                      data = JSON.parse(data);
-                      
-                      let casesBlock = document.querySelector(".casesList");
-                      casesBlock.innerHTML = data.data;
-                      let showMoreBtn = casesBlock.nextElementSibling.querySelector(".show_more_cases");
-                      showMoreBtn.setAttribute("data-id", id);
-                      
-                      //Скрываем или отображаем кнопку "показать ещё"
-                      if(!data.nextData){
-                          showMoreBtn.style.display = "none";
-                      }else{
-                          showMoreBtn.style.display = "";
-                      }
-                  });
+  tags.forEach(function (item) {
+    item.addEventListener("click", function (e) {
+      e.preventDefault();
+      let id = this.dataset.id;
+      generalPreloader.classList.add("spin-overlap--active");
+      $.post(
+        "/assets/templates/agelar/isTagsCases.php",
+        {
+          id: id,
+        },
+        function (data) {
+          if (Number(data)) window.location.href = this.href;
+          else {
+            getCases(id).then(function (data) {
+              data = JSON.parse(data);
+              let casesBlock = document.querySelector(".casesList");
+              casesBlock.innerHTML = data.data;
+              console.log("add content");
+
+              let showMoreBtn = document.querySelector(".show_more_cases");
+
+              if (showMoreBtn) {
+                showMoreBtn.setAttribute("data-id", id);
+                //Скрываем или отображаем кнопку "показать ещё"
+                if (!data.nextData) {
+                  showMoreBtn.style.display = "none";
+                } else {
+                  showMoreBtn.style.display = "";
+                }
               }
-          });
-      }); 
+              generalPreloader.classList.remove("spin-overlap--active");
+              loadImages();
+            });
+          }
+        }
+      );
+    });
   });
   /*
       Загрузка кейсов
       resource - id ресурса
       shift - сдвиг получаемых данных
   */
-  function getCases(resource, shift = 0){
-      return $.post('/assets/templates/agelar/getCases.php', {
-          id: resource,
-          shift: shift,
-      });
+  let generalPreloader;
+
+  if (document.querySelector(".spin-overlap")) {
+    generalPreloader = document.querySelector(".spin-overlap");
   }
-  
+
   //Загрузка данных по нажатию "показать ещё"
   /*Обязательные параметры у кнопки
     data-id - id ресурса
@@ -620,26 +647,55 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
     data-default-shift - сдвиг по умолчанию
   */
   let showMoreCaseBtn = document.querySelector(".show_more_cases");
-  if(showMoreCaseBtn){
-      showMoreCaseBtn.addEventListener("click", function(){
-          let id = this.getAttribute("data-id");
-          let shift = this.getAttribute("data-shift");
-          let defaultShift = this.dataset.defaultShift;
+  if (showMoreCaseBtn) {
+    showMoreCaseBtn.addEventListener("click", function () {
+      let id = this.getAttribute("data-id");
+      let shift = this.getAttribute("data-shift");
+      let defaultShift = this.dataset.defaultShift;
+      generalPreloader.classList.add("spin-overlap--active");
+      getCases(id, shift)
+        .then((data) => {
+          data = JSON.parse(data);
 
-          getCases(id, shift).then(data => {
-              data = JSON.parse(data);
+          if (data.data != "") {
+            let casesBlock = document.querySelector(".casesList");
+            casesBlock.innerHTML += data.data;
+            this.setAttribute(
+              "data-shift",
+              Number(shift) + Number(defaultShift)
+            );
 
-              if(data.data != ""){
-                  let casesBlock = document.querySelector(".casesList");
-                  casesBlock.innerHTML += data.data;
-                  this.setAttribute("data-shift", Number(shift) + Number(defaultShift));
-                  
-                  //Скрываем кнопку если нет более даннных
-                  if(!data.nextData){
-                      this.style.display = "none";
-                  }
-              }
-          });
-      });
+            //Скрываем кнопку если нет более даннных
+            if (!data.nextData) {
+              this.style.display = "none";
+            }
+          }
+          
+          return data;
+        })
+        .then((data) => {
+          generalPreloader.classList.remove("spin-overlap--active");
+          loadImages();
+        });
+    });
   }
+  
+  //Загрузка изображений
+  function loadImages(){
+    let images = document.querySelectorAll(".box-case__bg-image");
+    images.forEach(item => {
+        let image = document.createElement("img");
+        image.src = item.dataset.src;
+        image.setAttribute("class", item.getAttribute("class"));
+        image.addEventListener("load", function(){
+            item.parentNode.insertBefore(image, item);
+            let spin = item.parentNode.querySelector(".spin-overlap");
+            if(spin)
+                spin.remove();
+            item.remove();
+        });
+    });
+  }
+
+  loadImages();
 })(document);

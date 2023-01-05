@@ -347,7 +347,6 @@ main {
     height: 100%;
     cursor: pointer;
     height: 100%;
-    
   }
   &__img-dark {
   }
@@ -568,11 +567,9 @@ main {
   }
 }
 
-
 .slider-cases-box .swiper-slide {
   width: 350px;
 }
-
 
 .disabled-swiper-button {
   display: none;
@@ -595,6 +592,7 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   grid-auto-rows: auto;
+  position: relative;
   & .box-case {
     transition: transform 0.4s linear;
     &:hover {
@@ -823,7 +821,8 @@ main {
   }
 }
 
-.simple-budge-slider .swiper-slide, .budges-slider-min .swiper-slide {
+.simple-budge-slider .swiper-slide,
+.budges-slider-min .swiper-slide {
   width: 100% !important;
   flex-shrink: 100 !important;
 }
@@ -1123,23 +1122,13 @@ main {
   width: 350px;
 }
 
-
-
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
 .solutions {
-  display:flex;
+  display: flex;
   /* justify-content:space-between; */
-  justify-content:space-evenly;
-  flex-wrap:wrap;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   margin-top: 50px;
 }
 .solutions .solution {
@@ -1148,8 +1137,8 @@ main {
   width: 23%;
   border: 1px solid;
   margin-bottom: 25px;
-  -webkit-box-shadow: 3px 2px 8px 2px rgba(0,0,0,0.46); 
-box-shadow: 3px 2px 8px 2px rgba(0,0,0,0.46);
+  -webkit-box-shadow: 3px 2px 8px 2px rgba(0, 0, 0, 0.46);
+  box-shadow: 3px 2px 8px 2px rgba(0, 0, 0, 0.46);
 }
 
 .solution .poster {
@@ -1171,8 +1160,6 @@ box-shadow: 3px 2px 8px 2px rgba(0,0,0,0.46);
   display: inline;
 }
 
-
-
 .solution .poster h4 {
   padding: 10px;
   /* margin-bottom: 15px; */
@@ -1181,7 +1168,7 @@ box-shadow: 3px 2px 8px 2px rgba(0,0,0,0.46);
   color: white;
 }
 .solution .poster .text {
-padding: 15px 10px;
+  padding: 15px 10px;
 }
 .solution .poster .text ul {
   font-size: 16px;
@@ -1194,7 +1181,7 @@ padding: 15px 10px;
 
 .solutions .solution .poster img {
   max-width: 100%;
-  width:100%;
+  width: 100%;
 }
 
 .solution .name {
@@ -1220,7 +1207,7 @@ padding: 15px 10px;
   font-size: 27px;
   color: #a20000;
   font-weight: bold;
-  padding:0 10px;
+  padding: 0 10px;
 }
 .solution .priceAndOptions .price span.cur {
   font-size: 18px;
@@ -1250,7 +1237,6 @@ padding: 15px 10px;
 }
 .solution .btns a.demo {
   background-color: #a20000;
-
 }
 .solution .btns a.order {
   background-color: gray;
@@ -1264,53 +1250,116 @@ padding: 15px 10px;
   flex-wrap: wrap;
   justify-content: center;
 }
-.solutionsCategories a,.solutionsCategories div {
+.solutionsCategories a,
+.solutionsCategories div {
   display: block;
-  
+
   color: #a20000;
   font-size: 18px;
   padding: 0px 10px;
   margin: 10px;
   text-align: center;
 }
-.solutionsCategories a:hover, .solutionsCategories a.active {
+.solutionsCategories a:hover,
+.solutionsCategories a.active {
   text-decoration: underline;
 }
 
 @media only screen and (max-width: 1700px) {
   .solutions .solution {
-     
-      width: 30%;
-      
+    width: 30%;
   }
   .solution .name {
-      padding: 10px;
+    padding: 10px;
   }
 }
 @media only screen and (max-width: 1000px) {
   .solutions .solution {
-     
-      width: 45%;
-      
+    width: 45%;
   }
   .solution .name {
-      padding: 10px;
+    padding: 10px;
   }
 }
 
 @media only screen and (max-width: 800px) {
   .solutions .solution {
-     
-      width: 80%;
-      
+    width: 80%;
   }
   .solution .name {
-      padding: 10px;
+    padding: 10px;
   }
   .solutionsCategories a {
-      width: 100%;
-      font-size: 15px;
-      margin: 3px 0;
-      
+    width: 100%;
+    font-size: 15px;
+    margin: 3px 0;
+  }
+}
+
+.spin-overlap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  display: none;
+  &--active {
+    display: block;
+  }
+}
+
+.spin-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  background: #f6f6f6;
+
+  .spinner {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    border: 3px solid transparent;
+    border-top-color: #a04668;
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      border: 3px solid transparent;
+      border-radius: 50%;
+    }
+
+    &:before {
+      border-top-color: #254e70;
+      top: -12px;
+      left: -12px;
+      right: -12px;
+      bottom: -12px;
+      animation: spin 3s linear infinite;
+    }
+
+    &:after {
+      border-top-color: #fffbfe;
+      top: 6px;
+      left: 6px;
+      right: 6px;
+      bottom: 6px;
+      animation: spin 4s linear infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
