@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+@@include('components/page-blocks/_head.html',{
+"lang":"ru",
+"title":"New Agelar ",
+"description":"",
+"keywords":"",
+"favicon":"img/favicons/favicon",
+})
+
+<body>
+	<div class="page-wrapper">
+		@@include('components/page-blocks/_sidebar.html')
+		<main class="main " >
+			<div class="over-new"></div>
+			<img src="img/site/up.webp" class="upbtn" alt="">@@include('components/page-blocks/_header.html')
+			<!-- 
+			@@include('components/blocks/_top-banner.html')
+			<div class="p-30">
+				<div class="breadcrumbs">
+					<ul class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Главная</a></li>&gt;
+						<li class="breadcrumb-item active">Готовые решения сайтов</li>
+					</ul>    
+				</div>                            
+			</div> -->
+			@@include('components/cases/_top-case-bunner.html')
+			@@include('components/cases/_case-image.html')
+			@@include('components/cases/_charts.html')
+			@@include('components/cases/_text-with-num.html')
+			@@include('components/cases/_image-text.html')
+		</main>
+	</div>
+	@@include('components/page-blocks/_scripts.html')
+	@@include('components/page-blocks/_modals.html')
+</body>
+</html>

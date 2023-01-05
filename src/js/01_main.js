@@ -75,8 +75,8 @@ overflowNew.addEventListener("click", () => {
   overflowNew.classList.remove("active");
 });
 
-let btnToggler = document.querySelector(".btn-toggler");
-if(btnToggler){
+if (document.querySelector(".btn-toggler")) {
+  let btnToggler = document.querySelector(".btn-toggler");
   btnToggler.addEventListener("click", () => {
     document
       .querySelector(".line-buttons")
@@ -112,156 +112,180 @@ if(sidebarClose){
     new SimpleBar(spec);
 })(document);
 
+new SimpleBar(document.getElementById("menu"));
+new SimpleBar(document.getElementById("sidebar-scroll"));
 
-const PartnersSlider = new Swiper(".partners-slider", {
-  grabCursor: true,
-  navigation: {
-    nextEl: ".slider-partners-next",
-    prevEl: ".slider-partners-prev",
-  },
-  slidesPerView: "auto",
+if (document.querySelector(".spec-cont")) {
+  new SimpleBar(document.querySelector(".spec-cont"));
+}
+
+
+if (document.querySelector(".partners-slider")) {
+  const PartnersSlider = new Swiper(".partners-slider", {
+    grabCursor: true,
+    navigation: {
+      nextEl: ".slider-partners-next",
+      prevEl: ".slider-partners-prev",
+    },
+    slidesPerView: "auto",
+  });
+}
+lightGallery(document.querySelector(".certificates-slider"), {
+  selector: ".js_gal",
+  thumbnail: true,
+  animateThumb: true,
+  showThumbByDefault: true,
 });
-
-(function(document){
-  let certificates = document.querySelector(".certificates-slider");
-  if(certificates){
-    lightGallery(document.querySelector(".certificates-slider"), {
-      selector: ".js_gal",
-      thumbnail: true,
-      animateThumb: true,
-      showThumbByDefault: true,
-    });
-  }
-})(document);
 
 new AgelarPhoneValidator({
   inputSelector: ".input-phone",
   submitSelector: ".validator-submit",
 });
+if (document.querySelector(".certificates-slider")) {
+  const CertificatesSlider = new Swiper(".certificates-slider", {
+    grabCursor: true,
+    navigation: {
+      nextEl: ".slider-certificates-next",
+      prevEl: ".slider-certificates-prev",
+    },
+    slidesPerView: "auto",
+    breakpoints: {
+      320: {
+        spaceBetween: 15,
+      },
+      992: {
+        spaceBetween: 30,
+      },
+    },
+  });
+}
+if (document.querySelector(".slider-stock")) {
+  const sliderStock = new Swiper(".slider-stock", {
+    grabCursor: true,
+    slidesPerView: "auto",
+    spaceBetween: 0,
+  });
+}
 
-const CertificatesSlider = new Swiper(".certificates-slider", {
-  grabCursor: true,
-  navigation: {
-    nextEl: ".slider-certificates-next",
-    prevEl: ".slider-certificates-prev",
-  },
-  slidesPerView: "auto",
-  breakpoints: {
-    320: {
-      spaceBetween: 15,
+if (document.querySelector(".slider-stuff")) {
+  const StuffSlider = new Swiper(".slider-stuff", {
+    slidesPerView: "auto",
+    grabCursor: true,
+    navigation: {
+      nextEl: ".slider-stuff-next",
+      prevEl: ".slider-stuff-prev",
     },
-    992: {
-      spaceBetween: 30,
+    breakpoints: {
+      320: {
+        spaceBetween: 0,
+      },
+      992: {
+        spaceBetween: 15,
+      },
     },
-  },
-});
+  });
+}
+if (document.querySelector(".slider-tech")) {
+  const SliderTech = new Swiper(".slider-tech", {
+    slidesPerView: "auto",
+    grabCursor: true,
+    breakpoints: {
+      320: {
+        spaceBetween: 0,
+      },
+      992: {
+        spaceBetween: 15,
+      },
+    },
+  });
+}
 
-const StuffSlider = new Swiper(".slider-stuff", {
-  slidesPerView: "auto",
-  grabCursor: true,
-  navigation: {
-    nextEl: ".slider-stuff-next",
-    prevEl: ".slider-stuff-prev",
-  },
-  breakpoints: {
-    320: {
-      spaceBetween: 0,
+if (document.querySelector(".service-content-slider")) {
+  const ServiceContentSlider = new Swiper(".service-content-slider", {
+    slidesPerView: 1,
+    grabCursor: true,
+    navigation: {
+      nextEl: ".service-content-slider-next",
+      prevEl: ".service-content-slider-prev",
     },
-    992: {
-      spaceBetween: 15,
+    pagination: {
+      el: ".service-content-slider-pag",
+      dynamicBullets: true,
+      clickable: true,
+      renderBullet: function (index, className) {
+        return `<a href="#" class="${className}">${index + 1}</a>`;
+      },
     },
-  },
-});
-
-const SliderTech = new Swiper(".slider-tech", {
-  slidesPerView: "auto",
-  grabCursor: true,
-  breakpoints: {
-    320: {
-      spaceBetween: 0,
+  });
+}
+if (document.querySelector(".slider-top")) {
+  const SliderTop = new Swiper(".slider-top", {
+    slidesPerView: 1,
+    grabCursor: true,
+    pagination: {
+      el: ".swiper-slider-top",
+      clickable: true,
+      renderBullet: function (index, className) {
+        return `<a href="#" class="${className}"></a>`;
+      },
     },
-    992: {
-      spaceBetween: 15,
-    },
-  },
-});
-
-const ServiceContentSlider = new Swiper(".service-content-slider", {
-  slidesPerView: 1,
-  grabCursor: true,
-  navigation: {
-    nextEl: ".service-content-slider-next",
-    prevEl: ".service-content-slider-prev",
-  },
-  pagination: {
-    el: ".service-content-slider-pag",
-    dynamicBullets: true,
-    clickable: true,
-    dynamicMainBullets: 5,
-    renderBullet: function (index, className) {
-      return `<a href="#" class="${className}">${index + 1}</a>`;
-    },
-  },
-});
-
-const SliderTop = new Swiper(".slider-top", {
-  slidesPerView: 1,
-  grabCursor: true,
-  pagination: {
-    el: ".swiper-slider-top",
-    clickable: true,
-    renderBullet: function (index, className) {
-      return `<a href="#" class="${className}"></a>`;
-    },
-  },
-});
-
+  });
+}
 /* tarrifs-slider */
-
-const TarrifsSlider = new Swiper(".tarrifs-slider", {
-  slidesPerView: "auto",
-  grabCursor: true,
-  breakpoints: {
-    320: {
-      spaceBetween: 15,
+if (document.querySelector(".tarrifs-slider")) {
+  const TarrifsSlider = new Swiper(".tarrifs-slider", {
+    slidesPerView: "auto",
+    grabCursor: true,
+    breakpoints: {
+      320: {
+        spaceBetween: 5,
+      },
     },
-    575: {},
-
-    992: {
-      spaceBetween: 30,
+  });
+}
+if (document.querySelector(".slider-cases-box")) {
+  const TarrifsSlider = new Swiper(".slider-cases-box", {
+    slidesPerView: "auto",
+    grabCursor: true,
+    navigation: {
+      nextEl: ".slider-cases-next",
+      prevEl: ".slider-cases-prev",
+      disabledClass: "disabled-swiper-button",
     },
-  },
-});
+  });
+}
 
-const QuizSlider = new Swiper(".quiz-slider", {
-  slidesPerView: 1,
-  autoHeight: true,
-  allowTouchMove: false,
-  grabCursor: true,
-  pagination: {
-    el: ".quiz-pag",
-    clickable: true,
-    renderBullet: function (index, className) {
-      return `<div class="quiz-pag__box ${className}">
+if (document.querySelector(".quiz-slider")) {
+  const QuizSlider = new Swiper(".quiz-slider", {
+    slidesPerView: 1,
+    autoHeight: true,
+    allowTouchMove: false,
+    grabCursor: true,
+    pagination: {
+      el: ".quiz-pag",
+      clickable: true,
+      renderBullet: function (index, className) {
+        return `<div class="quiz-pag__box ${className}">
       <span>${index + 1}</span>
     </div><div class="quiz-pag__line"></div>`;
+      },
     },
-  },
-  breakpoints: {
-    320: {
-      spaceBetween: 15,
-    },
-    575: {},
+    breakpoints: {
+      320: {
+        spaceBetween: 15,
+      },
+      575: {},
 
-    992: {
-      spaceBetween: 30,
+      992: {
+        spaceBetween: 30,
+      },
     },
-  },
-});
+  });
+}
 
 /* let quizPag = document.querySelector('.') */
 
-QuizSlider.on("slideChange", handlerSlider);
+/* QuizSlider.on("slideChange", handlerSlider);
 function handlerSlider(slider) {
   elPag = slider.pagination.$el[0];
   widthSetPag = slider.pagination.$el[0].offsetWidth;
@@ -271,58 +295,61 @@ function handlerSlider(slider) {
     widthContainerPag / 2 - widthSetPag
   }px)`;
   console.log(widthSetPag / 5);
+} */
+if (document.querySelector(".articles-slider")) {
+  const ArticlesSlider = new Swiper(".articles-slider", {
+    pagination: {
+      el: ".swiper-slider-pag",
+      grabCursor: true,
+      clickable: true,
+      renderBullet: function (index, className) {
+        return `<a href="#" class="${className}">${index + 1}</a>`;
+      },
+    },
+
+    navigation: {
+      nextEl: ".swiper-button-prev",
+      prevEl: ".swiper-button-next",
+    },
+    breakpoints: {
+      320: {
+        slidesPerView: 1,
+        spaceBetween: 15,
+      },
+      575: {
+        slidesPerView: 2,
+      },
+
+      992: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+    },
+  });
 }
 
-const ArticlesSlider = new Swiper(".articles-slider", {
-  pagination: {
-    el: ".swiper-slider-pag",
+if (document.querySelector(".budges-slider-min")) {
+  const BudgeSliderMin = new Swiper(".budges-slider-min", {
+    slidesPerView: "auto",
     grabCursor: true,
-    clickable: true,
-    renderBullet: function (index, className) {
-      return `<a href="#" class="${className}">${index + 1}</a>`;
+    breakpoints: {
+      320: {
+        spaceBetween: 0,
+      },
+      992: {
+        spaceBetween: 15,
+      },
     },
-  },
+  });
+}
 
-  navigation: {
-    nextEl: ".swiper-button-prev",
-    prevEl: ".swiper-button-next",
-  },
-  breakpoints: {
-    320: {
-      slidesPerView: 1,
-      spaceBetween: 15,
-    },
-    575: {
-      slidesPerView: 2,
-    },
-
-    992: {
-      slidesPerView: 3,
-      spaceBetween: 30,
-    },
-  },
-});
-
-const BudgeSliderMin = new Swiper(".budges-slider-min", {
-  slidesPerView: "auto",
-  grabCursor: true,
-  breakpoints: {
-    320: {
-      spaceBetween: 0,
-    },
-
-    992: {
-      spaceBetween: 15,
-    },
-  },
-});
-
-const BudgeSlider = new Swiper(".simple-budge-slider", {
-  spaceBetween: 20,
-  slidesPerView: "auto",
-  grabCursor: true,
-  breakpoints: {
-    /* 320: {
+if (document.querySelector(".simple-budge-slider")) {
+  const BudgeSlider = new Swiper(".simple-budge-slider", {
+    spaceBetween: 20,
+    slidesPerView: "auto",
+    grabCursor: true,
+    breakpoints: {
+      /* 320: {
         slidesPerView: 1.5,
         spaceBetween: 15,
       },
@@ -338,9 +365,9 @@ const BudgeSlider = new Swiper(".simple-budge-slider", {
         slidesPerView: 5.5,
         spaceBetween: 30,
       }, */
-  },
-});
-
+    },
+  });
+}
 class ItcTabs {
   constructor(target, config) {
     const defaultConfig = {};
@@ -395,32 +422,36 @@ tabs.forEach((el, index) => {
   new ItcTabs(tabs[index]);
 });
 
-const reviewsTextSlider = new Swiper(".reviews-text-slider", {
-  slidesPerView: "auto",
-  grabCursor: true,
-  breakpoints: {
-    320: {
-      spaceBetween: 15,
+if (document.querySelector(".reviews-text-slider")) {
+  const reviewsTextSlider = new Swiper(".reviews-text-slider", {
+    slidesPerView: "auto",
+    grabCursor: true,
+    breakpoints: {
+      320: {
+        spaceBetween: 15,
+      },
+      1200: {
+        spaceBetween: 30,
+      },
     },
-    1200: {
-      spaceBetween: 30,
-    },
-  },
-});
+  });
+}
 
-const ReviewsVideoSlider = new Swiper(".reviews-video-slider", {
-  slidesPerView: "auto",
-  grabCursor: true,
+if (document.querySelector(".reviews-video-slider")) {
+  const ReviewsVideoSlider = new Swiper(".reviews-video-slider", {
+    slidesPerView: "auto",
+    grabCursor: true,
 
-  breakpoints: {
-    320: {
-      spaceBetween: 15,
+    breakpoints: {
+      320: {
+        spaceBetween: 15,
+      },
+      1200: {
+        spaceBetween: 30,
+      },
     },
-    1200: {
-      spaceBetween: 30,
-    },
-  },
-});
+  });
+}
 document.querySelectorAll(".tariff-btn").forEach((elem, index) => {
   elem.addEventListener("click", () => {
     let textButton = elem.querySelector("span");
@@ -444,26 +475,27 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
     const xRotation = -20 * ((yVal - height / 2) / height);
 
     const string =
-      "perspective(500px) scale(1.1) rotateX(" +
+      "transform: perspective(500px) scale(1.1) rotateX(" +
       xRotation +
       "deg) rotateY(" +
       yRotation +
-      "deg)";
+      "deg); transition: .1s ease";
 
-    elem.style.transform = string;
+    elem.style.cssText = string;
   });
   elem.addEventListener("mouseout", function () {
-    elem.style.transform = "perspective(500px) scale(1) rotateX(0) rotateY(0)";
+    elem.style.cssText =
+      "transform: perspective(500px) scale(1) rotateX(0) rotateY(0); transition: .1s ease";
   });
 
   elem.addEventListener("mousedown", function () {
-    elem.style.transform =
-      "perspective(500px) scale(0.9) rotateX(0) rotateY(0)";
+    elem.style.cssText =
+      "transform :perspective(500px) scale(0.9) rotateX(0) rotateY(0); transition: .1s ease";
   });
 
   elem.addEventListener("mouseup", function () {
     elem.style.transform =
-      "perspective(500px) scale(1.1) rotateX(0) rotateY(0)";
+      "transform :perspective(500px) scale(1.1) rotateX(0) rotateY(0)";
   });
 });
 
@@ -532,5 +564,83 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
 
       showThumbByDefault: true,
     });
+  }
+})(document);
+
+//Код для подгрузки кейсов в категории кейсов
+(function(document){
+  //Проверка на существования своих тегов у категории
+  let tags = document.querySelectorAll("[data-tags]");
+  tags.forEach(function(item){
+      item.addEventListener("click", function(e){
+          e.preventDefault();
+          let id = this.dataset.id;
+          
+          $.post('/assets/templates/agelar/isTagsCases.php', {
+              id: id
+          }, function(data){
+              if(Number(data))
+                  window.location.href = this.href;
+              else {
+                  getCases(id).then(function(data){
+                      data = JSON.parse(data);
+                      
+                      let casesBlock = document.querySelector(".casesList");
+                      casesBlock.innerHTML = data.data;
+                      let showMoreBtn = casesBlock.nextElementSibling.querySelector(".show_more_cases");
+                      showMoreBtn.setAttribute("data-id", id);
+                      
+                      //Скрываем или отображаем кнопку "показать ещё"
+                      if(!data.nextData){
+                          showMoreBtn.style.display = "none";
+                      }else{
+                          showMoreBtn.style.display = "";
+                      }
+                  });
+              }
+          });
+      }); 
+  });
+  
+  /*
+      Загрузка кейсов
+      resource - id ресурса
+      shift - сдвиг получаемых данных
+  */
+  function getCases(resource, shift = 0){
+      return $.post('/assets/templates/agelar/getCases.php', {
+          id: resource,
+          shift: shift,
+      });
+  }
+  
+  //Загрузка данных по нажатию "показать ещё"
+  /*Обязательные параметры у кнопки
+    data-id - id ресурса
+    data-shift - текущий сдвиг
+    data-default-shift - сдвиг по умолчанию
+  */
+  let showMoreCaseBtn = document.querySelector(".show_more_cases");
+  if(showMoreCaseBtn){
+      showMoreCaseBtn.addEventListener("click", function(){
+          let id = this.getAttribute("data-id");
+          let shift = this.getAttribute("data-shift");
+          let defaultShift = this.dataset.defaultShift;
+         
+          getCases(id, shift).then(data => {
+              data = JSON.parse(data);
+
+              if(data.data != ""){
+                  let casesBlock = document.querySelector(".casesList");
+                  casesBlock.innerHTML += data.data;
+                  this.setAttribute("data-shift", Number(shift) + Number(defaultShift));
+                  
+                  //Скрываем кнопку если нет более даннных
+                  if(!data.nextData){
+                      this.style.display = "none";
+                  }
+              }
+          });
+      });
   }
 })(document);
