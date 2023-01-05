@@ -601,7 +601,6 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
           });
       }); 
   });
-  
   /*
       Загрузка кейсов
       resource - id ресурса
@@ -626,7 +625,7 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
           let id = this.getAttribute("data-id");
           let shift = this.getAttribute("data-shift");
           let defaultShift = this.dataset.defaultShift;
-         
+
           getCases(id, shift).then(data => {
               data = JSON.parse(data);
 
