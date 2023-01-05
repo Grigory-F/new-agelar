@@ -1,3 +1,6 @@
+console.log(
+  "░█▀▀▄░█▀▀▀░█▀▀░█░░█▀▀▄░█▀▀▄\n▒█▄▄█░█░▀▄░█▀▀░█░░█▄▄█░█▄▄▀\n▒█░▒█░▀▀▀▀░▀▀▀░▀▀░▀░░▀░▀░▀▀\n Development"
+);
 let scrollButton = document.querySelector(".upbtn");
 let mainWrap = document.querySelector(".main");
 
@@ -128,12 +131,22 @@ if (document.querySelector(".partners-slider")) {
     slidesPerView: "auto",
   });
 }
+if (document.querySelector(".certificates-slider")) {
 lightGallery(document.querySelector(".certificates-slider"), {
   selector: ".js_gal",
   thumbnail: true,
   animateThumb: true,
   showThumbByDefault: true,
 });
+}
+if (document.querySelector(".case-gallery")) {
+  lightGallery(document.querySelector(".case-gallery"), {
+    selector: ".js_gal",
+    thumbnail: true,
+    animateThumb: true,
+    showThumbByDefault: true,
+  });
+}
 
 new AgelarPhoneValidator({
   inputSelector: ".input-phone",
