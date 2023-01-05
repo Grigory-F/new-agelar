@@ -681,7 +681,7 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
   }
   
   //Загрузка изображений
-  function loadImages(){
+  async function loadImages(){
     let images = document.querySelectorAll(".box-case__bg-image");
     images.forEach(item => {
         let image = document.createElement("img");
@@ -697,5 +697,7 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
     });
   }
 
+ 
   loadImages();
+
 })(document);
