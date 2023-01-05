@@ -595,7 +595,7 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
     item.addEventListener("click", function (e) {
       e.preventDefault();
       let id = this.dataset.id;
-
+      generalPreloader.classList.add("spin-overlap--active");
       $.post(
         "/assets/templates/agelar/isTagsCases.php",
         {
@@ -604,7 +604,6 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
         function (data) {
           if (Number(data)) window.location.href = this.href;
           else {
-            generalPreloader.classList.add("spin-overlap--active");
             getCases(id).then(function (data) {
               data = JSON.parse(data);
               let casesBlock = document.querySelector(".casesList");
@@ -613,15 +612,15 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
 
               let showMoreBtn = document.querySelector(".show_more_cases");
 
-              if (showMoreBtn) {showMoreBtn.setAttribute("data-id", id);
+              if (showMoreBtn) {
+                showMoreBtn.setAttribute("data-id", id);
                 if (!data.nextData) {
-                  
                   showMoreBtn.style.display = "none";
                 } else {
                   showMoreBtn.style.display = "";
                 }
               }
-              /* generalPreloader.classList.remove("spin-overlap--active"); */
+              generalPreloader.classList.remove("spin-overlap--active");
               //Скрываем или отображаем кнопку "показать ещё"
               if (!data.nextData) {
                 showMoreBtn.style.display = "none";
