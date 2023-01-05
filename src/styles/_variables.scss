@@ -138,6 +138,7 @@ $small-custom-font: $font-size-base * 0.875;
 $medium-small-custom-font: $font-size-base * 0.75;
 $extra-small-custom-font: $font-size-base * 0.625;
 $special-size: $font-size-base * 1.375;
+$big-font-size: $font-size-base * 4;
 
 $font-sizes: (
   1: $h1-font-size,
@@ -150,6 +151,7 @@ $font-sizes: (
   8: $medium-small-custom-font,
   9: $extra-small-custom-font,
   "special-size": $special-size,
+  "big-font": $big-font-size,
 );
 
 $headings-margin-bottom: 1.875rem;
