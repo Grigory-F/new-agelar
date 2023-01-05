@@ -84,11 +84,33 @@ if (document.querySelector(".btn-toggler")) {
   });
 }
 
-sidebarClose.addEventListener("click", () => {
-  burgerButton.classList.remove("change");
-  sidebar.classList.remove("show");
-  overflowNew.classList.remove("active");
-});
+if(sidebarClose){
+  sidebarClose.addEventListener("click", () => {
+    burgerButton.classList.remove("change");
+    sidebar.classList.remove("show");
+    overflowNew.classList.remove("active");
+  });
+}
+
+(function(document){
+  let menu = document.getElementById("menu")
+  if(menu){
+    new SimpleBar(document.getElementById("menu"));
+  }
+})(document);
+
+(function(document){
+  let sliderScroll = document.getElementById("sidebar-scroll");
+  if(sliderScroll){
+    new SimpleBar(sliderScroll);
+  }
+})(document);
+
+(function(document){
+  let spec = document.querySelector(".spec-cont")
+  if(spec)
+    new SimpleBar(spec);
+})(document);
 
 new SimpleBar(document.getElementById("menu"));
 new SimpleBar(document.getElementById("sidebar-scroll"));
@@ -432,7 +454,7 @@ if (document.querySelector(".reviews-video-slider")) {
 }
 document.querySelectorAll(".tariff-btn").forEach((elem, index) => {
   elem.addEventListener("click", () => {
-    textButton = elem.querySelector("span");
+    let textButton = elem.querySelector("span");
     if (textButton.textContent == "Что входит") {
       textButton.textContent = "Свернуть";
     } else {
@@ -479,18 +501,146 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
 
 //Определения размера ячеек блока "тарифы"
 (function (document) {
-  let cellTarifs = document.querySelectorAll(".tarrifs-table > div");
-  let maxHeightCell = 0;
-  if (cellTarifs) {
-    cellTarifs.forEach(function (item) {
-      if (item.offsetHeight > maxHeightCell) maxHeightCell = item.offsetHeight;
-    });
+  function setHeightCell(cellTarifs){
+    if(!cellTarifs)
+      return;
 
-    cellTarifs.forEach(function (item) {
-      item.style.height = maxHeightCell + "px";
+    let maxHeightCell = 0;
+    if (cellTarifs) {
+      cellTarifs.forEach(function (item) {
+        if (item.offsetHeight > maxHeightCell) maxHeightCell = item.offsetHeight;
+      });
+
+      cellTarifs.forEach(function (item) {
+        item.style.height = maxHeightCell + "px";
+      });
+    }
+
+    return maxHeightCell;
+  }
+
+  setHeightCell(document.querySelectorAll(".tarrifs-container .tarrifs-table > div"));
+})(document);
+
+/**
+ * Функция для установки заголовка формы.
+ * Нужна для одинкаовых модальных форм с разными заголовками.
+ * На ссылку ставим data-open-form и data-form-title="Заголовок" и dataa-bs-target="#idModal"
+ * На место для заголовка в форме ставим data-form-place-title
+ */
+(function(document){
+  let btnsForOpenForm = document.querySelectorAll("[data-open-form]");
+  btnsForOpenForm.forEach(function(elem){
+    elem.addEventListener("click", function() {
+      let modal = document.querySelector(this.dataset.bsTarget);
+      if(modal){
+        let placeTitle = modal.querySelector("[data-form-place-title]");
+        if(placeTitle){
+          placeTitle.innerHTML = this.dataset.formTitle;
+        }
+
+        let form = modal.querySelector("form");
+        if(form){
+          if(placeTitle){
+            let input = document.createElement("input");
+            input.setAttribute("type", "hidden");
+            input.setAttribute("name", "nameForm");
+            input.value = this.dataset.formTitle;
+            form.appendChild(input);
+          }
+        }
+      }
+    });
+  });
+})(document);
+
+(function(document){
+  let reviewsGall = document.getElementById('n-reviews-gall');
+  if(reviewsGall){
+    lightGallery(reviewsGall, {
+      selector: '.js_gal_reviews',
+      thumbnail:true,
+      animateThumb: true,
+
+      showThumbByDefault: true,
     });
   }
 })(document);
 
+//Код для подгрузки кейсов в категории кейсов
+(function(document){
+  //Проверка на существования своих тегов у категории
+  let tags = document.querySelectorAll("[data-tags]");
+  tags.forEach(function(item){
+      item.addEventListener("click", function(e){
+          e.preventDefault();
+          let id = this.dataset.id;
+          
+          $.post('/assets/templates/agelar/isTagsCases.php', {
+              id: id
+          }, function(data){
+              if(Number(data))
+                  window.location.href = this.href;
+              else {
+                  getCases(id).then(function(data){
+                      data = JSON.parse(data);
+                      
+                      let casesBlock = document.querySelector(".casesList");
+                      casesBlock.innerHTML = data.data;
+                      let showMoreBtn = casesBlock.nextElementSibling.querySelector(".show_more_cases");
+                      showMoreBtn.setAttribute("data-id", id);
+                      
+                      //Скрываем или отображаем кнопку "показать ещё"
+                      if(!data.nextData){
+                          showMoreBtn.style.display = "none";
+                      }else{
+                          showMoreBtn.style.display = "";
+                      }
+                  });
+              }
+          });
+      }); 
+  });
+  
+  /*
+      Загрузка кейсов
+      resource - id ресурса
+      shift - сдвиг получаемых данных
+  */
+  function getCases(resource, shift = 0){
+      return $.post('/assets/templates/agelar/getCases.php', {
+          id: resource,
+          shift: shift,
+      });
+  }
+  
+  //Загрузка данных по нажатию "показать ещё"
+  /*Обязательные параметры у кнопки
+    data-id - id ресурса
+    data-shift - текущий сдвиг
+    data-default-shift - сдвиг по умолчанию
+  */
+  let showMoreCaseBtn = document.querySelector(".show_more_cases");
+  if(showMoreCaseBtn){
+      showMoreCaseBtn.addEventListener("click", function(){
+          let id = this.getAttribute("data-id");
+          let shift = this.getAttribute("data-shift");
+          let defaultShift = this.dataset.defaultShift;
+         
+          getCases(id, shift).then(data => {
+              data = JSON.parse(data);
 
-
+              if(data.data != ""){
+                  let casesBlock = document.querySelector(".casesList");
+                  casesBlock.innerHTML += data.data;
+                  this.setAttribute("data-shift", Number(shift) + Number(defaultShift));
+                  
+                  //Скрываем кнопку если нет более даннных
+                  if(!data.nextData){
+                      this.style.display = "none";
+                  }
+              }
+          });
+      });
+  }
+})(document);
