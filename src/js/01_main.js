@@ -614,14 +614,16 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
         {
           id: id,
         },
-        function (data) {
+         (data) => {
           if (Number(data)) window.location.href = this.href;
           else {
+            window.history.pushState(null, null, this.getAttribute("href"));
+            console.log(123, this.getAttribute("href"));
             getCases(id).then(function (data) {
               data = JSON.parse(data);
               let casesBlock = document.querySelector(".casesList");
               casesBlock.innerHTML = data.data;
-              console.log("add content");
+             
 
               let showMoreBtn = document.querySelector(".show_more_cases");
 
@@ -694,7 +696,7 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
   }
   
   //Загрузка изображений
-  async function loadImages(){
+  function loadImages(){
     let images = document.querySelectorAll(".box-case__bg-image");
     images.forEach(item => {
         let image = document.createElement("img");
@@ -704,13 +706,11 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
             item.parentNode.insertBefore(image, item);
             let spin = item.parentNode.querySelector(".spin-overlap");
             if(spin)
-                spin.remove();
+              spin.remove();
             item.remove();
         });
     });
   }
 
- 
   loadImages();
-
 })(document);
