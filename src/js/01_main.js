@@ -653,7 +653,7 @@ if (elemEffect) {
 
               if (showMoreBtn) {
                 showMoreBtn.setAttribute("data-id", id);
-                showMoreBtn.setAttribute("data-shift", 9);
+                showMoreBtn.setAttribute("data-shift", showMoreBtn.dataset.defaultShift);
                 //Скрываем или отображаем кнопку "показать ещё"
                 if (!data.nextData) {
                   showMoreBtn.style.display = "none";
