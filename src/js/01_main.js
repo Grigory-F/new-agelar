@@ -132,12 +132,12 @@ if (document.querySelector(".partners-slider")) {
   });
 }
 if (document.querySelector(".certificates-slider")) {
-lightGallery(document.querySelector(".certificates-slider"), {
-  selector: ".js_gal",
-  thumbnail: true,
-  animateThumb: true,
-  showThumbByDefault: true,
-});
+  lightGallery(document.querySelector(".certificates-slider"), {
+    selector: ".js_gal",
+    thumbnail: true,
+    animateThumb: true,
+    showThumbByDefault: true,
+  });
 }
 if (document.querySelector(".case-gallery")) {
   lightGallery(document.querySelector(".case-gallery"), {
@@ -462,6 +462,20 @@ if (document.querySelector(".slider-case")) {
   });
 }
 
+if (document.querySelector(".solutions-slider")) {
+  const ReviewsVideoSliderNew = new Swiper(".solutions-slider", {
+    slidesPerView: "auto",
+    grabCursor: true,
+    breakpoints: {
+      320: {
+        spaceBetween: 15,
+      },
+      1200: {
+        spaceBetween: 30,
+      },
+    },
+  });
+}
 if (document.querySelector(".reviews-video-slider")) {
   const ReviewsVideoSlider = new Swiper(".reviews-video-slider", {
     slidesPerView: "auto",
@@ -487,42 +501,52 @@ document.querySelectorAll(".tariff-btn").forEach((elem, index) => {
     }
   });
 });
-document.querySelectorAll(".box-case").forEach((elem, index) => {
-  const height = elem.clientHeight;
-  const width = elem.clientWidth;
-  elem.addEventListener("mousemove", (e) => {
-    const xVal = e.layerX;
 
-    const yVal = e.layerY;
+("Эффект наведения на кейс и акции");
 
-    const yRotation = 10 * ((xVal - width / 2) / width);
+function setEffect(elems) {
+  elems.forEach((elem, index) => {
+    const height = elem.clientHeight;
+    const width = elem.clientWidth;
+    elem.addEventListener("mousemove", (e) => {
+      const xVal = e.layerX;
 
-    const xRotation = -20 * ((yVal - height / 2) / height);
+      const yVal = e.layerY;
 
-    const string =
-      "transform: perspective(500px) scale(1.1) rotateX(" +
-      xRotation +
-      "deg) rotateY(" +
-      yRotation +
-      "deg); transition: .1s ease";
+      const yRotation = 10 * ((xVal - width / 2) / width);
 
-    elem.style.cssText = string;
+      const xRotation = -20 * ((yVal - height / 2) / height);
+
+      const string =
+        "transform: perspective(500px) scale(1.1) rotateX(" +
+        xRotation +
+        "deg) rotateY(" +
+        yRotation +
+        "deg); transition: .1s ease";
+
+      elem.style.cssText = string;
+    });
+    elem.addEventListener("mouseout", function () {
+      elem.style.cssText =
+        "transform: perspective(500px) scale(1) rotateX(0) rotateY(0); transition: .1s ease";
+    });
+
+    elem.addEventListener("mousedown", function () {
+      elem.style.cssText =
+        "transform :perspective(500px) scale(0.9) rotateX(0) rotateY(0); transition: .1s ease";
+    });
+
+    elem.addEventListener("mouseup", function () {
+      elem.style.transform =
+        "transform :perspective(500px) scale(1.1) rotateX(0) rotateY(0)";
+    });
   });
-  elem.addEventListener("mouseout", function () {
-    elem.style.cssText =
-      "transform: perspective(500px) scale(1) rotateX(0) rotateY(0); transition: .1s ease";
-  });
+}
 
-  elem.addEventListener("mousedown", function () {
-    elem.style.cssText =
-      "transform :perspective(500px) scale(0.9) rotateX(0) rotateY(0); transition: .1s ease";
-  });
-
-  elem.addEventListener("mouseup", function () {
-    elem.style.transform =
-      "transform :perspective(500px) scale(1.1) rotateX(0) rotateY(0)";
-  });
-});
+let elemEffect = document.querySelectorAll(".cases-page .box-case");
+if (elemEffect) {
+  setEffect(elemEffect);
+}
 
 //Определения размера ячеек блока "тарифы"
 (function (document) {
@@ -618,7 +642,7 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
           if (Number(data)) window.location.href = this.href;
           else {
             window.history.pushState(null, null, this.getAttribute("href"));
-            console.log(123, this.getAttribute("href"));
+ 
             getCases(id).then(function (data) {
               data = JSON.parse(data);
               let casesBlock = document.querySelector(".casesList");
@@ -629,6 +653,7 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
 
               if (showMoreBtn) {
                 showMoreBtn.setAttribute("data-id", id);
+                showMoreBtn.setAttribute("data-shift", 9);
                 //Скрываем или отображаем кнопку "показать ещё"
                 if (!data.nextData) {
                   showMoreBtn.style.display = "none";
@@ -670,8 +695,9 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
       generalPreloader.classList.add("spin-overlap--active");
       getCases(id, shift)
         .then((data) => {
+          
           data = JSON.parse(data);
-
+          console.log(data)
           if (data.data != "") {
             let casesBlock = document.querySelector(".casesList");
             casesBlock.innerHTML += data.data;
@@ -714,3 +740,13 @@ document.querySelectorAll(".box-case").forEach((elem, index) => {
 
   loadImages();
 })(document);
+
+let partnersDeg = document.querySelectorAll(".partners-slider__slide-cont img");
+
+if (partnersDeg) {
+  partnersDeg.forEach((elem, index) => {
+    if (index > 9) {
+      elem.style.cssText = "width: 100% !important; height: auto !important;";
+    }
+  });
+}

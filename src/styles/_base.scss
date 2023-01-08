@@ -253,6 +253,9 @@ main {
   &__text-container {
     height: 180px;
     overflow-y: auto;
+    p {
+      padding-right: 15px;
+    }
   }
 }
 /* .tarrifs-slider {
@@ -1362,4 +1365,41 @@ main {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.solutions-slider .swiper-slide {
+  width: 350px;
+  margin-right: 20px;
+}
+.solution.preview .poster img {
+  width: 100%;
+}
+
+.case-page-new {
+  table {
+    @extend .table;
+    width: 100%;
+    tbody {
+      /* tr:nth-child(even) {
+        background-color: $muted;
+      } */
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+
+.design-page {
+  img {
+    width: 100%;
+  }
+}
+
+
+
+.partners-slider__slide-cont:nth-child(n+6) img {
+  height: auto;
+  width: 100%;
 }
