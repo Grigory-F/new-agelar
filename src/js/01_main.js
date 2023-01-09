@@ -213,8 +213,10 @@ if (document.querySelector(".slider-tech")) {
 
 (function(document){
   if (document.querySelector(".service-content-slider")) {
-    startIndex = 2;
-    lastIndex = 5;
+    const DefaultStartIndex = 2;
+    const DefaultLastIndex = 5;
+    let startIndex = DefaultStartIndex;
+    let lastIndex = DefaultLastIndex;
     let ServiceContentSlider = new Swiper(".service-content-slider", {
       slidesPerView: 1,
       grabCursor: true,
@@ -231,7 +233,7 @@ if (document.querySelector(".slider-tech")) {
           if(cIndex == 1)
             return `<a href="#" class="${className}" data-index="${cIndex}">${cIndex}</a>`;
           if(cIndex == this.imagesLoaded)
-            return `<a href="#" class="${className}" data-index="${cIndex}">${cIndex}</a>`;
+            return `<a href="#" class="${className} swiper-content-pag-last" data-index="${cIndex}">${cIndex}</a>`;
 
           let cls = '';
           if(cIndex === startIndex){
@@ -243,53 +245,123 @@ if (document.querySelector(".slider-tech")) {
             return `<a href="#" class="${className} ${cls}" data-index="${cIndex}">${cIndex}</a>`;
 
          
-          return `<a href="#" class="${className}"  data-index="${cIndex}">${cIndex}</a>`;
+          return `<a href="#" class="${className}" style="display:none" data-index="${cIndex}">${cIndex}</a>`;
         },
       },
       on: {
-        init: function(){
-          // let links = document.querySelectorAll(".service-content-slider-pag .swiper-pagination-bullet");
-          // console.log(111111, links)
-          // links.forEach(function(item){
-          //   item.addEventListener("click", function(e){
-              
-          //     if(this.classList.contains("service-content-left")){
-          //       console.log(startIndex)
-          //       if(this.previousSibling.innerHTML == 1){
-          //         return;
-          //       }
-          //       this.previousSibling.style.display = "";
-          //       this.previousSibling.classList.add("service-content-left");
-          //       this.classList.remove("service-content-left");
-          //       startIndex--;
-                
-          //       let lastEl = document.querySelector(".service-content-slider-pag .swiper-pagination-bullet[data-index='"+lastIndex+"']");
-          //       if(lastEl && lastEl.innerHTML != ServiceContentSlider.imagesLoaded){
-          //         lastEl.style.display = "none";
-          //         lastEl.classList.remove("service-content-left");
-          //         lastEl.previousSibling.classList.add("service-content-left")
-          //         lastIndex--;
-          //       }
-          //     }
+        paginationUpdate: function(swiper, pag){
+          let el = pag.querySelector(".swiper-pagination-bullet-active");
 
-          //     if(this.classList.contains("service-content-right")){
-          //       console.log(ServiceContentSlider.imagesLoaded)
-          //       if(this.previousSibling.innerHTML == ServiceContentSlider.imagesLoaded) return;
-          //       this.nextSibling.style.display = "";  
-          //       this.nextSibling.classList.add("service-content-right"); 
-          //       this.classList.remove("service-content-right");           
-          //       let firstEl = document.querySelector(".service-content-slider-pag .swiper-pagination-bullet[data-index='"+(startIndex)+"']");
-          //       startIndex++;
-          //       if(firstEl && firstEl.innerHTML != 1 &&  this.nextSibling.dataset.index != ServiceContentSlider.imagesLoaded){
+          // if(startIndex != DefaultStartIndex){
+          //   pag.querySelector(".swiper-content-pag-first").style.display = "";
+          // }else{
+          //   //pag.querySelector(".swiper-content-pag-first").style.display = "none";
+          // }
+
+          // if(lastIndex != swiper.imagesLoaded - 1){
+          //   pag.querySelector(".swiper-content-pag-last").style.display = "";
+          // }else{
+          //   //pag.querySelector(".swiper-content-pag-last").style.display = "none";
+          // }
+
+          if(el.classList.contains("service-content-left")){
+            if(el.previousSibling.innerHTML == 1){
+              return;
+            }
+            el.previousSibling.style.display = "";
+            el.previousSibling.classList.add("service-content-left");
+            el.classList.remove("service-content-left");
+            startIndex--;
+            
+            let lastEl = pag.querySelector(".swiper-pagination-bullet[data-index='"+lastIndex+"']");
+            if(lastEl && lastEl.innerHTML != swiper.imagesLoaded){
+              lastEl.style.display = "none";
+              lastEl.classList.remove("service-content-left");
+              lastEl.previousSibling.classList.add("service-content-left")
+              lastIndex--;
+            }
+          }
+
+          if(el.classList.contains("service-content-right")){
+            console.log(swiper.imagesLoaded)
+            if(el.previousSibling.innerHTML == swiper.imagesLoaded) return;
+            el.nextSibling.style.display = "";  
+            el.nextSibling.classList.add("service-content-right"); 
+            el.classList.remove("service-content-right");           
+            let firstEl = pag.querySelector(".swiper-pagination-bullet[data-index='"+(startIndex)+"']");
+           
+            if(firstEl && firstEl.innerHTML != 1 &&  el.nextSibling.dataset.index != swiper.imagesLoaded){
+              startIndex++;
+              firstEl.style.display = "none";
+              firstEl.classList.remove("service-content-left")
+              firstEl.nextSibling.classList.add("service-content-left");
+              lastIndex++;
+            }
+          }
+          
+         
+          if(el.dataset.index == 1 &&  startIndex != DefaultStartIndex){
+           
+            for(let i = startIndex; i <= lastIndex; i++){
+              let link = pag.querySelector(".swiper-pagination-bullet[data-index='"+(i)+"']");
+              if(i == startIndex)
+                link.classList.remove("service-content-left");
+
+              link.style.display = "none";
+
+              if(i == lastIndex)
+                link.classList.remove("service-content-right");
+            }
+
+            
+            for(let i = DefaultStartIndex; i <= DefaultLastIndex; i++){
+              let link = pag.querySelector(".swiper-pagination-bullet[data-index='"+(i)+"']");
+              if(i == DefaultStartIndex)
+                link.classList.add("service-content-left");
+              
+              link.style.display = "";
+              
+              if(i == DefaultLastIndex)
+                link.classList.add("service-content-right");
+            }
+
+            startIndex = DefaultStartIndex;
+            lastIndex = DefaultLastIndex;
+          }
+          
+          if(el.dataset.index == swiper.imagesLoaded){
+           
+            let prevLastEl = el.dataset.index-1;
+            if(lastIndex != el.dataset.index-1){  
+              let end = lastIndex;
+              let start = startIndex
+              for(let i = start; i <= end; i++){
+                let link = pag.querySelector(".swiper-pagination-bullet[data-index='"+(i)+"']");
+                if(i == start)
+                  link.classList.remove("service-content-left");
                 
-          //         firstEl.style.display = "none";
-          //         firstEl.classList.remove("service-content-left")
-          //         firstEl.nextSibling.classList.add("service-content-left");
-          //         lastIndex++;
-          //       }
-          //     }
-          //   })
-          // });
+                link.style.display = "none";
+
+                if(i == end)
+                  link.classList.remove("service-content-right");
+              }
+              
+            
+              end = el.dataset.index - 1 - (DefaultLastIndex-DefaultStartIndex)
+              for(let i = prevLastEl; i >= end; i--){
+                let link = pag.querySelector(".swiper-pagination-bullet[data-index='"+(i)+"']")
+                if(i == prevLastEl)
+                  link.classList.add("service-content-right");
+                link.style.display = "";
+                if(i == end)
+                  link.classList.add("service-content-left");
+              }
+
+             
+              startIndex = end;
+              lastIndex = prevLastEl;
+            }
+          }
         }
       }
     });
@@ -519,6 +591,7 @@ if (document.querySelector(".slider-case")) {
   const reviewsTextSlider = new Swiper(".slider-case", {
     slidesPerView: "auto",
     grabCursor: true,
+    adaptiveHeight: true,
     breakpoints: {
       320: {
         spaceBetween: 15,
