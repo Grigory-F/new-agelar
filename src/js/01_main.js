@@ -211,24 +211,92 @@ if (document.querySelector(".slider-tech")) {
   });
 }
 
-if (document.querySelector(".service-content-slider")) {
-  const ServiceContentSlider = new Swiper(".service-content-slider", {
-    slidesPerView: 1,
-    grabCursor: true,
-    navigation: {
-      nextEl: ".service-content-slider-next",
-      prevEl: ".service-content-slider-prev",
-    },
-    pagination: {
-      el: ".service-content-slider-pag",
-      dynamicBullets: true,
-      clickable: true,
-      renderBullet: function (index, className) {
-        return `<a href="#" class="${className}">${index + 1}</a>`;
+(function(document){
+  if (document.querySelector(".service-content-slider")) {
+    startIndex = 2;
+    lastIndex = 5;
+    let ServiceContentSlider = new Swiper(".service-content-slider", {
+      slidesPerView: 1,
+      grabCursor: true,
+      navigation: {
+        nextEl: ".service-content-slider-next",
+        prevEl: ".service-content-slider-prev",
       },
-    },
-  });
-}
+      pagination: {
+        el: ".service-content-slider-pag",
+        dynamicBullets: true,
+        clickable: true,
+        renderBullet: function (index, className) {
+          cIndex = index + 1;
+          if(cIndex == 1)
+            return `<a href="#" class="${className}" data-index="${cIndex}">${cIndex}</a>`;
+          if(cIndex == this.imagesLoaded)
+            return `<a href="#" class="${className}" data-index="${cIndex}">${cIndex}</a>`;
+
+          let cls = '';
+          if(cIndex === startIndex){
+            cls = "service-content-left";
+          }else if(cIndex === startIndex + 3)
+            cls = "service-content-right";
+      
+          if(cIndex >= startIndex && cIndex <= startIndex + 3)
+            return `<a href="#" class="${className} ${cls}" data-index="${cIndex}">${cIndex}</a>`;
+
+         
+          return `<a href="#" class="${className}"  data-index="${cIndex}">${cIndex}</a>`;
+        },
+      },
+      on: {
+        init: function(){
+          // let links = document.querySelectorAll(".service-content-slider-pag .swiper-pagination-bullet");
+          // console.log(111111, links)
+          // links.forEach(function(item){
+          //   item.addEventListener("click", function(e){
+              
+          //     if(this.classList.contains("service-content-left")){
+          //       console.log(startIndex)
+          //       if(this.previousSibling.innerHTML == 1){
+          //         return;
+          //       }
+          //       this.previousSibling.style.display = "";
+          //       this.previousSibling.classList.add("service-content-left");
+          //       this.classList.remove("service-content-left");
+          //       startIndex--;
+                
+          //       let lastEl = document.querySelector(".service-content-slider-pag .swiper-pagination-bullet[data-index='"+lastIndex+"']");
+          //       if(lastEl && lastEl.innerHTML != ServiceContentSlider.imagesLoaded){
+          //         lastEl.style.display = "none";
+          //         lastEl.classList.remove("service-content-left");
+          //         lastEl.previousSibling.classList.add("service-content-left")
+          //         lastIndex--;
+          //       }
+          //     }
+
+          //     if(this.classList.contains("service-content-right")){
+          //       console.log(ServiceContentSlider.imagesLoaded)
+          //       if(this.previousSibling.innerHTML == ServiceContentSlider.imagesLoaded) return;
+          //       this.nextSibling.style.display = "";  
+          //       this.nextSibling.classList.add("service-content-right"); 
+          //       this.classList.remove("service-content-right");           
+          //       let firstEl = document.querySelector(".service-content-slider-pag .swiper-pagination-bullet[data-index='"+(startIndex)+"']");
+          //       startIndex++;
+          //       if(firstEl && firstEl.innerHTML != 1 &&  this.nextSibling.dataset.index != ServiceContentSlider.imagesLoaded){
+                
+          //         firstEl.style.display = "none";
+          //         firstEl.classList.remove("service-content-left")
+          //         firstEl.nextSibling.classList.add("service-content-left");
+          //         lastIndex++;
+          //       }
+          //     }
+          //   })
+          // });
+        }
+      }
+    });
+  
+   
+  }
+})(document);
 if (document.querySelector(".slider-top")) {
   const SliderTop = new Swiper(".slider-top", {
     slidesPerView: 1,
