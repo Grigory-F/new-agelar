@@ -451,6 +451,7 @@ if (document.querySelector(".slider-case")) {
   const reviewsTextSlider = new Swiper(".slider-case", {
     slidesPerView: "auto",
     grabCursor: true,
+    adaptiveHeight: true,
     breakpoints: {
       320: {
         spaceBetween: 15,
