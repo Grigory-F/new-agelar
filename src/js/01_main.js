@@ -212,40 +212,43 @@ if (document.querySelector(".slider-tech")) {
 }
 
 //Пагинация для swiper с отображением n кол-во кнопок активными а осталные появляются по мере нужности
-function PaginatorSwiper(swiper, options = {}){
+function PaginatorSwiper(swiper, options = {}) {
   this.swiper = swiper;
-  this.defaultStartIndex = options.defaultStartIndex? options.defaultStartIndex:2;
-  this.defaultLastIndex = options.defaultLastIndex? options.defaultLastIndex:5;
+  this.defaultStartIndex = options.defaultStartIndex
+    ? options.defaultStartIndex
+    : 2;
+  this.defaultLastIndex = options.defaultLastIndex
+    ? options.defaultLastIndex
+    : 5;
   this.startIndex = this.defaultStartIndex;
   this.lastIndex = this.defaultLastIndex;
-  this.clsNext  = "swiper-content-pag-next";
-  this.clsPrev  = "swiper-content-pag-prev";
+  this.clsNext = "swiper-content-pag-next";
+  this.clsPrev = "swiper-content-pag-prev";
   this.clsFirst = "swiper-content-pag-first";
-  this.clsLast  = "swiper-content-pag-last";
-  this.init = function(){
-   // let btns = this.swiper.pagination.el.querySelectorAll("[data-index]");
+  this.clsLast = "swiper-content-pag-last";
+  this.init = function () {
+    // let btns = this.swiper.pagination.el.querySelectorAll("[data-index]");
     //this.swiper.pagination.bullets = btns;
-  }
-  this.renderBullet = function(index, className){
+  };
+  this.renderBullet = function (index, className) {
     cIndex = index + 1;
-    if(cIndex == 1)
+    if (cIndex == 1)
       return `<a href="#" class="${className}" data-index="${cIndex}">${cIndex}</a>`;
-    if(cIndex == this.swiper.imagesLoaded)
+    if (cIndex == this.swiper.imagesLoaded)
       return `<a href="#" class="${className} ${this.clsLast} " data-index="${cIndex}">${cIndex}</a>`;
 
-    let cls = '';
-    if(cIndex === this.startIndex){
+    let cls = "";
+    if (cIndex === this.startIndex) {
       cls = this.clsPrev;
-    }else if(cIndex === this.startIndex + 3)
-      cls = this.clsNext;
+    } else if (cIndex === this.startIndex + 3) cls = this.clsNext;
 
-    if(cIndex >= this.startIndex && cIndex <= this.startIndex + 3)
+    if (cIndex >= this.startIndex && cIndex <= this.startIndex + 3)
       return `<a href="#" class="${className} ${cls}" data-index="${cIndex}">${cIndex}</a>`;
-    
-    return `<a href="#" class="${className}" style="display:none" data-index="${cIndex}">${cIndex}</a>`;
-  }
 
-  this.paginationUpdate = function(swiper, pag){
+    return `<a href="#" class="${className}" style="display:none" data-index="${cIndex}">${cIndex}</a>`;
+  };
+
+  this.paginationUpdate = function (swiper, pag) {
     let el = pag.querySelector(".swiper-pagination-bullet-active");
 
     // if(this.startIndex != this.defaultStartIndex){
@@ -260,8 +263,8 @@ function PaginatorSwiper(swiper, options = {}){
     //   pag.querySelector("."+this.clsLast).style.display = "none";
     // }
 
-    if(el.classList.contains(this.clsPrev)){
-      if(el.previousSibling.innerHTML == 1){
+    if (el.classList.contains(this.clsPrev)) {
+      if (el.previousSibling.innerHTML == 1) {
         this.startIndex = this.defaultStartIndex;
         return;
       }
@@ -269,93 +272,104 @@ function PaginatorSwiper(swiper, options = {}){
       el.previousSibling.classList.add(this.clsPrev);
       el.classList.remove(this.clsPrev);
       this.startIndex--;
-      
-      let lastEl = pag.querySelector(".swiper-pagination-bullet[data-index='"+this.lastIndex+"']");
-      if(lastEl && lastEl.innerHTML != swiper.imagesLoaded){
+
+      let lastEl = pag.querySelector(
+        ".swiper-pagination-bullet[data-index='" + this.lastIndex + "']"
+      );
+      if (lastEl && lastEl.innerHTML != swiper.imagesLoaded) {
         lastEl.style.display = "none";
         lastEl.classList.remove(this.clsNext);
-        lastEl.previousSibling.classList.add(this.clsNext)
+        lastEl.previousSibling.classList.add(this.clsNext);
         this.lastIndex--;
       }
     }
 
-    if(el.classList.contains(this.clsNext)){
-      if(el.previousSibling.innerHTML == swiper.imagesLoaded) return;
-      el.nextSibling.style.display = "";  
-      el.nextSibling.classList.add(this.clsNext); 
-      el.classList.remove(this.clsNext);           
-      let firstEl = pag.querySelector(".swiper-pagination-bullet[data-index='"+(this.startIndex)+"']");
-      
-      if(firstEl && firstEl.innerHTML != 1 &&  el.nextSibling.dataset.index != swiper.imagesLoaded){
+    if (el.classList.contains(this.clsNext)) {
+      if (el.previousSibling.innerHTML == swiper.imagesLoaded) return;
+      el.nextSibling.style.display = "";
+      el.nextSibling.classList.add(this.clsNext);
+      el.classList.remove(this.clsNext);
+      let firstEl = pag.querySelector(
+        ".swiper-pagination-bullet[data-index='" + this.startIndex + "']"
+      );
+
+      if (
+        firstEl &&
+        firstEl.innerHTML != 1 &&
+        el.nextSibling.dataset.index != swiper.imagesLoaded
+      ) {
         this.startIndex++;
         firstEl.style.display = "none";
-        firstEl.classList.remove(this.clsPrev)
+        firstEl.classList.remove(this.clsPrev);
         firstEl.nextSibling.classList.add(this.clsPrev);
         this.lastIndex++;
       }
     }
-      
-    if(el.dataset.index == 1 &&  this.startIndex != this.defaultStartIndex){
-      for(let i = this.startIndex; i <= this.lastIndex; i++){
-        let link = pag.querySelector(".swiper-pagination-bullet[data-index='"+(i)+"']");
-        if(i == this.startIndex)
-          link.classList.remove(this.clsPrev);
+
+    if (el.dataset.index == 1 && this.startIndex != this.defaultStartIndex) {
+      for (let i = this.startIndex; i <= this.lastIndex; i++) {
+        let link = pag.querySelector(
+          ".swiper-pagination-bullet[data-index='" + i + "']"
+        );
+        if (i == this.startIndex) link.classList.remove(this.clsPrev);
 
         link.style.display = "none";
 
-        if(i == this.lastIndex)
-          link.classList.remove(this.clsNext);
+        if (i == this.lastIndex) link.classList.remove(this.clsNext);
       }
 
-      for(let i = this.defaultStartIndex; i <= this.defaultLastIndex; i++){
-        let link = pag.querySelector(".swiper-pagination-bullet[data-index='"+(i)+"']");
-        if(i == this.defaultStartIndex)
-          link.classList.add(this.clsPrev);
-        
+      for (let i = this.defaultStartIndex; i <= this.defaultLastIndex; i++) {
+        let link = pag.querySelector(
+          ".swiper-pagination-bullet[data-index='" + i + "']"
+        );
+        if (i == this.defaultStartIndex) link.classList.add(this.clsPrev);
+
         link.style.display = "";
-        
-        if(i == this.defaultLastIndex)
-          link.classList.add(this.clsNext);
+
+        if (i == this.defaultLastIndex) link.classList.add(this.clsNext);
       }
 
       startIndex = this.defaultStartIndex;
       lastIndex = this.defaultLastIndex;
     }
-    
-    if(el.dataset.index == swiper.imagesLoaded){
-      let prevLastEl = el.dataset.index-1;
-      if(this.lastIndex != el.dataset.index-1){  
+
+    if (el.dataset.index == swiper.imagesLoaded) {
+      let prevLastEl = el.dataset.index - 1;
+      if (this.lastIndex != el.dataset.index - 1) {
         let end = this.lastIndex;
-        let start = this.startIndex
-        for(let i = start; i <= end; i++){
-          let link = pag.querySelector(".swiper-pagination-bullet[data-index='"+(i)+"']");
-          if(i == start)
-            link.classList.remove(this.clsPrev);
-          
+        let start = this.startIndex;
+        for (let i = start; i <= end; i++) {
+          let link = pag.querySelector(
+            ".swiper-pagination-bullet[data-index='" + i + "']"
+          );
+          if (i == start) link.classList.remove(this.clsPrev);
+
           link.style.display = "none";
 
-          if(i == end)
-            link.classList.remove(this.clsNext);
+          if (i == end) link.classList.remove(this.clsNext);
         }
-          
-        end = el.dataset.index - 1 - (this.defaultLastIndex-this.defaultStartIndex)
-        for(let i = prevLastEl; i >= end; i--){
-          let link = pag.querySelector(".swiper-pagination-bullet[data-index='"+(i)+"']")
-          if(i == prevLastEl)
-            link.classList.add(this.clsNext);
+
+        end =
+          el.dataset.index -
+          1 -
+          (this.defaultLastIndex - this.defaultStartIndex);
+        for (let i = prevLastEl; i >= end; i--) {
+          let link = pag.querySelector(
+            ".swiper-pagination-bullet[data-index='" + i + "']"
+          );
+          if (i == prevLastEl) link.classList.add(this.clsNext);
           link.style.display = "";
-          if(i == end)
-            link.classList.add(this.clsPrev);
+          if (i == end) link.classList.add(this.clsPrev);
         }
 
         this.startIndex = end;
         this.lastIndex = prevLastEl;
       }
-    }     
-  }
+    }
+  };
 }
 
-(function(document){
+(function (document) {
   if (document.querySelector(".service-content-slider")) {
     let ServiceContentSlider = new Swiper(".service-content-slider", {
       slidesPerView: 1,
@@ -373,18 +387,18 @@ function PaginatorSwiper(swiper, options = {}){
         },
       },
       on: {
-        beforeInit(){
+        beforeInit() {
           this.paginator = new PaginatorSwiper(this);
         },
-        
-        init(){
+
+        init() {
           this.paginator.init();
         },
-        paginationUpdate: function(swiper, pag){
-          console.log(swiper)
+        paginationUpdate: function (swiper, pag) {
+          console.log(swiper);
           this.paginator.paginationUpdate(swiper, pag);
-        }
-      }
+        },
+      },
     });
   }
 })(document);
@@ -471,7 +485,6 @@ if (document.querySelector(".articles-slider")) {
   const ArticlesSlider = new Swiper(".articles-slider", {
     slidesPerView: "auto",
     grabCursor: true,
-    
 
     navigation: {
       nextEl: ".swiper-button-prev",
@@ -479,10 +492,8 @@ if (document.querySelector(".articles-slider")) {
     },
     breakpoints: {
       320: {
-
         spaceBetween: 15,
       },
-      
     },
   });
 }
@@ -758,7 +769,7 @@ if (elemEffect) {
   let reviewsGall = document.getElementById("n-reviews-gall");
   if (reviewsGall) {
     lightGallery(reviewsGall, {
-      selector: ".js_gal_reviews",
+      selector: ".js_gal",
       thumbnail: true,
       animateThumb: true,
 
@@ -791,12 +802,11 @@ if (elemEffect) {
   //         if (Number(data)) window.location.href = this.href;
   //         else {
   //           window.history.pushState(null, null, this.getAttribute("href"));
- 
+
   //           getCases(id).then(function (data) {
   //             data = JSON.parse(data);
   //             let casesBlock = document.querySelector(".casesList");
   //             casesBlock.innerHTML = data.data;
-             
 
   //             let showMoreBtn = document.querySelector(".show_more_cases");
 
@@ -903,8 +913,6 @@ if (elemEffect) {
   loadImages();
 })(document);
 
-
-
 /* [
   {
     status: 200,
@@ -914,3 +922,29 @@ if (elemEffect) {
     
   }
 ] */
+
+$(document).on("af_complete", function (event, response) {
+  if (response.success) {
+    response.form[0].classList.remove("error");
+    onClearErrorForm(form)
+
+  } else {
+    response.form[0].classList.add("error");
+    onClearErrorForm(response.form[0]);
+    for (const key in response.data) {
+      let selecError = response.form[0].querySelector(`[name=${key}]`);
+      console.log(selecError);
+      if (selecError) {
+        selecError.insertAdjacentHTML("afterend", `${response.data[key]}`);
+      }
+    }
+  }
+});
+
+
+
+function onClearErrorForm(form) {
+  form.querySelectorAll(".error").forEach((elem, index) => {
+    elem.remove();
+  });
+}
