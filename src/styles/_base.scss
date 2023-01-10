@@ -424,7 +424,7 @@ main {
     transition: 0.3s ease;
   }
   &:hover &__content-box {
-    background: rgba(106, 21, 7, 0.65);
+    background: rgba($color: #6A1507, $alpha: 0.9);
   }
   &__content {
     transition: 0.3s ease;
@@ -674,6 +674,9 @@ main {
   transition: 0.3s ease;
   width: fit-content;
   width: 100%;
+  & img {
+    filter: invert(1);
+  }
 }
 .min-budge:hover {
   border: 1px solid $primary;
@@ -1401,5 +1404,33 @@ main {
 
 .partners-slider__slide-cont:nth-child(n+6) img {
   height: auto;
+  width: 100%;
+}
+
+
+
+
+.is-desctop .slider-case, .is-desctop .swiper-slide{
+  padding-left: 0 !important;
+  
+}
+
+
+.is-desctop, .is-mobile {
+  border: 20px solid #1e1e24;
+  margin: 20px 10px;
+  border-radius: 45px;
+  height: 70vh;
+  overflow-y: auto !important;
+}
+
+
+.is-mobile {
+  max-width: 320px;
+  margin: 20px auto;
+}
+
+
+.slider-case img {
   width: 100%;
 }

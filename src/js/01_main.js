@@ -211,24 +211,168 @@ if (document.querySelector(".slider-tech")) {
   });
 }
 
-if (document.querySelector(".service-content-slider")) {
-  const ServiceContentSlider = new Swiper(".service-content-slider", {
-    slidesPerView: 1,
-    grabCursor: true,
-    navigation: {
-      nextEl: ".service-content-slider-next",
-      prevEl: ".service-content-slider-prev",
-    },
-    pagination: {
-      el: ".service-content-slider-pag",
-      dynamicBullets: true,
-      clickable: true,
-      renderBullet: function (index, className) {
-        return `<a href="#" class="${className}">${index + 1}</a>`;
+(function (document) {
+  if (document.querySelector(".service-content-slider")) {
+    const DefaultStartIndex = 2;
+    const DefaultLastIndex = 5;
+    let startIndex = DefaultStartIndex;
+    let lastIndex = DefaultLastIndex;
+    let ServiceContentSlider = new Swiper(".service-content-slider", {
+      slidesPerView: 1,
+      grabCursor: true,
+      navigation: {
+        nextEl: ".service-content-slider-next",
+        prevEl: ".service-content-slider-prev",
       },
-    },
-  });
-}
+      pagination: {
+        el: ".service-content-slider-pag",
+        dynamicBullets: true,
+        clickable: true,
+        renderBullet: function (index, className) {
+          cIndex = index + 1;
+          if (cIndex == 1)
+            return `<a href="#" class="${className}" data-index="${cIndex}">${cIndex}</a>`;
+          if (cIndex == this.imagesLoaded)
+            return `<a href="#" class="${className} swiper-content-pag-last" data-index="${cIndex}">${cIndex}</a>`;
+
+          let cls = "";
+          if (cIndex === startIndex) {
+            cls = "service-content-left";
+          } else if (cIndex === startIndex + 3) cls = "service-content-right";
+
+          if (cIndex >= startIndex && cIndex <= startIndex + 3)
+            return `<a href="#" class="${className} ${cls}" data-index="${cIndex}">${cIndex}</a>`;
+
+          return `<a href="#" class="${className}" style="display:none" data-index="${cIndex}">${cIndex}</a>`;
+        },
+      },
+      on: {
+        paginationUpdate: function (swiper, pag) {
+          let el = pag.querySelector(".swiper-pagination-bullet-active");
+
+          // if(startIndex != DefaultStartIndex){
+          //   pag.querySelector(".swiper-content-pag-first").style.display = "";
+          // }else{
+          //   //pag.querySelector(".swiper-content-pag-first").style.display = "none";
+          // }
+
+          // if(lastIndex != swiper.imagesLoaded - 1){
+          //   pag.querySelector(".swiper-content-pag-last").style.display = "";
+          // }else{
+          //   //pag.querySelector(".swiper-content-pag-last").style.display = "none";
+          // }
+
+          if (el.classList.contains("service-content-left")) {
+            if (el.previousSibling.innerHTML == 1) {
+              return;
+            }
+            el.previousSibling.style.display = "";
+            el.previousSibling.classList.add("service-content-left");
+            el.classList.remove("service-content-left");
+            startIndex--;
+
+            let lastEl = pag.querySelector(
+              ".swiper-pagination-bullet[data-index='" + lastIndex + "']"
+            );
+            if (lastEl && lastEl.innerHTML != swiper.imagesLoaded) {
+              lastEl.style.display = "none";
+              lastEl.classList.remove("service-content-left");
+              lastEl.previousSibling.classList.add("service-content-left");
+              lastIndex--;
+            }
+          }
+
+          if (el.classList.contains("service-content-right")) {
+            console.log(swiper.imagesLoaded);
+            if (el.previousSibling.innerHTML == swiper.imagesLoaded) return;
+            el.nextSibling.style.display = "";
+            el.nextSibling.classList.add("service-content-right");
+            el.classList.remove("service-content-right");
+            let firstEl = pag.querySelector(
+              ".swiper-pagination-bullet[data-index='" + startIndex + "']"
+            );
+
+            if (
+              firstEl &&
+              firstEl.innerHTML != 1 &&
+              el.nextSibling.dataset.index != swiper.imagesLoaded
+            ) {
+              startIndex++;
+              firstEl.style.display = "none";
+              firstEl.classList.remove("service-content-left");
+              firstEl.nextSibling.classList.add("service-content-left");
+              lastIndex++;
+            }
+          }
+
+          if (el.dataset.index == 1 && startIndex != DefaultStartIndex) {
+            for (let i = startIndex; i <= lastIndex; i++) {
+              let link = pag.querySelector(
+                ".swiper-pagination-bullet[data-index='" + i + "']"
+              );
+              if (i == startIndex)
+                link.classList.remove("service-content-left");
+
+              link.style.display = "none";
+
+              if (i == lastIndex)
+                link.classList.remove("service-content-right");
+            }
+
+            for (let i = DefaultStartIndex; i <= DefaultLastIndex; i++) {
+              let link = pag.querySelector(
+                ".swiper-pagination-bullet[data-index='" + i + "']"
+              );
+              if (i == DefaultStartIndex)
+                link.classList.add("service-content-left");
+
+              link.style.display = "";
+
+              if (i == DefaultLastIndex)
+                link.classList.add("service-content-right");
+            }
+
+            startIndex = DefaultStartIndex;
+            lastIndex = DefaultLastIndex;
+          }
+
+          if (el.dataset.index == swiper.imagesLoaded) {
+            let prevLastEl = el.dataset.index - 1;
+            if (lastIndex != el.dataset.index - 1) {
+              let end = lastIndex;
+              let start = startIndex;
+              for (let i = start; i <= end; i++) {
+                let link = pag.querySelector(
+                  ".swiper-pagination-bullet[data-index='" + i + "']"
+                );
+                if (i == start) link.classList.remove("service-content-left");
+
+                link.style.display = "none";
+
+                if (i == end) link.classList.remove("service-content-right");
+              }
+
+              end =
+                el.dataset.index - 1 - (DefaultLastIndex - DefaultStartIndex);
+              for (let i = prevLastEl; i >= end; i--) {
+                let link = pag.querySelector(
+                  ".swiper-pagination-bullet[data-index='" + i + "']"
+                );
+                if (i == prevLastEl)
+                  link.classList.add("service-content-right");
+                link.style.display = "";
+                if (i == end) link.classList.add("service-content-left");
+              }
+
+              startIndex = end;
+              lastIndex = prevLastEl;
+            }
+          }
+        },
+      },
+    });
+  }
+})(document);
 if (document.querySelector(".slider-top")) {
   const SliderTop = new Swiper(".slider-top", {
     slidesPerView: 1,
@@ -639,19 +783,24 @@ if (elemEffect) {
         {
           id: id,
         },
-        function (data) {
+        (data) => {
           if (Number(data)) window.location.href = this.href;
           else {
+            window.history.pushState(null, null, this.getAttribute("href"));
+
             getCases(id).then(function (data) {
               data = JSON.parse(data);
               let casesBlock = document.querySelector(".casesList");
               casesBlock.innerHTML = data.data;
-              console.log("add content");
 
               let showMoreBtn = document.querySelector(".show_more_cases");
 
               if (showMoreBtn) {
                 showMoreBtn.setAttribute("data-id", id);
+                showMoreBtn.setAttribute(
+                  "data-shift",
+                  showMoreBtn.dataset.defaultShift
+                );
                 //Скрываем или отображаем кнопку "показать ещё"
                 if (!data.nextData) {
                   showMoreBtn.style.display = "none";
@@ -694,7 +843,7 @@ if (elemEffect) {
       getCases(id, shift)
         .then((data) => {
           data = JSON.parse(data);
-
+          console.log(data);
           if (data.data != "") {
             let casesBlock = document.querySelector(".casesList");
             casesBlock.innerHTML += data.data;
@@ -719,7 +868,22 @@ if (elemEffect) {
   }
 
   //Загрузка изображений
-  async function loadImages() {
+  /* async function loadImages() {
+    let images = document.querySelectorAll(".box-case__bg-image");
+    images.forEach((item) => {
+      let image = document.createElement("img");
+      image.src = item.dataset.src;
+      image.setAttribute("class", item.getAttribute("class"));
+      image.addEventListener("load", function () {
+        item.parentNode.insertBefore(image, item);
+        let spin = item.parentNode.querySelector(".spin-overlap");
+        if (spin) spin.remove();
+        item.remove();
+      });
+    }
+  } */
+  //Загрузка изображений
+  function loadImages() {
     let images = document.querySelectorAll(".box-case__bg-image");
     images.forEach((item) => {
       let image = document.createElement("img");
@@ -736,13 +900,3 @@ if (elemEffect) {
 
   loadImages();
 })(document);
-
-let partnersDeg = document.querySelectorAll(".partners-slider__slide-cont img");
-
-if (partnersDeg) {
-  partnersDeg.forEach((elem, index) => {
-    if (index > 9) {
-      elem.style.cssText = "width: 100% !important; height: auto !important;";
-    }
-  });
-}
