@@ -770,7 +770,7 @@ if (elemEffect) {
   let reviewsGall = document.getElementById("n-reviews-gall");
   if (reviewsGall) {
     lightGallery(reviewsGall, {
-      selector: ".js_gal_reviews",
+      selector: ".js_gal",
       thumbnail: true,
       animateThumb: true,
 
