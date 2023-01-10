@@ -371,12 +371,10 @@ main {
 @media (max-width: 992px) {
   .partners-slider {
     & .swiper-slide {
-      width: 175px;
     }
 
     &__slide-cont {
       width: 100%;
-      height: 100px;
       position: relative;
     }
   }
@@ -814,22 +812,18 @@ main {
   &__slider {
   }
   &__box-image {
-
   }
 }
-
 
 .articles-slider .swiper-slide {
   width: 370px;
 }
-
 
 @media (max-width: 992px) {
   .articles-slider {
     &__slider {
     }
     &__box-image {
-
     }
   }
 }
@@ -1048,19 +1042,19 @@ main {
   display: flex;
   flex-direction: column;
   &__icon-box {
-    height: 150px;
     display: flex;
+    
     align-items: flex-start;
   }
   &__icon {
-    height: 100%;
+    width: 100%;
     margin: 0 auto;
   }
 }
 
 .slider-tech {
   & .swiper-slide {
-    width: 250px;
+    width: 200px;
   }
 }
 
