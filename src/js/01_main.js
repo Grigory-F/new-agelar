@@ -211,20 +211,27 @@ if (document.querySelector(".slider-tech")) {
   });
 }
 
+//Пагинация для swiper с отображением n кол-во кнопок активными а осталные появляются по мере нужности
 function PaginatorSwiper(swiper, options = {}){
   this.swiper = swiper;
   this.defaultStartIndex = options.defaultStartIndex? options.defaultStartIndex:2;
   this.defaultLastIndex = options.defaultLastIndex? options.defaultLastIndex:5;
   this.startIndex = this.defaultStartIndex;
   this.lastIndex = this.defaultLastIndex;
-  this.clsNext = "swiper-content-pag-next";
-  this.clsPrev = "swiper-content-pag-prev";
+  this.clsNext  = "swiper-content-pag-next";
+  this.clsPrev  = "swiper-content-pag-prev";
+  this.clsFirst = "swiper-content-pag-first";
+  this.clsLast  = "swiper-content-pag-last";
+  this.init = function(){
+   // let btns = this.swiper.pagination.el.querySelectorAll("[data-index]");
+    //this.swiper.pagination.bullets = btns;
+  }
   this.renderBullet = function(index, className){
     cIndex = index + 1;
     if(cIndex == 1)
       return `<a href="#" class="${className}" data-index="${cIndex}">${cIndex}</a>`;
     if(cIndex == this.swiper.imagesLoaded)
-      return `<a href="#" class="${className} swiper-content-pag-last" data-index="${cIndex}">${cIndex}</a>`;
+      return `<a href="#" class="${className} ${this.clsLast} " data-index="${cIndex}">${cIndex}</a>`;
 
     let cls = '';
     if(cIndex === this.startIndex){
@@ -234,7 +241,6 @@ function PaginatorSwiper(swiper, options = {}){
 
     if(cIndex >= this.startIndex && cIndex <= this.startIndex + 3)
       return `<a href="#" class="${className} ${cls}" data-index="${cIndex}">${cIndex}</a>`;
-
     
     return `<a href="#" class="${className}" style="display:none" data-index="${cIndex}">${cIndex}</a>`;
   }
@@ -242,16 +248,16 @@ function PaginatorSwiper(swiper, options = {}){
   this.paginationUpdate = function(swiper, pag){
     let el = pag.querySelector(".swiper-pagination-bullet-active");
 
-    // if(startIndex != DefaultStartIndex){
-    //   pag.querySelector(".swiper-content-pag-first").style.display = "";
+    // if(this.startIndex != this.defaultStartIndex){
+    //   pag.querySelector("."+this.clsFirst).style.display = "";
     // }else{
-    //   //pag.querySelector(".swiper-content-pag-first").style.display = "none";
+    //   pag.querySelector("."+this.clsFirst).style.display = "none";
     // }
 
-    // if(lastIndex != swiper.imagesLoaded - 1){
-    //   pag.querySelector(".swiper-content-pag-last").style.display = "";
+    // if(this.lastIndex != this.swiper.imagesLoaded - 1){
+    //   pag.querySelector("."+this.clsLast).style.display = "";
     // }else{
-    //   //pag.querySelector(".swiper-content-pag-last").style.display = "none";
+    //   pag.querySelector("."+this.clsLast).style.display = "none";
     // }
 
     if(el.classList.contains(this.clsPrev)){
@@ -345,21 +351,12 @@ function PaginatorSwiper(swiper, options = {}){
         this.startIndex = end;
         this.lastIndex = prevLastEl;
       }
-    }
-        
+    }     
   }
 }
 
 (function(document){
   if (document.querySelector(".service-content-slider")) {
-    new PaginatorSwiper()
-    const DefaultStartIndex = 2;
-    const DefaultLastIndex = 5;
-    let startIndex = DefaultStartIndex;
-    let lastIndex = DefaultLastIndex;
-    let clsNext = "swiper-content-pag-next";
-    let clsPrev = "swiper-content-pag-prev";
-
     let ServiceContentSlider = new Swiper(".service-content-slider", {
       slidesPerView: 1,
       grabCursor: true,
@@ -373,151 +370,25 @@ function PaginatorSwiper(swiper, options = {}){
         clickable: true,
         renderBullet: function (index, className) {
           return this.paginator.renderBullet(index, className);
-          // cIndex = index + 1;
-          // if(cIndex == 1)
-          //   return `<a href="#" class="${className}" data-index="${cIndex}">${cIndex}</a>`;
-          // if(cIndex == this.imagesLoaded)
-          //   return `<a href="#" class="${className} swiper-content-pag-last" data-index="${cIndex}">${cIndex}</a>`;
-
-          // let cls = '';
-          // if(cIndex === startIndex){
-          //   cls = clsPrev;
-          // }else if(cIndex === startIndex + 3)
-          //   cls = clsNext;
-      
-          // if(cIndex >= startIndex && cIndex <= startIndex + 3)
-          //   return `<a href="#" class="${className} ${cls}" data-index="${cIndex}">${cIndex}</a>`;
-
-         
-          // return `<a href="#" class="${className}" style="display:none" data-index="${cIndex}">${cIndex}</a>`;
         },
       },
       on: {
         beforeInit(){
           this.paginator = new PaginatorSwiper(this);
         },
+        
+        init(){
+          this.paginator.init();
+        },
         paginationUpdate: function(swiper, pag){
+          console.log(swiper)
           this.paginator.paginationUpdate(swiper, pag);
-          //let el = pag.querySelector(".swiper-pagination-bullet-active");
-
-          // if(startIndex != DefaultStartIndex){
-          //   pag.querySelector(".swiper-content-pag-first").style.display = "";
-          // }else{
-          //   //pag.querySelector(".swiper-content-pag-first").style.display = "none";
-          // }
-
-          // if(lastIndex != swiper.imagesLoaded - 1){
-          //   pag.querySelector(".swiper-content-pag-last").style.display = "";
-          // }else{
-          //   //pag.querySelector(".swiper-content-pag-last").style.display = "none";
-          // }
-
-          // if(el.classList.contains(clsPrev)){
-          //   if(el.previousSibling.innerHTML == 1){
-          //     startIndex = DefaultStartIndex;
-          //     return;
-          //   }
-          //   el.previousSibling.style.display = "";
-          //   el.previousSibling.classList.add(clsPrev);
-          //   el.classList.remove(clsPrev);
-          //   startIndex--;
-            
-          //   let lastEl = pag.querySelector(".swiper-pagination-bullet[data-index='"+lastIndex+"']");
-          //   if(lastEl && lastEl.innerHTML != swiper.imagesLoaded){
-          //     lastEl.style.display = "none";
-          //     lastEl.classList.remove(clsNext);
-          //     lastEl.previousSibling.classList.add(clsNext)
-          //     lastIndex--;
-          //   }
-          // }
-
-          // if(el.classList.contains(clsNext)){
-          //   console.log(startIndex, lastIndex)
-          //   if(el.previousSibling.innerHTML == swiper.imagesLoaded) return;
-          //   el.nextSibling.style.display = "";  
-          //   el.nextSibling.classList.add(clsNext); 
-          //   el.classList.remove(clsNext);           
-          //   let firstEl = pag.querySelector(".swiper-pagination-bullet[data-index='"+(startIndex)+"']");
-           
-          //   if(firstEl && firstEl.innerHTML != 1 &&  el.nextSibling.dataset.index != swiper.imagesLoaded){
-          //     startIndex++;
-          //     firstEl.style.display = "none";
-          //     firstEl.classList.remove(clsPrev)
-          //     firstEl.nextSibling.classList.add(clsPrev);
-          //     lastIndex++;
-          //   }
-          // }
-          
-         
-          // if(el.dataset.index == 1 &&  startIndex != DefaultStartIndex){
-           
-          //   for(let i = startIndex; i <= lastIndex; i++){
-          //     let link = pag.querySelector(".swiper-pagination-bullet[data-index='"+(i)+"']");
-          //     if(i == startIndex)
-          //       link.classList.remove(clsPrev);
-
-          //     link.style.display = "none";
-
-          //     if(i == lastIndex)
-          //       link.classList.remove(clsNext);
-          //   }
-
-            
-          //   for(let i = DefaultStartIndex; i <= DefaultLastIndex; i++){
-          //     let link = pag.querySelector(".swiper-pagination-bullet[data-index='"+(i)+"']");
-          //     if(i == DefaultStartIndex)
-          //       link.classList.add(clsPrev);
-              
-          //     link.style.display = "";
-              
-          //     if(i == DefaultLastIndex)
-          //       link.classList.add(clsNext);
-          //   }
-
-          //   startIndex = DefaultStartIndex;
-          //   lastIndex = DefaultLastIndex;
-          // }
-          
-          // if(el.dataset.index == swiper.imagesLoaded){
-           
-          //   let prevLastEl = el.dataset.index-1;
-          //   if(lastIndex != el.dataset.index-1){  
-          //     let end = lastIndex;
-          //     let start = startIndex
-          //     for(let i = start; i <= end; i++){
-          //       let link = pag.querySelector(".swiper-pagination-bullet[data-index='"+(i)+"']");
-          //       if(i == start)
-          //         link.classList.remove(clsPrev);
-                
-          //       link.style.display = "none";
-
-          //       if(i == end)
-          //         link.classList.remove(clsNext);
-          //     }
-              
-            
-          //     end = el.dataset.index - 1 - (DefaultLastIndex-DefaultStartIndex)
-          //     for(let i = prevLastEl; i >= end; i--){
-          //       let link = pag.querySelector(".swiper-pagination-bullet[data-index='"+(i)+"']")
-          //       if(i == prevLastEl)
-          //         link.classList.add(clsNext);
-          //       link.style.display = "";
-          //       if(i == end)
-          //         link.classList.add(clsPrev);
-          //     }
-
-             
-          //     startIndex = end;
-          //     lastIndex = prevLastEl;
-          //   }
-          // }
         }
       }
     });
-  
-   
   }
 })(document);
+
 if (document.querySelector(".slider-top")) {
   const SliderTop = new Swiper(".slider-top", {
     slidesPerView: 1,
