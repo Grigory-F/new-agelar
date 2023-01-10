@@ -469,14 +469,9 @@ function handlerSlider(slider) {
 } */
 if (document.querySelector(".articles-slider")) {
   const ArticlesSlider = new Swiper(".articles-slider", {
-    pagination: {
-      el: ".swiper-slider-pag",
-      grabCursor: true,
-      clickable: true,
-      renderBullet: function (index, className) {
-        return `<a href="#" class="${className}">${index + 1}</a>`;
-      },
-    },
+    slidesPerView: "auto",
+    grabCursor: true,
+    
 
     navigation: {
       nextEl: ".swiper-button-prev",
@@ -484,17 +479,10 @@ if (document.querySelector(".articles-slider")) {
     },
     breakpoints: {
       320: {
-        slidesPerView: 1,
+
         spaceBetween: 15,
       },
-      575: {
-        slidesPerView: 2,
-      },
-
-      992: {
-        slidesPerView: 3,
-        spaceBetween: 30,
-      },
+      
     },
   });
 }
@@ -914,3 +902,15 @@ if (elemEffect) {
 
   loadImages();
 })(document);
+
+
+
+/* [
+  {
+    status: 200,
+    massage: "OK",
+    nameInput: "name-elem",
+    targetElem: "<DOMContentElem>",
+    
+  }
+] */
