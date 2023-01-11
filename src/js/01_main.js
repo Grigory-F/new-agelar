@@ -656,8 +656,11 @@ document.querySelectorAll(".tariff-btn").forEach((elem, index) => {
     let textButton = elem.querySelector("span");
     if (textButton.textContent == "Что входит") {
       textButton.textContent = "Свернуть";
+  
+      textButton.nextElementSibling.style.display = "none";
     } else {
       textButton.textContent = "Что входит";
+      textButton.nextElementSibling.style.display = "";
     }
   });
 });
