@@ -395,7 +395,6 @@ function PaginatorSwiper(swiper, options = {}) {
           this.paginator.init();
         },
         paginationUpdate: function (swiper, pag) {
-          console.log(swiper);
           this.paginator.paginationUpdate(swiper, pag);
         },
       },
