@@ -1422,3 +1422,15 @@ main {
 .slider-case img {
   width: 100%;
 }
+
+form span.error {
+  display: none;
+}
+form.error span.error {
+  display: inline;
+}
+
+.modal form.error span.error {
+  color: white !important;
+  display: inline;
+}
