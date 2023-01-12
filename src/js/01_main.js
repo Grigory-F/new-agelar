@@ -374,6 +374,7 @@ function PaginatorSwiper(swiper, options = {}) {
     let ServiceContentSlider = new Swiper(".service-content-slider", {
       slidesPerView: 1,
       grabCursor: true,
+      adaptiveHeight: true,
       navigation: {
         nextEl: ".service-content-slider-next",
         prevEl: ".service-content-slider-prev",

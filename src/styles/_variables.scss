@@ -30,7 +30,7 @@ $setting: rgba(40, 53, 71, 0.3);
 $interface-icons: #2f3c4e;
 $muted: $text-muted;
 $second-text: #7e8082;
-
+$light: #fff;
 $colors: (
   "blue": $blue,
   "indigo": $indigo,
@@ -59,7 +59,7 @@ $theme-colors: (
   "dark": $dark,
   "body-bg": $body-bg,
   "body-color": $body-color,
-  /* Custom */ "system-component": $system-component,
+  "system-component": $system-component,
   "block-component": $block-component,
   "block": $block,
   "setting": $setting,
