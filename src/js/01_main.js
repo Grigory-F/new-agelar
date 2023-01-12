@@ -928,8 +928,7 @@ if (elemEffect) {
 $(document).on("af_complete", function (event, response) {
   if (response.success) {
     response.form[0].classList.remove("error");
-    onClearErrorForm(form)
-
+    onClearErrorForm(form);
   } else {
     response.form[0].classList.add("error");
     onClearErrorForm(response.form[0]);
@@ -943,10 +942,35 @@ $(document).on("af_complete", function (event, response) {
   }
 });
 
-
-
 function onClearErrorForm(form) {
   form.querySelectorAll(".error").forEach((elem, index) => {
     elem.remove();
   });
+}
+
+/* nav-sidebar__link-arrow */
+/* level2 */
+
+let sidebarLinks = document.querySelectorAll(
+  ".nav-sidebar .top_menu ul > .level1"
+);
+
+sidebarLinks.forEach((elem, index) => {
+  if (!elem.querySelector("ul")) {
+    console.log(elem.querySelector("ul"));
+    let elemArrow = elem.querySelector(".nav-sidebar__link-arrow");
+    if (elemArrow) {
+      elemArrow.remove();
+    }
+  }
+});
+
+let tarrifElem = document.querySelectorAll(".tarrifs-table-min");
+if (tarrifElem && tarrifElem[2]) {
+  tarrifElem[2]
+    .querySelectorAll("div:nth-child(odd)")
+    .forEach((elem, index) => {
+      elem.style.cssText =
+        "background-color: #880000;mix-blend-mode: normal;color: white!important;";
+    });
 }
