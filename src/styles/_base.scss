@@ -1,5 +1,8 @@
 @import "cases/top-case-bunner";
-
+h2 {
+  font-size: 20px;
+  font-weight: 800;
+}
 .layout-main {
 }
 
@@ -507,7 +510,6 @@ main {
   mix-blend-mode: multiply;
 }
 
-
 /* @media (max-width: 768px) {
   .tarrifs-titles__content .tarrifs-table div:nth-child(odd),
   .tarrifs-content__slide .tarrifs-table div:nth-child(odd) {
@@ -652,26 +654,26 @@ main {
     cursor: pointer;
   }
   &__line-btn.btn-expand--active &__arrow {
-    background-color: $primary;
-    color: white;
+    background-color: white;
+    color: $primary;
     transition: 0.3s ease;
     & svg {
       transition: 0.3s ease;
-      transform: rotate(0deg);
+      transform: rotate(-180deg);
     }
   }
 
   &__arrow {
     padding: 10px;
-    background-color: white;
+    background-color: $primary;
     border-radius: 4px;
     transition: 0.3s ease;
-    color: $primary;
+    color: white;
   }
   &__arrow {
     & svg {
       transition: 0.3s ease;
-      transform: rotate(-180deg);
+      transform: rotate(0deg);
     }
   }
 }
@@ -684,9 +686,6 @@ main {
   transition: 0.3s ease;
   width: fit-content;
   width: 100%;
-  & img {
-    filter: invert(1);
-  }
 }
 .min-budge:hover {
   border: 1px solid $primary;
@@ -706,7 +705,7 @@ main {
   display: flex;
   gap: 15px;
   align-items: center;
-  &:hover img,
+  /* &:hover img, */
   &:hover svg {
     filter: invert(1);
   }
@@ -773,7 +772,7 @@ main {
     background-color: $primary;
     transition: 0.3s ease;
   }
-  &--min:hover img,
+  /* &--min:hover img, */
   &--middle:hover img,
   &--big:hover img {
     filter: invert(1);
@@ -1055,7 +1054,6 @@ main {
   flex-direction: column;
   &__icon-box {
     display: flex;
-    
     align-items: flex-start;
   }
   &__icon {
@@ -1064,9 +1062,18 @@ main {
   }
 }
 
+@media (max-width: 768px) {
+  .box-tech {
+    &__icon {
+      width: 160px;
+      margin: auto;
+    }
+  }
+}
+
 .slider-tech {
   & .swiper-slide {
-    width: 200px;
+    width: 150px;
   }
 }
 
@@ -1096,7 +1103,7 @@ main {
 
 .breadcrumbs ul li {
   display: inline;
-  padding: 0 0 0 10px;
+  padding: 0 10px 0 10px;
 }
 
 .line-buttons {
@@ -1445,4 +1452,35 @@ form.error span.error {
 .modal form.error span.error {
   color: white !important;
   display: inline;
+}
+
+.btn-light:disabled {
+  @extend .opacity-100;
+}
+
+.case-table table img {
+  margin: 0 auto;
+  display: block;
+}
+
+ul li {
+  list-style: none;
+  position: relative;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: -15px;
+    width: 5px;
+    border-radius: 50%;
+    height: 5px;
+    background-color: $primary;
+  }
+}
+
+.list-custom-unstyle li {
+  &::before {
+    display: none;
+  }
 }

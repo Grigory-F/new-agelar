@@ -374,6 +374,7 @@ function PaginatorSwiper(swiper, options = {}) {
     let ServiceContentSlider = new Swiper(".service-content-slider", {
       slidesPerView: 1,
       grabCursor: true,
+      autoHeight: true,
       navigation: {
         nextEl: ".service-content-slider-next",
         prevEl: ".service-content-slider-prev",
@@ -405,6 +406,9 @@ function PaginatorSwiper(swiper, options = {}) {
 if (document.querySelector(".slider-top")) {
   const SliderTop = new Swiper(".slider-top", {
     slidesPerView: 1,
+    autoplay: {
+      delay: 2000,
+    },
     grabCursor: true,
     pagination: {
       el: ".swiper-slider-top",

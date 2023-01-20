@@ -166,7 +166,7 @@ class AgelarPhoneValidator {
   showErrorOn(input) {
     input.style.color = "red";
     setTimeout(() => {
-      input.style.color = "inherit";
+      input.style.color = "black";
     }, 600);
   }
 }
