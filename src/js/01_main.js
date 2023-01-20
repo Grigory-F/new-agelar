@@ -396,7 +396,6 @@ function PaginatorSwiper(swiper, options = {}) {
           this.paginator.init();
         },
         paginationUpdate: function (swiper, pag) {
-          console.log(swiper);
           this.paginator.paginationUpdate(swiper, pag);
         },
       },
@@ -407,6 +406,9 @@ function PaginatorSwiper(swiper, options = {}) {
 if (document.querySelector(".slider-top")) {
   const SliderTop = new Swiper(".slider-top", {
     slidesPerView: 1,
+    autoplay: {
+      delay: 2000,
+    },
     grabCursor: true,
     pagination: {
       el: ".swiper-slider-top",
