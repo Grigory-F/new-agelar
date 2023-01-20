@@ -651,26 +651,26 @@ main {
     cursor: pointer;
   }
   &__line-btn.btn-expand--active &__arrow {
-    background-color: $primary;
-    color: white;
+    background-color: white;
+    color: $primary;
     transition: 0.3s ease;
     & svg {
       transition: 0.3s ease;
-      transform: rotate(0deg);
+      transform: rotate(-180deg);
     }
   }
 
   &__arrow {
     padding: 10px;
-    background-color: white;
+    background-color: $primary;
     border-radius: 4px;
     transition: 0.3s ease;
-    color: $primary;
+    color: white;
   }
   &__arrow {
     & svg {
       transition: 0.3s ease;
-      transform: rotate(-180deg);
+      transform: rotate(0deg);
     }
   }
 }
@@ -683,9 +683,6 @@ main {
   transition: 0.3s ease;
   width: fit-content;
   width: 100%;
-  & img {
-    filter: invert(1);
-  }
 }
 .min-budge:hover {
   border: 1px solid $primary;
@@ -705,7 +702,7 @@ main {
   display: flex;
   gap: 15px;
   align-items: center;
-  &:hover img,
+  /* &:hover img, */
   &:hover svg {
     filter: invert(1);
   }
@@ -772,7 +769,7 @@ main {
     background-color: $primary;
     transition: 0.3s ease;
   }
-  &--min:hover img,
+  /* &--min:hover img, */
   &--middle:hover img,
   &--big:hover img {
     filter: invert(1);
@@ -1073,7 +1070,7 @@ main {
 
 .slider-tech {
   & .swiper-slide {
-    width: 200px;
+    width: 150px;
   }
 }
 
@@ -1103,7 +1100,7 @@ main {
 
 .breadcrumbs ul li {
   display: inline;
-  padding: 0 0 0 10px;
+  padding: 0 10px 0 10px;
 }
 
 .line-buttons {
@@ -1452,4 +1449,13 @@ form.error span.error {
 .modal form.error span.error {
   color: white !important;
   display: inline;
+}
+
+.btn-light:disabled {
+  @extend .opacity-100;
+}
+
+.case-table table img {
+  margin: 0 auto;
+  display: block;
 }
