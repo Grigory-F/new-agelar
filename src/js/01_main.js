@@ -249,19 +249,9 @@ function PaginatorSwiper(swiper, options = {}) {
   };
 
   this.paginationUpdate = function (swiper, pag) {
+    if(swiper.imagesLoaded < this.defaultLastIndex) return;
+    
     let el = pag.querySelector(".swiper-pagination-bullet-active");
-
-    // if(this.startIndex != this.defaultStartIndex){
-    //   pag.querySelector("."+this.clsFirst).style.display = "";
-    // }else{
-    //   pag.querySelector("."+this.clsFirst).style.display = "none";
-    // }
-
-    // if(this.lastIndex != this.swiper.imagesLoaded - 1){
-    //   pag.querySelector("."+this.clsLast).style.display = "";
-    // }else{
-    //   pag.querySelector("."+this.clsLast).style.display = "none";
-    // }
 
     if (el.classList.contains(this.clsPrev)) {
       if (el.previousSibling.innerHTML == 1) {
@@ -614,10 +604,7 @@ if (document.querySelector(".slider-case")) {
     slidesPerView: 1,
     grabCursor: true,
     autoHeight: true,
-    navigation: {
-      nextEl: ".service-content-slider-next",
-      prevEl: ".service-content-slider-prev",
-    },
+   
     breakpoints: {
       320: {
         spaceBetween: 15,
@@ -627,7 +614,7 @@ if (document.querySelector(".slider-case")) {
       },
     },
     pagination: {
-      el: ".service-content-slider-pag",
+      el: ".slider-case-content-slider-pag",
       dynamicBullets: true,
       clickable: true,
       renderBullet: function (index, className) {
