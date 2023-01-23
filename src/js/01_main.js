@@ -670,7 +670,7 @@ document.querySelectorAll(".tariff-btn").forEach((elem, index) => {
     let textButton = elem.querySelector("span");
     if (textButton.textContent == "Что входит") {
       textButton.textContent = "Свернуть";
-  
+
       textButton.nextElementSibling.style.display = "none";
     } else {
       textButton.textContent = "Что входит";
@@ -990,24 +990,31 @@ if (tarrifElem && tarrifElem[2]) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function(){
-  if(window.localStorage.getItem("statusBtnBack")){
-      window.localStorage.setItem("statusBtnBack", 0);
-      let url = new URL(location.href);
-      let position = url.searchParams.get("id");
-      let element = document.querySelector("[data-position='"+position+"'");
-      if(element){
-          console.log($(element).offset().top)
-          $("main").animate({
-              scrollTop: $(element).offset().top
-          });
-      }
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.localStorage.getItem("statusBtnBack")) {
+    window.localStorage.setItem("statusBtnBack", 0);
+    let url = new URL(location.href);
+    let position = url.searchParams.get("id");
+    let element = document.querySelector("[data-position='" + position + "'");
+    if (element) {
+      console.log($(element).offset().top);
+      $("main").animate({
+        scrollTop: $(element).offset().top,
+      });
+    }
   }
 });
 
 function return_to_initial_page(url, query) {
   window.localStorage.setItem("statusBtnBack", 1);
   url = new URL(url);
-  url.searchParams.set('id', query);
+  url.searchParams.set("id", query);
   window.location.href = url;
 }
+
+
+let sldeCaseScrollBarForImage = document.querySelectorAll(".site-cases .cont-case-image, .style-cases .cont-case-image, .mobile-cases .cont-case-image, .redesign-cases .cont-case-image");
+sldeCaseScrollBarForImage && sldeCaseScrollBarForImage.forEach(e=>{
+    new SimpleBar(e)
+}
+);
