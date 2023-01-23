@@ -622,6 +622,31 @@ if (document.querySelector(".slider-case")) {
         spaceBetween: 30,
       },
     },
+    navigation: {
+      nextEl: ".slider-content-slider-next",
+      prevEl: ".slider-content-slider-prev",
+    },
+    pagination: {
+      el: ".slider-case-content-slider-pag",
+      dynamicBullets: true,
+      clickable: true,
+      renderBullet: function (index, className) {
+        return this.paginator.renderBullet(index, className);
+      },
+    },
+    on: {
+      beforeInit() {
+        this.paginator = new PaginatorSwiper(this);
+        console.log(this)
+      },
+
+      init() {
+        this.paginator.init();
+      },
+      paginationUpdate: function (swiper, pag) {
+        this.paginator.paginationUpdate(swiper, pag);
+      },
+    },
   });
 }
 
@@ -977,4 +1002,26 @@ if (tarrifElem && tarrifElem[2]) {
       elem.style.cssText =
         "background-color: #880000;mix-blend-mode: normal;color: white!important;";
     });
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+  if(window.localStorage.getItem("statusBtnBack")){
+      window.localStorage.setItem("statusBtnBack", 0);
+      let url = new URL(location.href);
+      let position = url.searchParams.get("id");
+      let element = document.querySelector("[data-position='"+position+"'");
+      if(element){
+          console.log($(element).offset().top)
+          $("main").animate({
+              scrollTop: $(element).offset().top
+          });
+      }
+  }
+});
+
+function return_to_initial_page(url, query) {
+  window.localStorage.setItem("statusBtnBack", 1);
+  url = new URL(url);
+  url.searchParams.set('id', query);
+  window.location.href = url;
 }
