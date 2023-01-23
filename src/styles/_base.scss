@@ -1415,11 +1415,12 @@ main {
 
 .design-page {
   img {
-    width: 100%;
+    margin: 0 auto;
+    display: block;
   }
 }
 
-.is-desctop .slider-case,
+/* .is-desctop .slider-case,
 .is-desctop .swiper-slide {
   padding-left: 0 !important;
 }
@@ -1436,7 +1437,7 @@ main {
 .is-mobile {
   max-width: 320px;
   margin: 20px auto;
-}
+} */
 
 .slider-case img {
   width: 100%;
@@ -1482,5 +1483,29 @@ ul li {
 .list-custom-unstyle li {
   &::before {
     display: none;
+  }
+}
+
+.site-cases .cont-case-image,
+.style-cases .cont-case-image,
+.mobile-cases .cont-case-image,
+.redesign-cases .cont-case-image {
+  height: 650px;
+}
+
+.mobile-cases .cont-case-image {
+  max-width: 500px;
+}
+
+.mobile-cases .cont-case-image img {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .site-cases .cont-case-image,
+  .style-cases .cont-case-image,
+  .mobile-cases .cont-case-image,
+  .redesign-cases .cont-case-image {
+    height: 450px;
   }
 }

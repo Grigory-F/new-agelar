@@ -78,14 +78,14 @@ overflowNew.addEventListener("click", () => {
   overflowNew.classList.remove("active");
 });
 
-if (document.querySelector(".btn-toggler")) {
+/* if (document.querySelector(".btn-toggler")) {
   let btnToggler = document.querySelector(".btn-toggler");
   btnToggler.addEventListener("click", () => {
     document
       .querySelector(".line-buttons")
       .classList.toggle("line-buttons--show");
   });
-}
+} */
 
 if (sidebarClose) {
   sidebarClose.addEventListener("click", () => {
@@ -611,9 +611,13 @@ if (document.querySelector(".reviews-text-slider")) {
 }
 if (document.querySelector(".slider-case")) {
   const reviewsTextSlider = new Swiper(".slider-case", {
-    slidesPerView: "auto",
+    slidesPerView: 1,
     grabCursor: true,
-    adaptiveHeight: true,
+    autoHeight: true,
+    navigation: {
+      nextEl: ".service-content-slider-next",
+      prevEl: ".service-content-slider-prev",
+    },
     breakpoints: {
       320: {
         spaceBetween: 15,
@@ -622,12 +626,8 @@ if (document.querySelector(".slider-case")) {
         spaceBetween: 30,
       },
     },
-    navigation: {
-      nextEl: ".slider-content-slider-next",
-      prevEl: ".slider-content-slider-prev",
-    },
     pagination: {
-      el: ".slider-case-content-slider-pag",
+      el: ".service-content-slider-pag",
       dynamicBullets: true,
       clickable: true,
       renderBullet: function (index, className) {
@@ -637,7 +637,6 @@ if (document.querySelector(".slider-case")) {
     on: {
       beforeInit() {
         this.paginator = new PaginatorSwiper(this);
-        console.log(this)
       },
 
       init() {
