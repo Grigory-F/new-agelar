@@ -14,8 +14,13 @@ tarrifsContentMoreButton.forEach((tarrifsContentMoreButtonThis, index) => {
     tarrifsTableHidden.forEach((elem, index) => {
       elem.classList.remove("tarrifs-table--hidden");
       /* tarrifsContentMoreButtonThis[index].classList.add("d-none"); */
+      
     });
     delButtons();
+   
+    setHeightCell(
+      document.querySelectorAll(".tarrifs-container .tarrifs-table > div")
+    );
   });
 });
 
@@ -738,29 +743,30 @@ if (elemEffect) {
 }
 
 //Определения размера ячеек блока "тарифы"
-(function (document) {
-  function setHeightCell(cellTarifs) {
-    if (!cellTarifs) return;
 
-    let maxHeightCell = 0;
-    if (cellTarifs) {
-      cellTarifs.forEach(function (item) {
-        if (item.offsetHeight > maxHeightCell)
-          maxHeightCell = item.offsetHeight;
-      });
+function setHeightCell(cellTarifs) {
+  if (!cellTarifs) return;
 
-      cellTarifs.forEach(function (item) {
-        item.style.height = maxHeightCell + "px";
-      });
-    }
+  let maxHeightCell = 0;
+  if (cellTarifs) {
+    cellTarifs.forEach(function (item) {
+      item.style.height = "auto";
+      if (item.offsetHeight > maxHeightCell)
+        maxHeightCell = item.offsetHeight;
+    });
 
-    return maxHeightCell;
+    cellTarifs.forEach(function (item) {
+      item.style.height = maxHeightCell + "px";
+    });
   }
 
-  setHeightCell(
-    document.querySelectorAll(".tarrifs-container .tarrifs-table > div")
-  );
-})(document);
+  return maxHeightCell;
+}
+
+setHeightCell(
+  document.querySelectorAll(".tarrifs-container .tarrifs-table > div")
+);
+
 
 /**
  * Функция для установки заголовка формы.
