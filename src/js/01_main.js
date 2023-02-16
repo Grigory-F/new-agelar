@@ -292,8 +292,8 @@ function PaginatorSwiper(swiper, options = {}) {
   };
 
   this.paginationUpdate = function (swiper, pag) {
-    if(swiper.imagesLoaded < this.defaultLastIndex) return;
-    
+    if (swiper.imagesLoaded < this.defaultLastIndex) return;
+
     let el = pag.querySelector(".swiper-pagination-bullet-active");
 
     if (el.classList.contains(this.clsPrev)) {
@@ -655,7 +655,7 @@ if (document.querySelector(".slider-case")) {
     slidesPerView: 1,
     grabCursor: true,
     autoHeight: true,
-   
+
     breakpoints: {
       320: {
         spaceBetween: 15,
@@ -1068,9 +1068,10 @@ function return_to_initial_page(url, query) {
   window.location.href = url;
 }
 
-
-let sldeCaseScrollBarForImage = document.querySelectorAll(".site-cases .cont-case-image, .style-cases .cont-case-image, .mobile-cases .cont-case-image, .redesign-cases .cont-case-image");
-sldeCaseScrollBarForImage && sldeCaseScrollBarForImage.forEach(e=>{
-    new SimpleBar(e)
-}
+let sldeCaseScrollBarForImage = document.querySelectorAll(
+  ".site-cases .cont-case-image, .style-cases .cont-case-image, .mobile-cases .cont-case-image, .redesign-cases .cont-case-image"
 );
+sldeCaseScrollBarForImage &&
+  sldeCaseScrollBarForImage.forEach((e) => {
+    new SimpleBar(e);
+  });
