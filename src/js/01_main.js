@@ -133,7 +133,30 @@ if (document.querySelector(".partners-slider")) {
       nextEl: ".slider-partners-next",
       prevEl: ".slider-partners-prev",
     },
-    slidesPerView: "auto",
+    
+    preloadImages: false,
+    // Enable lazy loading
+    lazy: true,
+    breakpoints: {
+      320: {
+        slidesPerView: "auto",
+      },
+      425:{
+        slidesPerView: 2,
+      },
+      768:{
+        slidesPerView: 4,
+      },
+      1024:{
+        slidesPerView: 5,
+      },
+      1440:{
+        slidesPerView: 7,
+      },
+      2560:{
+        slidesPerView: 11,
+      }
+    },
   });
 }
 if (document.querySelector(".certificates-slider")) {
@@ -164,13 +187,22 @@ if (document.querySelector(".certificates-slider")) {
       nextEl: ".slider-certificates-next",
       prevEl: ".slider-certificates-prev",
     },
-    slidesPerView: "auto",
+    slidesPerView: 8,
+    preloadImages: false,
+    // Enable lazy loading
+    lazy: true,
+    watchSlidesVisibility:true,
     breakpoints: {
       320: {
         spaceBetween: 15,
+        slidesPerView: "auto",
+      },
+      425: {
+        slidesPerView: 4,
       },
       992: {
         spaceBetween: 30,
+       
       },
     },
   });
@@ -191,6 +223,9 @@ if (document.querySelector(".slider-stuff")) {
       nextEl: ".slider-stuff-next",
       prevEl: ".slider-stuff-prev",
     },
+    preloadImages: false,
+    lazy: true,
+    watchSlidesProgress:true,
     breakpoints: {
       320: {
         spaceBetween: 0,
@@ -205,6 +240,9 @@ if (document.querySelector(".slider-tech")) {
   const SliderTech = new Swiper(".slider-tech", {
     slidesPerView: "auto",
     grabCursor: true,
+    preloadImages: false,
+    lazy: true,
+    watchSlidesProgress:true,
     breakpoints: {
       320: {
         spaceBetween: 0,
@@ -1009,8 +1047,8 @@ if (tarrifElem && tarrifElem[2]) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  if (window.localStorage.getItem("statusBtnBack")) {
-    window.localStorage.setItem("statusBtnBack", 0);
+  //if (window.localStorage.getItem("statusBtnBack")) {
+   // window.localStorage.setItem("statusBtnBack", 0);
     let url = new URL(location.href);
     let position = url.searchParams.get("id");
     let element = document.querySelector("[data-position='" + position + "'");
@@ -1020,7 +1058,7 @@ document.addEventListener("DOMContentLoaded", function () {
         scrollTop: $(element).offset().top,
       });
     }
-  }
+  //}
 });
 
 function return_to_initial_page(url, query) {
