@@ -655,7 +655,9 @@ if (document.querySelector(".slider-case")) {
     slidesPerView: 1,
     grabCursor: true,
     autoHeight: true,
-
+    preloadImages: false,
+    // Enable lazy loading
+    lazy: true,
     breakpoints: {
       320: {
         spaceBetween: 15,
@@ -695,6 +697,10 @@ if (document.querySelector(".solutions-slider")) {
   const ReviewsVideoSliderNew = new Swiper(".solutions-slider", {
     slidesPerView: "auto",
     grabCursor: true,
+    preloadImages: false,
+    watchSlidesProgress:true,
+    // Enable lazy loading
+    lazy: true,
     breakpoints: {
       320: {
         spaceBetween: 15,
