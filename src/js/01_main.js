@@ -277,7 +277,7 @@ function PaginatorSwiper(swiper, options = {}) {
     cIndex = index + 1;
     if (cIndex == 1)
       return `<a href="#" class="${className}" data-index="${cIndex}">${cIndex}</a>`;
-    if (cIndex == this.swiper.imagesLoaded)
+    if (cIndex == this.swiper.slides.length)
       return `<a href="#" class="${className} ${this.clsLast} " data-index="${cIndex}">${cIndex}</a>`;
 
     let cls = "";
@@ -292,7 +292,7 @@ function PaginatorSwiper(swiper, options = {}) {
   };
 
   this.paginationUpdate = function (swiper, pag) {
-    if (swiper.imagesLoaded < this.defaultLastIndex) return;
+    if (swiper.slides.length < this.defaultLastIndex) return;
 
     let el = pag.querySelector(".swiper-pagination-bullet-active");
 
@@ -309,7 +309,7 @@ function PaginatorSwiper(swiper, options = {}) {
       let lastEl = pag.querySelector(
         ".swiper-pagination-bullet[data-index='" + this.lastIndex + "']"
       );
-      if (lastEl && lastEl.innerHTML != swiper.imagesLoaded) {
+      if (lastEl && lastEl.innerHTML != swiper.slides.length) {
         lastEl.style.display = "none";
         lastEl.classList.remove(this.clsNext);
         lastEl.previousSibling.classList.add(this.clsNext);
@@ -318,7 +318,7 @@ function PaginatorSwiper(swiper, options = {}) {
     }
 
     if (el.classList.contains(this.clsNext)) {
-      if (el.previousSibling.innerHTML == swiper.imagesLoaded) return;
+      if (el.previousSibling.innerHTML == swiper.slides.length) return;
       el.nextSibling.style.display = "";
       el.nextSibling.classList.add(this.clsNext);
       el.classList.remove(this.clsNext);
@@ -329,7 +329,7 @@ function PaginatorSwiper(swiper, options = {}) {
       if (
         firstEl &&
         firstEl.innerHTML != 1 &&
-        el.nextSibling.dataset.index != swiper.imagesLoaded
+        el.nextSibling.dataset.index != swiper.slides.length
       ) {
         this.startIndex++;
         firstEl.style.display = "none";
@@ -366,7 +366,7 @@ function PaginatorSwiper(swiper, options = {}) {
       lastIndex = this.defaultLastIndex;
     }
 
-    if (el.dataset.index == swiper.imagesLoaded) {
+    if (el.dataset.index == swiper.slides.length) {
       let prevLastEl = el.dataset.index - 1;
       if (this.lastIndex != el.dataset.index - 1) {
         let end = this.lastIndex;
@@ -661,7 +661,7 @@ if (document.querySelector(".slider-case")) {
     autoHeight: true,
     preloadImages: false,
     // Enable lazy loading
-    lazy: true,
+   lazy: true,
     breakpoints: {
       320: {
         spaceBetween: 15,
@@ -676,7 +676,7 @@ if (document.querySelector(".slider-case")) {
     },
     pagination: {
       el: ".slider-case-content-slider-pag",
-      dynamicBullets: true,
+      
       clickable: true,
       renderBullet: function (index, className) {
         return this.paginator.renderBullet(index, className);
@@ -691,6 +691,7 @@ if (document.querySelector(".slider-case")) {
         this.paginator.init();
       },
       paginationUpdate: function (swiper, pag) {
+        console.log(swiper)
         this.paginator.paginationUpdate(swiper, pag);
       },
     },
@@ -1116,7 +1117,7 @@ function Calculator(classElement, options){
         
         let calculators = document.querySelectorAll(classElement);
         calculators.forEach((item, i) => {
-            item.questId = i;
+            
             let element = new Element(item);
             item.calculator = element;
         });
@@ -1144,7 +1145,7 @@ function Calculator(classElement, options){
                             this.questsBase.push(e.target.getAttribute("name"));
                             this.setDiscount(this.discount + 1);
                         }else if(this.questsBase.indexOf(e.target.getAttribute("name")) != -1){
-                            if(!this.isValidQuest(e.target.getAttribute("name"))){
+                            if(!this.isValidQuest(e.target.dataset.group)){
                                 delete this.questsBase[this.questsBase.indexOf(e.target.getAttribute("name"))];
                                 this.setDiscount(this.discount - 1);
                             }
@@ -1168,9 +1169,10 @@ function Calculator(classElement, options){
         
         this.clear = function(){
             this.questsBase = [];
-            this.setDiscount(0);
+            this.setDiscount(1);
             this.element.querySelector(options.classSwiper).swiper.slideTo(0, 10);
             this.element.querySelector(options.classBtnPagination).style.display = '';
+         
             if(this.form){
                 this.form.reset();
             }
@@ -1188,17 +1190,17 @@ function Calculator(classElement, options){
             let prevBtn = this.element.querySelector(options.classBtnSlidePrev);
             if(prevBtn){
                 prevBtn.addEventListener("click", item => {
-                    this.element.querySelector(options.classSwiper).swiper.slideTo(--this.element.questId, 10);
+                    this.swiper.slideTo(this.swiper.activeIndex-1, 10);
                 });
             }
             
             let nextBtn = this.element.querySelector(options.classBtnSlideNext);
             if(nextBtn){
                 nextBtn.addEventListener("click", item => {
-                    if(!this.isError(this.element.questId)){
-                        let questNextId = ++this.element.questId;
+                    if(!this.isError(this.swiper.activeIndex)){
+                        let questNextId = this.swiper.activeIndex+1;
                         this.element.querySelector(options.classSwiper).swiper.slideTo(questNextId, 10);
-                        if(questNextId == this.element.querySelector(options.classSwiper).swiper.imagesLoaded){
+                        if(questNextId == this.swiper.imagesLoaded){
                             this.element.querySelector(options.classBtnPagination).style.display = 'none';
                         }
                     }
@@ -1221,6 +1223,7 @@ function Calculator(classElement, options){
             }
             
             this.swiper.on("activeIndexChange", () => {
+                console.log(111, sectionPag, sectionPag.querySelector("."+classActive))
                 let currentPag = sectionPag.querySelector("."+classActive);
                 if(currentPag){
                     currentPag.classList.remove(classActive);
@@ -1236,7 +1239,7 @@ function Calculator(classElement, options){
                 item.addEventListener("click", (e) => {
                     let id = e.target.dataset.index;
                     let lastId = id > this.swiper.activeIndex? id-1: this.swiper.activeIndex;
-                    if(id > this.swiper.activeIndex && this.isValidSiteName(lastId) && this.isValidQuest("quest_"+lastId)){
+                    if(id > this.swiper.activeIndex && this.isValidSiteName(lastId) && this.isValidQuest(lastId)){
                         this.swiper.slideTo(id, 10);
                         showBottomSection(id, this);
                     }else if(id < this.swiper.activeIndex){
@@ -1265,7 +1268,7 @@ function Calculator(classElement, options){
                 return true;
             }
             
-            if(!this.isValidQuest("quest_"+id)){
+            if(!this.isValidQuest(id)){
                 this.errorNextSlide();
                 return true;
             }
@@ -1285,9 +1288,10 @@ function Calculator(classElement, options){
             return true;
         };
         
-        this.isValidQuest = function(name){
+        this.isValidQuest = function(id){
+          console.log(id)
             let flag = false;
-            this.element.querySelectorAll("[name='"+name+"']").forEach(function(item){ 
+            this.element.querySelectorAll("[data-group='"+id+"']").forEach(function(item){ 
                 if(item.checked){
                     flag = true;
                     return 1;
