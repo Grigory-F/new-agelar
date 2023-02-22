@@ -482,33 +482,37 @@ if (document.querySelector(".slider-cases-box")) {
   });
 }
 
-if (document.querySelector(".quiz-slider")) {
-  const QuizSlider = new Swiper(".quiz-slider", {
-    slidesPerView: 1,
-    autoHeight: true,
-    allowTouchMove: false,
-    grabCursor: true,
-    pagination: {
-      el: ".quiz-pag",
-      clickable: true,
-      renderBullet: function (index, className) {
-        return `<div class="quiz-pag__box ${className}">
-      <span>${index + 1}</span>
-    </div><div class="quiz-pag__line"></div>`;
-      },
-    },
-    breakpoints: {
-      320: {
-        spaceBetween: 15,
-      },
-      575: {},
+// if (document.querySelector(".quiz-slider")) {
+//   const QuizSlider = new Swiper(".quiz-slider", {
+//     slidesPerView: 1,
+//     autoHeight: true,
+//     allowTouchMove: false,
+//     grabCursor: true,
+//     // navigation: {
+//     //   nextEl: ".quiz-slider-next",
+//     //   prevEl: ".quiz-slider-prev",
+//     // },
+//     pagination: {
+//       el: ".quiz-pag",
+//       clickable: true,
+//       renderBullet: function (index, className) {
+//         return `<div class="quiz-pag__box ${className}">
+//           <span>${index + 1}</span>
+//         </div><div class="quiz-pag__line"></div>`;
+//       },
+//     },
+//     breakpoints: {
+//       320: {
+//         spaceBetween: 15,
+//       },
+//       575: {},
 
-      992: {
-        spaceBetween: 30,
-      },
-    },
-  });
-}
+//       992: {
+//         spaceBetween: 30,
+//       },
+//     },
+//   });
+// }
 
 /* let quizPag = document.querySelector('.') */
 
@@ -1081,3 +1085,263 @@ sldeCaseScrollBarForImage &&
   sldeCaseScrollBarForImage.forEach((e) => {
     new SimpleBar(e);
   });
+
+function Calculator(classElement, options){
+    let defaultOptions = {
+        classSwiper: "",
+        swiperOptions: { },
+        classBtnSlidePrev: ".quiz-slider-prev",
+        classBtnSlideNext: ".quiz-slider-next",
+        classAnswersElement: ".quest-answer",
+        classBtnPagination: ".quiz-buttons",
+        classDiscount: ".discount",
+        classPagination: ".quiz-pag"
+    }
+    
+
+    
+    this.init = function(){
+        for(optionKey in defaultOptions){
+            if(!options[optionKey]){
+                options[optionKey] = defaultOptions[optionKey];
+            }
+        }
+        
+        if(options.classSwiper == ""){
+            console.log("Calculator: Не определён swiper slider");
+            return 1;
+        }else{
+            this.swiper = new Swiper(options.classSwiper, options.swiperOptions);
+        }
+        
+        let calculators = document.querySelectorAll(classElement);
+        calculators.forEach((item, i) => {
+            item.questId = i;
+            let element = new Element(item);
+            item.calculator = element;
+        });
+    }
+    
+    this.init();
+    
+    function Element(element){
+        this.discount = 1;
+        this.classDiscount = options.classDiscount;
+        this.element = element;
+        this.questsBase = [];
+        this.form = this.element.querySelector("form");
+        
+        this.init = function(){
+            this.element.clear = this.clear.bind(this);
+            let questAnswers = this.element.querySelectorAll(options.classAnswersElement);
+            this.swiper = this.element.querySelector(options.classSwiper).swiper;
+            this.setDiscount(this.discount);
+            
+            if(questAnswers){
+                questAnswers.forEach(item => {
+                    item.addEventListener("click", e => {
+                        if(this.questsBase.indexOf(e.target.getAttribute("name")) == -1){
+                            this.questsBase.push(e.target.getAttribute("name"));
+                            this.setDiscount(this.discount + 1);
+                        }else if(this.questsBase.indexOf(e.target.getAttribute("name")) != -1){
+                            if(!this.isValidQuest(e.target.getAttribute("name"))){
+                                delete this.questsBase[this.questsBase.indexOf(e.target.getAttribute("name"))];
+                                this.setDiscount(this.discount - 1);
+                            }
+                        }
+                    });
+                });
+            }
+            
+            this.pagination();
+            this.paginationBtn();
+           
+            
+            if(this.form){
+                this.form.addEventListener("agelar-form-success", () => {
+                    this.clear();
+                });
+            }
+            
+            
+        }
+        
+        this.clear = function(){
+            this.questsBase = [];
+            this.setDiscount(0);
+            this.element.querySelector(options.classSwiper).swiper.slideTo(0, 10);
+            this.element.querySelector(options.classBtnPagination).style.display = '';
+            if(this.form){
+                this.form.reset();
+            }
+        }
+        
+        this.setDiscount = function(discount){
+            this.discount = discount;
+            let discounts = this.element.querySelectorAll(this.classDiscount);
+            discounts.forEach(item => {
+                item.innerHTML = discount;
+            });
+        }
+        
+        this.paginationBtn = function(){
+            let prevBtn = this.element.querySelector(options.classBtnSlidePrev);
+            if(prevBtn){
+                prevBtn.addEventListener("click", item => {
+                    this.element.querySelector(options.classSwiper).swiper.slideTo(--this.element.questId, 10);
+                });
+            }
+            
+            let nextBtn = this.element.querySelector(options.classBtnSlideNext);
+            if(nextBtn){
+                nextBtn.addEventListener("click", item => {
+                    if(!this.isError(this.element.questId)){
+                        let questNextId = ++this.element.questId;
+                        this.element.querySelector(options.classSwiper).swiper.slideTo(questNextId, 10);
+                        if(questNextId == this.element.querySelector(options.classSwiper).swiper.imagesLoaded){
+                            this.element.querySelector(options.classBtnPagination).style.display = 'none';
+                        }
+                    }
+                });
+            }
+        }
+        
+         this.pagination = function(){
+            let sectionPag = this.element.querySelector(options.classPagination);
+            let classActive = "swiper-pagination-bullet-active";
+            
+            if(sectionPag){
+                for(let i = 0; i <= this.swiper.imagesLoaded; i++){
+                    let cls = "";
+                    if(i == this.swiper.activeIndex)
+                        cls = classActive;
+                    sectionPag.innerHTML += this.renderPagination(i, cls);
+                  
+                }
+            }
+            
+            this.swiper.on("activeIndexChange", () => {
+                let currentPag = sectionPag.querySelector("."+classActive);
+                if(currentPag){
+                    currentPag.classList.remove(classActive);
+                }
+                
+                let activePag = sectionPag.querySelector("[data-index='"+this.swiper.activeIndex+"']");
+                if(activePag){
+                    activePag.classList.add(classActive);
+                }
+            });
+            
+            sectionPag.querySelectorAll("[data-index]").forEach((item) => {
+                item.addEventListener("click", (e) => {
+                    let id = e.target.dataset.index;
+                    let lastId = id > this.swiper.activeIndex? id-1: this.swiper.activeIndex;
+                    if(id > this.swiper.activeIndex && this.isValidSiteName(lastId) && this.isValidQuest("quest_"+lastId)){
+                        this.swiper.slideTo(id, 10);
+                        showBottomSection(id, this);
+                    }else if(id < this.swiper.activeIndex){
+                        this.swiper.slideTo(id, 10);
+                        showBottomSection(id, this);
+                    }
+                });
+            });
+            
+            function showBottomSection(id, sef){
+                if(id < sef.swiper.imagesLoaded){
+                    sef.element.querySelector(options.classBtnPagination).style.display = '';
+                }else{
+                    sef.element.querySelector(options.classBtnPagination).style.display = 'none';
+                }
+            }
+        }
+        
+        this.renderPagination = function(index,  className){
+            return `<div class="quiz-pag__box ${className}" data-index="${index}" style="cursor:pointer"><span>${ index + 1 }</span></div><div class="quiz-pag__line"></div>`
+        }
+        
+        this.isError = function(id){
+            if(!this.isValidSiteName(id)){
+                this.errorSiteName();
+                return true;
+            }
+            
+            if(!this.isValidQuest("quest_"+id)){
+                this.errorNextSlide();
+                return true;
+            }
+            return false;
+        }
+        
+        this.errorNextSlide = function(){
+            alert("Проверте заполнения всех полей");
+        }
+        this.errorSiteName = function() {
+            alert("Введите имя сайта");
+        }
+        
+        this.isValidSiteName = function(id){
+            let siteName = this.element.querySelector(".site_name_"+id);
+            if(siteName) return siteName.value != "";
+            return true;
+        };
+        
+        this.isValidQuest = function(name){
+            let flag = false;
+            this.element.querySelectorAll("[name='"+name+"']").forEach(function(item){ 
+                if(item.checked){
+                    flag = true;
+                    return 1;
+                }
+            });
+            
+            return flag;
+        }
+        
+        this.init();
+    }
+}
+
+/*
+Опции по умолчанию и которые можно предать
+classSwiper: "", Класс свйпера
+swiperOptions: { }, Опции свайпера
+classBtnSlidePrev: ".quiz-slider-prev", Кнопка назад
+classBtnSlideNext: ".quiz-slider-next", Кннопка далее
+classAnswersElement: ".quest-answer", Класс определяющий что это input ответа
+classBtnPagination: ".quiz-buttons", Класс блока с кнопками далее и назад
+classDiscount: ".discount", Класс блока в котором лежит значение скидки
+classPagination: ".quiz-pag" Класс пагинации сверху слайдера
+*/
+
+let calculator = new Calculator(".calculator", {
+  classSwiper:".quiz-slider",
+  swiperOptions: {
+      slidesPerView: 1,
+      autoHeight: true,
+      allowTouchMove: false,
+      grabCursor: true,
+     
+      breakpoints: {
+        320: {
+          spaceBetween: 15,
+        },
+        575: {
+            
+        },
+  
+        992: {
+          spaceBetween: 30,
+        },
+      },
+  }
+});
+
+//Функция показа ошибки если не введено имя сайта
+//calculator.errorSiteName = function(){
+  //alert("Введите имя сайта");
+//}
+
+//Функция показа ошибки если не выбран не один из ответов
+//this.errorNextSlide = function(){ 
+ // alert("Проверте заполнения всех полей");
+//}
