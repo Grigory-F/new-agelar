@@ -136,6 +136,7 @@ if (document.querySelector(".partners-slider")) {
     
     preloadImages: false,
     // Enable lazy loading
+    watchSlidesProgress:true,
     lazy: true,
     breakpoints: {
       320: {
@@ -192,6 +193,7 @@ if (document.querySelector(".certificates-slider")) {
     // Enable lazy loading
     lazy: true,
     watchSlidesVisibility:true,
+    watchSlidesProgress:true,
     breakpoints: {
       320: {
         spaceBetween: 15,
@@ -643,6 +645,9 @@ tabs.forEach((el, index) => {
 if (document.querySelector(".reviews-text-slider")) {
   const reviewsTextSlider = new Swiper(".reviews-text-slider", {
     slidesPerView: "auto",
+    lazy: true,
+    preloadImages: false,
+    watchSlidesProgress:true,
     grabCursor: true,
     breakpoints: {
       320: {
