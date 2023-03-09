@@ -276,7 +276,7 @@ function PaginatorSwiper(swiper, options = {}) {
     //this.swiper.pagination.bullets = btns;
   };
   this.renderBullet = function (index, className) {
-    cIndex = index + 1;
+    let cIndex = index + 1;
     if (cIndex == 1)
       return `<a href="#" class="${className}" data-index="${cIndex}">${cIndex}</a>`;
     if (cIndex == this.swiper.slides.length)
