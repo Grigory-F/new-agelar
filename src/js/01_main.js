@@ -177,38 +177,38 @@ if (document.querySelector(".case-gallery")) {
   });
 }
 
-new AgelarPhoneValidator({
-  inputSelector: ".input-phone",
-  submitSelector: ".validator-submit",
-});
-if (document.querySelector(".certificates-slider")) {
-  const CertificatesSlider = new Swiper(".certificates-slider", {
-    grabCursor: true,
-    navigation: {
-      nextEl: ".slider-certificates-next",
-      prevEl: ".slider-certificates-prev",
-    },
-    slidesPerView: 8,
-    preloadImages: false,
-    // Enable lazy loading
-    lazy: true,
-    watchSlidesVisibility:true,
-    watchSlidesProgress:true,
-    breakpoints: {
-      320: {
-        spaceBetween: 15,
-        slidesPerView: "auto",
-      },
-      425: {
-        slidesPerView: 4,
-      },
-      992: {
-        spaceBetween: 30,
+// new AgelarPhoneValidator({
+//   inputSelector: ".input-phone",
+//   submitSelector: ".validator-submit",
+// });
+// if (document.querySelector(".certificates-slider")) {
+//   const CertificatesSlider = new Swiper(".certificates-slider", {
+//     grabCursor: true,
+//     navigation: {
+//       nextEl: ".slider-certificates-next",
+//       prevEl: ".slider-certificates-prev",
+//     },
+//     slidesPerView: 8,
+//     preloadImages: false,
+//     // Enable lazy loading
+//     lazy: true,
+//     watchSlidesVisibility:true,
+//     watchSlidesProgress:true,
+//     breakpoints: {
+//       320: {
+//         spaceBetween: 15,
+//         slidesPerView: "auto",
+//       },
+//       425: {
+//         slidesPerView: 4,
+//       },
+//       992: {
+//         spaceBetween: 30,
        
-      },
-    },
-  });
-}
+//       },
+//     },
+//   });
+// }
 if (document.querySelector(".slider-stock")) {
   const sliderStock = new Swiper(".slider-stock", {
     grabCursor: true,
