@@ -14,10 +14,9 @@ tarrifsContentMoreButton.forEach((tarrifsContentMoreButtonThis, index) => {
     tarrifsTableHidden.forEach((elem, index) => {
       elem.classList.remove("tarrifs-table--hidden");
       /* tarrifsContentMoreButtonThis[index].classList.add("d-none"); */
-      
     });
     delButtons();
-   
+
     setHeightCell(
       document.querySelectorAll(".tarrifs-container .tarrifs-table > div")
     );
@@ -133,30 +132,30 @@ if (document.querySelector(".partners-slider")) {
       nextEl: ".slider-partners-next",
       prevEl: ".slider-partners-prev",
     },
-    
+
     preloadImages: false,
     // Enable lazy loading
-    watchSlidesProgress:true,
+    watchSlidesProgress: true,
     lazy: true,
     breakpoints: {
       320: {
         slidesPerView: "auto",
       },
-      425:{
+      425: {
         slidesPerView: 2,
       },
-      768:{
+      768: {
         slidesPerView: 4,
       },
-      1024:{
+      1024: {
         slidesPerView: 5,
       },
-      1440:{
+      1440: {
         slidesPerView: 7,
       },
-      2560:{
+      2560: {
         slidesPerView: 11,
-      }
+      },
     },
   });
 }
@@ -204,7 +203,7 @@ if (document.querySelector(".case-gallery")) {
 //       },
 //       992: {
 //         spaceBetween: 30,
-       
+
 //       },
 //     },
 //   });
@@ -227,7 +226,7 @@ if (document.querySelector(".slider-stuff")) {
     },
     preloadImages: false,
     lazy: true,
-    watchSlidesProgress:true,
+    watchSlidesProgress: true,
     breakpoints: {
       320: {
         spaceBetween: 0,
@@ -244,7 +243,7 @@ if (document.querySelector(".slider-tech")) {
     grabCursor: true,
     preloadImages: false,
     lazy: true,
-    watchSlidesProgress:true,
+    watchSlidesProgress: true,
     breakpoints: {
       320: {
         spaceBetween: 0,
@@ -476,9 +475,9 @@ if (document.querySelector(".slider-cases-box")) {
       disabledClass: "disabled-swiper-button",
     },
     preloadImages: false,
-    watchSlidesProgress:true,
+    watchSlidesProgress: true,
     lazy: {
-      enabled:true,
+      enabled: true,
       loadPrevNext: true,
     },
   });
@@ -535,7 +534,7 @@ if (document.querySelector(".articles-slider")) {
     grabCursor: true,
     preloadImages: false,
     lazy: true,
-    watchSlidesProgress:true,
+    watchSlidesProgress: true,
     navigation: {
       nextEl: ".swiper-button-prev",
       prevEl: ".swiper-button-next",
@@ -647,7 +646,7 @@ if (document.querySelector(".reviews-text-slider")) {
     slidesPerView: "auto",
     lazy: true,
     preloadImages: false,
-    watchSlidesProgress:true,
+    watchSlidesProgress: true,
     grabCursor: true,
     breakpoints: {
       320: {
@@ -666,7 +665,7 @@ if (document.querySelector(".slider-case")) {
     autoHeight: true,
     preloadImages: false,
     // Enable lazy loading
-   lazy: true,
+    lazy: true,
     breakpoints: {
       320: {
         spaceBetween: 15,
@@ -681,7 +680,7 @@ if (document.querySelector(".slider-case")) {
     },
     pagination: {
       el: ".slider-case-content-slider-pag",
-      
+
       clickable: true,
       renderBullet: function (index, className) {
         return this.paginator.renderBullet(index, className);
@@ -696,7 +695,7 @@ if (document.querySelector(".slider-case")) {
         this.paginator.init();
       },
       paginationUpdate: function (swiper, pag) {
-        console.log(swiper)
+        console.log(swiper);
         this.paginator.paginationUpdate(swiper, pag);
       },
     },
@@ -708,7 +707,7 @@ if (document.querySelector(".solutions-slider")) {
     slidesPerView: "auto",
     grabCursor: true,
     preloadImages: false,
-    watchSlidesProgress:true,
+    watchSlidesProgress: true,
     // Enable lazy loading
     lazy: true,
     breakpoints: {
@@ -805,8 +804,7 @@ function setHeightCell(cellTarifs) {
   if (cellTarifs) {
     cellTarifs.forEach(function (item) {
       item.style.height = "auto";
-      if (item.offsetHeight > maxHeightCell)
-        maxHeightCell = item.offsetHeight;
+      if (item.offsetHeight > maxHeightCell) maxHeightCell = item.offsetHeight;
     });
 
     cellTarifs.forEach(function (item) {
@@ -820,7 +818,6 @@ function setHeightCell(cellTarifs) {
 setHeightCell(
   document.querySelectorAll(".tarrifs-container .tarrifs-table > div")
 );
-
 
 /**
  * Функция для установки заголовка формы.
@@ -1064,16 +1061,16 @@ if (tarrifElem && tarrifElem[2]) {
 
 document.addEventListener("DOMContentLoaded", function () {
   //if (window.localStorage.getItem("statusBtnBack")) {
-   // window.localStorage.setItem("statusBtnBack", 0);
-    let url = new URL(location.href);
-    let position = url.searchParams.get("id");
-    let element = document.querySelector("[data-position='" + position + "'");
-    if (element) {
-      console.log($(element).offset().top);
-      $("main").animate({
-        scrollTop: $(element).offset().top,
-      });
-    }
+  // window.localStorage.setItem("statusBtnBack", 0);
+  let url = new URL(location.href);
+  let position = url.searchParams.get("id");
+  let element = document.querySelector("[data-position='" + position + "'");
+  if (element) {
+    console.log($(element).offset().top);
+    $("main").animate({
+      scrollTop: $(element).offset().top,
+    });
+  }
   //}
 });
 
@@ -1092,222 +1089,253 @@ sldeCaseScrollBarForImage &&
     new SimpleBar(e);
   });
 
-function Calculator(classElement, options){
-    let defaultOptions = {
-        classSwiper: "",
-        swiperOptions: { },
-        classBtnSlidePrev: ".quiz-slider-prev",
-        classBtnSlideNext: ".quiz-slider-next",
-        classAnswersElement: ".quest-answer",
-        classBtnPagination: ".quiz-buttons",
-        classDiscount: ".discount",
-        classPagination: ".quiz-pag"
-    }
-    
+var calcModal;
+if (document.getElementById("calcModal")) {
+  calcModal = new bootstrap.Modal(document.getElementById("calcModal"), {});
+}
 
-    
-    this.init = function(){
-        for(optionKey in defaultOptions){
-            if(!options[optionKey]){
-                options[optionKey] = defaultOptions[optionKey];
+function Calculator(classElement, options) {
+  let defaultOptions = {
+    classSwiper: "",
+    swiperOptions: {},
+    classBtnSlidePrev: ".quiz-slider-prev",
+    classBtnSlideNext: ".quiz-slider-next",
+    classAnswersElement: ".quest-answer",
+    classBtnPagination: ".quiz-buttons",
+    classDiscount: ".discount",
+    classPagination: ".quiz-pag",
+  };
+
+  this.init = function () {
+    for (optionKey in defaultOptions) {
+      if (!options[optionKey]) {
+        options[optionKey] = defaultOptions[optionKey];
+      }
+    }
+
+    if (options.classSwiper == "") {
+      console.log("Calculator: Не определён swiper slider");
+      return 1;
+    } else {
+      this.swiper = new Swiper(options.classSwiper, options.swiperOptions);
+    }
+
+    let calculators = document.querySelectorAll(classElement);
+    calculators.forEach((item, i) => {
+      let element = new Element(item);
+      item.calculator = element;
+    });
+  };
+
+  this.init();
+
+  function Element(element) {
+    this.discount = 1;
+    this.classDiscount = options.classDiscount;
+    this.element = element;
+    this.questsBase = [];
+    this.form = this.element.querySelector("form");
+
+    this.init = function () {
+      this.element.clear = this.clear.bind(this);
+      let questAnswers = this.element.querySelectorAll(
+        options.classAnswersElement
+      );
+      this.swiper = this.element.querySelector(options.classSwiper).swiper;
+      this.setDiscount(this.discount);
+
+      if (questAnswers) {
+        questAnswers.forEach((item) => {
+          item.addEventListener("click", (e) => {
+            if (this.questsBase.indexOf(e.target.getAttribute("name")) == -1) {
+              this.questsBase.push(e.target.getAttribute("name"));
+              this.setDiscount(this.discount + 1);
+            } else if (
+              this.questsBase.indexOf(e.target.getAttribute("name")) != -1
+            ) {
+              if (!this.isValidQuest(e.target.dataset.group)) {
+                delete this.questsBase[
+                  this.questsBase.indexOf(e.target.getAttribute("name"))
+                ];
+                this.setDiscount(this.discount - 1);
+              }
             }
-        }
-        
-        if(options.classSwiper == ""){
-            console.log("Calculator: Не определён swiper slider");
-            return 1;
-        }else{
-            this.swiper = new Swiper(options.classSwiper, options.swiperOptions);
-        }
-        
-        let calculators = document.querySelectorAll(classElement);
-        calculators.forEach((item, i) => {
-            
-            let element = new Element(item);
-            item.calculator = element;
+          });
         });
-    }
-    
+      }
+
+      this.pagination();
+      this.paginationBtn();
+
+      if (this.form) {
+        this.form.addEventListener("agelar-form-success", () => {
+          this.clear();
+        });
+      }
+    };
+
+    this.clear = function () {
+      this.questsBase = [];
+      this.setDiscount(1);
+      this.element.querySelector(options.classSwiper).swiper.slideTo(0, 10);
+      this.element.querySelector(options.classBtnPagination).style.display = "";
+
+      if (this.form) {
+        this.form.reset();
+      }
+    };
+
+    this.setDiscount = function (discount) {
+      this.discount = discount;
+      let discounts = this.element.querySelectorAll(this.classDiscount);
+      discounts.forEach((item) => {
+        item.innerHTML = discount;
+      });
+    };
+
+    this.paginationBtn = function () {
+      let prevBtn = this.element.querySelector(options.classBtnSlidePrev);
+      if (prevBtn) {
+        prevBtn.addEventListener("click", (item) => {
+          this.swiper.slideTo(this.swiper.activeIndex - 1, 10);
+        });
+      }
+
+      let nextBtn = this.element.querySelector(options.classBtnSlideNext);
+      if (nextBtn) {
+        nextBtn.addEventListener("click", (item) => {
+          if (!this.isError(this.swiper.activeIndex)) {
+            let questNextId = this.swiper.activeIndex + 1;
+            this.element
+              .querySelector(options.classSwiper)
+              .swiper.slideTo(questNextId, 10);
+
+            if (questNextId == this.swiper.imagesLoaded) {
+              this.element.querySelector(
+                options.classBtnPagination
+              ).style.display = "none";
+            }
+          }
+        });
+      }
+    };
+
+    this.pagination = function () {
+      let sectionPag = this.element.querySelector(options.classPagination);
+      let classActive = "swiper-pagination-bullet-active";
+      let containerDotPagination = sectionPag.innerWidth;
+      console.log(sectionPag.innerWidth);
+      let widthEachDotPagination =
+        containerDotPagination / this.swiper.imagesLoaded;
+      if (sectionPag) {
+        for (let i = 0; i <= this.swiper.imagesLoaded; i++) {
+          let cls = "";
+          if (i == this.swiper.activeIndex) cls = classActive;
+          sectionPag.innerHTML += this.renderPagination(i, cls);
+        }
+      }
+
+      this.swiper.on("activeIndexChange", () => {
+        sectionPag.style.transform = `translateX(-${
+          widthEachDotPagination * (this.swiper.activeIndex + 1)
+        }px)`;
+        console.log(
+          111,
+          sectionPag,
+          sectionPag.querySelector("." + classActive)
+        );
+        let currentPag = sectionPag.querySelector("." + classActive);
+        if (currentPag) {
+          currentPag.classList.remove(classActive);
+        }
+
+        let activePag = sectionPag.querySelector(
+          "[data-index='" + this.swiper.activeIndex + "']"
+        );
+        if (activePag) {
+          activePag.classList.add(classActive);
+        }
+      });
+
+      sectionPag.querySelectorAll("[data-index]").forEach((item) => {
+        item.addEventListener("click", (e) => {
+          let id = e.target.dataset.index;
+          let lastId =
+            id > this.swiper.activeIndex ? id - 1 : this.swiper.activeIndex;
+          if (
+            id > this.swiper.activeIndex &&
+            this.isValidSiteName(lastId) &&
+            this.isValidQuest(lastId)
+          ) {
+            this.swiper.slideTo(id, 10);
+            showBottomSection(id, this);
+          } else if (id < this.swiper.activeIndex) {
+            this.swiper.slideTo(id, 10);
+            showBottomSection(id, this);
+          }
+        });
+      });
+
+      function showBottomSection(id, sef) {
+        if (id < sef.swiper.imagesLoaded) {
+          sef.element.querySelector(options.classBtnPagination).style.display =
+            "";
+        } else {
+          sef.element.querySelector(options.classBtnPagination).style.display =
+            "none";
+        }
+      }
+    };
+
+    this.renderPagination = function (index, className) {
+      return `<div class="quiz-pag__box ${className}" data-index="${index}" style="cursor:pointer"><span>${
+        index + 1
+      }</span></div><div class="quiz-pag__line"></div>`;
+    };
+
+    this.isError = function (id) {
+      if (!this.isValidSiteName(id)) {
+        this.errorSiteName();
+        return true;
+      }
+
+      if (!this.isValidQuest(id)) {
+        this.errorNextSlide();
+        return true;
+      }
+      return false;
+    };
+
+    this.errorNextSlide = function () {
+      calcModal.show();
+    };
+    this.errorSiteName = function () {
+      calcModal.show();
+    };
+
+    this.isValidSiteName = function (id) {
+      let siteName = this.element.querySelector(".site_name_" + id);
+      if (siteName) return siteName.value != "";
+      return true;
+    };
+
+    this.isValidQuest = function (id) {
+      console.log(id);
+      let flag = false;
+      this.element
+        .querySelectorAll("[data-group='" + id + "']")
+        .forEach(function (item) {
+          if (item.checked) {
+            flag = true;
+            return 1;
+          }
+        });
+
+      return flag;
+    };
+
     this.init();
-    
-    function Element(element){
-        this.discount = 1;
-        this.classDiscount = options.classDiscount;
-        this.element = element;
-        this.questsBase = [];
-        this.form = this.element.querySelector("form");
-        
-        this.init = function(){
-            this.element.clear = this.clear.bind(this);
-            let questAnswers = this.element.querySelectorAll(options.classAnswersElement);
-            this.swiper = this.element.querySelector(options.classSwiper).swiper;
-            this.setDiscount(this.discount);
-            
-            if(questAnswers){
-                questAnswers.forEach(item => {
-                    item.addEventListener("click", e => {
-                        if(this.questsBase.indexOf(e.target.getAttribute("name")) == -1){
-                            this.questsBase.push(e.target.getAttribute("name"));
-                            this.setDiscount(this.discount + 1);
-                        }else if(this.questsBase.indexOf(e.target.getAttribute("name")) != -1){
-                            if(!this.isValidQuest(e.target.dataset.group)){
-                                delete this.questsBase[this.questsBase.indexOf(e.target.getAttribute("name"))];
-                                this.setDiscount(this.discount - 1);
-                            }
-                        }
-                    });
-                });
-            }
-            
-            this.pagination();
-            this.paginationBtn();
-           
-            
-            if(this.form){
-                this.form.addEventListener("agelar-form-success", () => {
-                    this.clear();
-                });
-            }
-            
-            
-        }
-        
-        this.clear = function(){
-            this.questsBase = [];
-            this.setDiscount(1);
-            this.element.querySelector(options.classSwiper).swiper.slideTo(0, 10);
-            this.element.querySelector(options.classBtnPagination).style.display = '';
-         
-            if(this.form){
-                this.form.reset();
-            }
-        }
-        
-        this.setDiscount = function(discount){
-            this.discount = discount;
-            let discounts = this.element.querySelectorAll(this.classDiscount);
-            discounts.forEach(item => {
-                item.innerHTML = discount;
-            });
-        }
-        
-        this.paginationBtn = function(){
-            let prevBtn = this.element.querySelector(options.classBtnSlidePrev);
-            if(prevBtn){
-                prevBtn.addEventListener("click", item => {
-                    this.swiper.slideTo(this.swiper.activeIndex-1, 10);
-                });
-            }
-            
-            let nextBtn = this.element.querySelector(options.classBtnSlideNext);
-            if(nextBtn){
-                nextBtn.addEventListener("click", item => {
-                    if(!this.isError(this.swiper.activeIndex)){
-                        let questNextId = this.swiper.activeIndex+1;
-                        this.element.querySelector(options.classSwiper).swiper.slideTo(questNextId, 10);
-                        if(questNextId == this.swiper.imagesLoaded){
-                            this.element.querySelector(options.classBtnPagination).style.display = 'none';
-                        }
-                    }
-                });
-            }
-        }
-        
-         this.pagination = function(){
-            let sectionPag = this.element.querySelector(options.classPagination);
-            let classActive = "swiper-pagination-bullet-active";
-            
-            if(sectionPag){
-                for(let i = 0; i <= this.swiper.imagesLoaded; i++){
-                    let cls = "";
-                    if(i == this.swiper.activeIndex)
-                        cls = classActive;
-                    sectionPag.innerHTML += this.renderPagination(i, cls);
-                  
-                }
-            }
-            
-            this.swiper.on("activeIndexChange", () => {
-                console.log(111, sectionPag, sectionPag.querySelector("."+classActive))
-                let currentPag = sectionPag.querySelector("."+classActive);
-                if(currentPag){
-                    currentPag.classList.remove(classActive);
-                }
-                
-                let activePag = sectionPag.querySelector("[data-index='"+this.swiper.activeIndex+"']");
-                if(activePag){
-                    activePag.classList.add(classActive);
-                }
-            });
-            
-            sectionPag.querySelectorAll("[data-index]").forEach((item) => {
-                item.addEventListener("click", (e) => {
-                    let id = e.target.dataset.index;
-                    let lastId = id > this.swiper.activeIndex? id-1: this.swiper.activeIndex;
-                    if(id > this.swiper.activeIndex && this.isValidSiteName(lastId) && this.isValidQuest(lastId)){
-                        this.swiper.slideTo(id, 10);
-                        showBottomSection(id, this);
-                    }else if(id < this.swiper.activeIndex){
-                        this.swiper.slideTo(id, 10);
-                        showBottomSection(id, this);
-                    }
-                });
-            });
-            
-            function showBottomSection(id, sef){
-                if(id < sef.swiper.imagesLoaded){
-                    sef.element.querySelector(options.classBtnPagination).style.display = '';
-                }else{
-                    sef.element.querySelector(options.classBtnPagination).style.display = 'none';
-                }
-            }
-        }
-        
-        this.renderPagination = function(index,  className){
-            return `<div class="quiz-pag__box ${className}" data-index="${index}" style="cursor:pointer"><span>${ index + 1 }</span></div><div class="quiz-pag__line"></div>`
-        }
-        
-        this.isError = function(id){
-            if(!this.isValidSiteName(id)){
-                this.errorSiteName();
-                return true;
-            }
-            
-            if(!this.isValidQuest(id)){
-                this.errorNextSlide();
-                return true;
-            }
-            return false;
-        }
-        
-        this.errorNextSlide = function(){
-            alert("Проверте заполнения всех полей");
-        }
-        this.errorSiteName = function() {
-            alert("Введите имя сайта");
-        }
-        
-        this.isValidSiteName = function(id){
-            let siteName = this.element.querySelector(".site_name_"+id);
-            if(siteName) return siteName.value != "";
-            return true;
-        };
-        
-        this.isValidQuest = function(id){
-          console.log(id)
-            let flag = false;
-            this.element.querySelectorAll("[data-group='"+id+"']").forEach(function(item){ 
-                if(item.checked){
-                    flag = true;
-                    return 1;
-                }
-            });
-            
-            return flag;
-        }
-        
-        this.init();
-    }
+  }
 }
 
 /*
@@ -1323,34 +1351,32 @@ classPagination: ".quiz-pag" Класс пагинации сверху слай
 */
 
 let calculator = new Calculator(".calculator", {
-  classSwiper:".quiz-slider",
+  classSwiper: ".quiz-slider",
   swiperOptions: {
-      slidesPerView: 1,
-      autoHeight: true,
-      allowTouchMove: false,
-      grabCursor: true,
-     
-      breakpoints: {
-        320: {
-          spaceBetween: 15,
-        },
-        575: {
-            
-        },
-  
-        992: {
-          spaceBetween: 30,
-        },
+    slidesPerView: 1,
+    autoHeight: true,
+    allowTouchMove: false,
+    grabCursor: true,
+
+    breakpoints: {
+      320: {
+        spaceBetween: 15,
       },
-  }
+      575: {},
+
+      992: {
+        spaceBetween: 30,
+      },
+    },
+  },
 });
 
 //Функция показа ошибки если не введено имя сайта
 //calculator.errorSiteName = function(){
-  //alert("Введите имя сайта");
+//alert("Введите имя сайта");
 //}
 
 //Функция показа ошибки если не выбран не один из ответов
-//this.errorNextSlide = function(){ 
- // alert("Проверте заполнения всех полей");
+//this.errorNextSlide = function(){
+// alert("Проверте заполнения всех полей");
 //}
