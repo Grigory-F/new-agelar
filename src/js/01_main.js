@@ -191,8 +191,8 @@ if (document.querySelector(".certificates-slider")) {
     preloadImages: false,
     // Enable lazy loading
     lazy: true,
-    watchSlidesVisibility:true,
-    watchSlidesProgress:true,
+    watchSlidesVisibility: true,
+    watchSlidesProgress: true,
     breakpoints: {
       320: {
         spaceBetween: 15,
@@ -203,11 +203,10 @@ if (document.querySelector(".certificates-slider")) {
       },
       992: {
         spaceBetween: 30,
-       
       },
     },
   });
- }
+}
 // if (document.querySelector(".certificates-slider")) {
 //   const CertificatesSlider = new Swiper(".certificates-slider", {
 //     grabCursor: true,
@@ -1408,3 +1407,45 @@ let calculator = new Calculator(".calculator", {
 //this.errorNextSlide = function(){
 // alert("Проверте заполнения всех полей");
 //}
+
+
+
+
+/* Новый калькулятор  */
+
+let newCalcinputs = document.querySelectorAll(".new-calc input[type=checkbox]");
+let newCalcInputSubmit = document.querySelector(".new-calc-submit");
+let elemActiveCheckbox;
+
+
+let newCalcInputSum = document.querySelector(".new-calc-sum-input");
+
+
+if (newCalcinputs) {
+  newCalcInputSubmit.disabled = true
+  newCalcinputs.forEach((elem, index) => {
+    elem.addEventListener("input", checkIsInput);
+  });
+}
+function checkIsInput() {
+  let sumOfVal = 0;
+  elemActiveCheckbox = document.querySelectorAll('.new-calc input[type=checkbox]:checked')
+  if (elemActiveCheckbox.length) {
+    newCalcInputSubmit.disabled = false
+    console.log(false);
+  } else {
+    console.log(true);
+    
+    newCalcInputSubmit.disabled = true
+    return
+  }
+  elemActiveCheckbox.forEach((elem, index) => {
+    sumOfVal = sumOfVal + Number(elem.value) 
+    newCalcInputSum.value = sumOfVal
+    console.log(newCalcInputSum.value);
+  })
+  
+}
+
+
+/* Новый калькулятор  */

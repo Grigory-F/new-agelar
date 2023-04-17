@@ -108,7 +108,7 @@ main {
 }
 
 .burger-button {
-  display: inline-block;
+  display: none;
   cursor: pointer;
 }
 
@@ -120,6 +120,12 @@ main {
   background-color: #333;
   margin: 3px 0;
   transition: 0.4s;
+}
+
+@media (max-width: 1441px) {
+  .burger-button {
+    display: inline-block;
+  }
 }
 .toponims {
   display: none;
@@ -1701,4 +1707,13 @@ ul li {
   a {
     text-decoration: underline !important;
   }
+}
+
+
+
+
+
+
+.new-calc {
+  
 }
