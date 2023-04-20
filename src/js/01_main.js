@@ -191,8 +191,8 @@ if (document.querySelector(".certificates-slider")) {
     preloadImages: false,
     // Enable lazy loading
     lazy: true,
-    watchSlidesVisibility:true,
-    watchSlidesProgress:true,
+    watchSlidesVisibility: true,
+    watchSlidesProgress: true,
     breakpoints: {
       320: {
         spaceBetween: 15,
@@ -203,11 +203,10 @@ if (document.querySelector(".certificates-slider")) {
       },
       992: {
         spaceBetween: 30,
-       
       },
     },
   });
- }
+}
 // if (document.querySelector(".certificates-slider")) {
 //   const CertificatesSlider = new Swiper(".certificates-slider", {
 //     grabCursor: true,
@@ -1415,3 +1414,83 @@ let calculator = new Calculator(".calculator", {
 //this.errorNextSlide = function(){
 // alert("Проверте заполнения всех полей");
 //}
+
+
+
+
+/* Новый калькулятор  */
+
+// let newCalcinputs = document.querySelectorAll(".new-calc input[type=checkbox]");
+// let newCalcInputSubmit = document.querySelector(".new-calc-submit");
+// let elemActiveCheckbox;
+
+
+// let newCalcInputSum = document.querySelector(".new-calc-sum-input");
+
+
+// if (newCalcinputs) {
+//   newCalcInputSubmit.disabled = true
+//   newCalcinputs.forEach((elem, index) => {
+//     elem.addEventListener("input", checkIsInput);
+//   });
+// }
+// function checkIsInput() {
+//   let sumOfVal = 0;
+//   elemActiveCheckbox = document.querySelectorAll('.new-calc input[type=checkbox]:checked')
+//   if (elemActiveCheckbox.length) {
+//     newCalcInputSubmit.disabled = false
+//     console.log(false);
+//   } else {
+//     console.log(true);
+    
+//     newCalcInputSubmit.disabled = true
+//     return
+//   }
+//   elemActiveCheckbox.forEach((elem, index) => {
+//     sumOfVal = sumOfVal + Number(elem.value) 
+//     newCalcInputSum.value = sumOfVal
+//     console.log(newCalcInputSum.value);
+//   })
+  
+// }
+
+
+/* Новый калькулятор  */
+class CalculatorV2{
+  constructor(elementDom){
+    if(elementDom){
+      this.elementDom = elementDom;
+      this.eventSubmit();
+    }
+  }
+
+  eventSubmit(){
+    let submitBtn = this.elementDom.querySelector("[type='submit']");
+    console.log(submitBtn)
+    if(submitBtn){
+      submitBtn.addEventListener("click", e => {
+        console.log(e.target.dataset)
+        let idForm = e.target.dataset.bsTarget;
+        let form = document.querySelector(idForm + ' form');
+        if(form){
+          form.querySelectorAll(".modify-input--js").forEach(item1 => {
+            item1.remove();
+          });
+
+          let inputs = this.elementDom.querySelectorAll("input");
+          inputs.forEach(item => {
+            if(item.type == "checkbox" && !item.checked) return;
+            
+            let newInput = item.cloneNode(true);
+            newInput.setAttribute("type", "hidden");
+            newInput.classList.add("modify-input--js");
+           
+            form.appendChild(newInput);
+          })
+        }
+      });
+    }
+  }
+}
+
+new CalculatorV2(document.querySelector(".calculator-v2--js"));

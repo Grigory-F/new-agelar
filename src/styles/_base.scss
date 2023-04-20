@@ -108,7 +108,7 @@ main {
 }
 
 .burger-button {
-  display: inline-block;
+  display: none;
   cursor: pointer;
 }
 
@@ -120,6 +120,12 @@ main {
   background-color: #333;
   margin: 3px 0;
   transition: 0.4s;
+}
+
+@media (max-width: 1441px) {
+  .burger-button {
+    display: inline-block;
+  }
 }
 .toponims {
   display: none;
@@ -1591,14 +1597,14 @@ ul li {
 
 .calc-custom-btn {
   display: flex;
-  border: 3px solid #7E8082;
+  border: 3px solid #7e8082;
   border-radius: 8px;
   cursor: pointer;
   height: 60px;
   &::before {
     content: "";
     display: block;
-    background-color: #7E8082;
+    background-color: #7e8082;
     width: 3px;
 
     order: 2;
@@ -1612,7 +1618,7 @@ ul li {
       color: inherit;
       width: 15px;
       margin: auto;
-      color: #7E8082;
+      color: #7e8082;
     }
   }
   &__sign {
@@ -1642,21 +1648,14 @@ ul li {
   }
 }
 
-
-
-
-
 @media (max-width: 1050px) {
-
   .calc-num-container {
     position: relative;
     transform: translateX(0);
     margin-bottom: 15px;
     left: 0;
     top: 0;
-    }
-
-
+  }
 
   .calc-custom-btn {
     display: flex;
@@ -1669,7 +1668,7 @@ ul li {
       display: flex;
       padding: 0 10px;
       order: 1;
-  
+
       & svg {
       }
     }
@@ -1681,7 +1680,7 @@ ul li {
       padding: 0 15px;
       align-items: center;
     }
-  
+
     &--next &__arrow {
       order: 3;
     }
@@ -1694,11 +1693,63 @@ ul li {
   }
 }
 
-
-
-
 .page-content {
   a {
     text-decoration: underline !important;
+  }
+}
+
+.dev-steps-block-before{
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 2px;
+    background-color: $primary;
+    bottom: 0;
+    top: 2px;
+    left: 75px;
+  }
+}
+.dev-steps-block {
+  display: flex;
+  gap: 20px;
+  position: relative;
+  padding-bottom: 30px;
+ 
+  &__inner-image {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+    img {
+      width: 100%;
+    }
+  }
+  &__content {
+  }
+  &__content-desc {
+  }
+}
+
+@media (max-width: 768px) {
+  .dev-steps-block {
+    display: flex;
+    gap: 20px;
+    position: relative;
+    padding-bottom: 20px;
+    
+    &__inner-image {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      z-index: 1;
+    }
+  }
+  
+  .dev-steps-block-before{
+    &::before {
+      left: 50px;
+    }
   }
 }
