@@ -1177,7 +1177,8 @@ function Calculator(classElement, options) {
           item.addEventListener("click", (e) => {
             if (this.questsBase.indexOf(e.target.getAttribute("name")) == -1) {
               this.questsBase.push(e.target.getAttribute("name"));
-              this.setDiscount(this.discount + 1);
+             
+              this.setDiscount(this.discount + Number(this.swiper.slides[this.swiper.activeIndex].dataset.discount));
             } else if (
               this.questsBase.indexOf(e.target.getAttribute("name")) != -1
             ) {
@@ -1185,7 +1186,7 @@ function Calculator(classElement, options) {
                 delete this.questsBase[
                   this.questsBase.indexOf(e.target.getAttribute("name"))
                 ];
-                this.setDiscount(this.discount - 1);
+                this.setDiscount(this.discount - Number(his.swiper.slides[this.swiper.activeIndex].dataset.discount));
               }
             }
           });
@@ -1238,7 +1239,7 @@ function Calculator(classElement, options) {
               .querySelector(options.classSwiper)
               .swiper.slideTo(questNextId, 10);
 
-            if (questNextId == this.swiper.imagesLoaded) {
+            if (questNextId == this.swiper.slides.length - 1) {
               this.element.querySelector(
                 options.classBtnPagination
               ).style.display = "none";
@@ -1251,27 +1252,25 @@ function Calculator(classElement, options) {
     this.pagination = function () {
       let sectionPag = this.element.querySelector(options.classPagination);
       let classActive = "swiper-pagination-bullet-active";
-      let containerDotPagination = sectionPag.innerWidth;
-      console.log(sectionPag.innerWidth);
-      let widthEachDotPagination =
-        containerDotPagination / this.swiper.imagesLoaded;
+
+      
+
       if (sectionPag) {
-        for (let i = 0; i <= this.swiper.imagesLoaded; i++) {
+        for (let i = 0; i < this.swiper.slides.length; i++) {
           let cls = "";
           if (i == this.swiper.activeIndex) cls = classActive;
           sectionPag.innerHTML += this.renderPagination(i, cls);
         }
       }
 
+      let offset = 0;
+      if(sectionPag.offsetWidth > sectionPag.parentElement.offsetWidth){
+        sectionPag.parentElement.style.justifyContent = "initial"; 
+        offset = sectionPag.parentElement.offsetWidth/2 - (sectionPag.children[1].offsetLeft + sectionPag.children[1].offsetWidth) + (sectionPag.children[1].offsetLeft + sectionPag.children[1].offsetWidth)/2;
+        sectionPag.style.transform = `translateX(${offset}px)`;
+      }
+
       this.swiper.on("activeIndexChange", () => {
-        sectionPag.style.transform = `translateX(-${
-          widthEachDotPagination * (this.swiper.activeIndex + 1)
-        }px)`;
-        console.log(
-          111,
-          sectionPag,
-          sectionPag.querySelector("." + classActive)
-        );
         let currentPag = sectionPag.querySelector("." + classActive);
         if (currentPag) {
           currentPag.classList.remove(classActive);
@@ -1283,6 +1282,13 @@ function Calculator(classElement, options) {
         if (activePag) {
           activePag.classList.add(classActive);
         }
+
+        if(sectionPag.offsetWidth > sectionPag.parentElement.offsetWidth){
+          console.log(offset, activePag.offsetLeft + activePag.offsetWidth)
+          offset = sectionPag.parentElement.offsetWidth/2 - (activePag.offsetLeft + activePag.offsetWidth) +  (activePag.offsetWidth/2 - 5);
+          console.log(offset)
+          sectionPag.style.transform = `translateX(${offset}px)`;
+        }
       });
 
       sectionPag.querySelectorAll("[data-index]").forEach((item) => {
@@ -1292,7 +1298,7 @@ function Calculator(classElement, options) {
             id > this.swiper.activeIndex ? id - 1 : this.swiper.activeIndex;
           if (
             id > this.swiper.activeIndex &&
-            this.isValidSiteName(lastId) &&
+          
             this.isValidQuest(lastId)
           ) {
             this.swiper.slideTo(id, 10);
@@ -1305,7 +1311,8 @@ function Calculator(classElement, options) {
       });
 
       function showBottomSection(id, sef) {
-        if (id < sef.swiper.imagesLoaded) {
+        console.log(id, sef.swiper.slides.length, id < sef.swiper.slides.length - 1, sef.element.querySelector(options.classBtnPagination))
+        if (id < sef.swiper.slides.length - 1) {
           sef.element.querySelector(options.classBtnPagination).style.display =
             "";
         } else {
@@ -1317,15 +1324,15 @@ function Calculator(classElement, options) {
 
     this.renderPagination = function (index, className) {
       return `<div class="quiz-pag__box ${className}" data-index="${index}" style="cursor:pointer"><span>${
-        index + 1
-      }</span></div><div class="quiz-pag__line"></div>`;
+            index + 1
+          }</span></div><div class="quiz-pag__line"></div>`;
     };
 
     this.isError = function (id) {
-      if (!this.isValidSiteName(id)) {
-        this.errorSiteName();
-        return true;
-      }
+      // if (!this.isValidSiteName(id)) {
+      //   this.errorSiteName();
+      //   return true;
+      // }
 
       if (!this.isValidQuest(id)) {
         this.errorNextSlide();
