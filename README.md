@@ -2,6 +2,14 @@
 #### Dependencies:
 Bootstrap, Swiper, Custom Tabs Component, Custom Scroll Component
 
+
+## TODO
+
+1) Добален класс для пользовательских ошибок ввода.
+На инпут - ".input-error"
+При активизации данного класса, тригеррится спан, стоящий ниже в DOM. Класс - '.input-error-message'
+
+
 ## Installation:
 ```sh
 npm install

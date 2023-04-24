@@ -30,7 +30,7 @@ $setting: rgba(40, 53, 71, 0.3);
 $interface-icons: #2f3c4e;
 $muted: $text-muted;
 $second-text: #7e8082;
-
+$light: #fff;
 $colors: (
   "blue": $blue,
   "indigo": $indigo,
@@ -59,7 +59,7 @@ $theme-colors: (
   "dark": $dark,
   "body-bg": $body-bg,
   "body-color": $body-color,
-  /* Custom */ "system-component": $system-component,
+  "system-component": $system-component,
   "block-component": $block-component,
   "block": $block,
   "setting": $setting,
@@ -123,6 +123,8 @@ $border-radius-pill: 50rem;
 
 /* =======================FONT======================= */
 
+
+
 $font-family-sans-serif: Circe;
 $font-weight-bolder: 800;
 $font-weight-semi-bold: 600;
@@ -138,6 +140,7 @@ $small-custom-font: $font-size-base * 0.875;
 $medium-small-custom-font: $font-size-base * 0.75;
 $extra-small-custom-font: $font-size-base * 0.625;
 $special-size: $font-size-base * 1.375;
+$big-font-size: $font-size-base * 4;
 
 $font-sizes: (
   1: $h1-font-size,
@@ -150,12 +153,13 @@ $font-sizes: (
   8: $medium-small-custom-font,
   9: $extra-small-custom-font,
   "special-size": $special-size,
+  "big-font": $big-font-size,
 );
 
 $headings-margin-bottom: 1.875rem;
 $headings-font-family: null;
 $headings-font-style: null;
-$headings-font-weight: 500;
+$headings-font-weight: 800;
 $headings-line-height: 1.2;
 $headings-color: null;
 
@@ -175,9 +179,9 @@ $spread-gap: 5;
 
 // ROUNDED VALUES
 
-$max-gap: 50;
+/* $max-gap: 50;
 $begin-gap: 5;
-$spread-gap: 5;
+$spread-gap: 5; */
 
 @function generate-sizes(
   $max-value-size,

@@ -1,0 +1,100 @@
+<section>
+  <div class="container">
+    <div class="row g-3 g-lg-5">
+      <div>
+        <h2 class="pt-20 mb-0">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto,
+          incidunt?
+        </h2>
+      </div>
+      <div class="col-lg-6">
+        <div>
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div><canvas id="myChart1"></canvas></div>
+      </div>
+      <div class="col-lg-6">
+        <div><canvas id="myChart2"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener("load", () => {
+    new Chart(document.getElementById("myChart"), {
+      type: "bar",
+      data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [
+          {
+            label: "# of Votes",
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+
+    new Chart(document.getElementById("myChart1"), {
+      type: "bar",
+      data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [
+          {
+            label: "# of Votes",
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+
+    new Chart(document.getElementById("myChart2"), {
+      type: "bar",
+      data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [
+          {
+            label: "# of Votes",
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1,
+          },
+          {
+            label: "# of Votes",
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1,
+          },
+          {
+            label: "# of Votes",
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  });
+</script>

@@ -6,7 +6,6 @@ const {
 } = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const concat = require('gulp-concat');
-const map = require('gulp-sourcemaps');
 const chalk = require('chalk');
 
 module.exports = function libs_style(done) {
@@ -17,7 +16,6 @@ module.exports = function libs_style(done) {
         outputStyle: 'compressed'
       }).on('error', sass.logError))
       .pipe(concat('libs.min.css'))
-      .pipe(map.write('../sourcemaps/'))
       .pipe(dest('build/css/'))
   } else {
     return done(console.log(chalk.bgYellow(`${chalk.bold('WARNING!')} You did not add any CSS/SCSS plugins.`)));
