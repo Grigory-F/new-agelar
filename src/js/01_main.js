@@ -1466,7 +1466,7 @@ class CalculatorV2{
 
   eventSubmit(){
     let submitBtn = this.elementDom.querySelector("[type='submit']");
-    console.log(submitBtn)
+   
     if(submitBtn){
       submitBtn.addEventListener("click", e => {
         console.log(e.target.dataset)
@@ -1494,3 +1494,7 @@ class CalculatorV2{
 }
 
 new CalculatorV2(document.querySelector(".calculator-v2--js"));
+
+document.querySelectorAll("[data-hide-text]").forEach(function(item){
+  item.innerHTML = item.dataset.hideText;
+});
