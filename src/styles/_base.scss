@@ -1707,7 +1707,7 @@ ul li {
     width: 2px;
     background-color: $primary;
     bottom: 0;
-    top: 2px;
+    top: 150px;
     left: 75px;
   }
 }
@@ -1738,7 +1738,10 @@ ul li {
     gap: 20px;
     position: relative;
     padding-bottom: 20px;
-    
+    &::before {
+      left: 50px;
+      top: 50px;
+    }
     &__inner-image {
       position: relative;
       width: 100px;
