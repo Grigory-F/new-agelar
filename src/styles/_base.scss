@@ -1753,3 +1753,7 @@ ul li {
     }
   }
 }
+
+[data-hide-text]::before{
+  content: attr(data-hide-text);
+}
